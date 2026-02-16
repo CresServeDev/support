@@ -1,0 +1,125 @@
+$flaticon_te-font: "flaticon_te";
+
+@font-face {
+    font-family: $flaticon_te-font;
+    src: url("./flaticon_te.woff2?63692c4f159134dcbc77625da8f3ff7d") format("woff2"),
+url("./flaticon_te.woff?63692c4f159134dcbc77625da8f3ff7d") format("woff"),
+url("./flaticon_te.eot?63692c4f159134dcbc77625da8f3ff7d#iefix") format("embedded-opentype"),
+url("./flaticon_te.ttf?63692c4f159134dcbc77625da8f3ff7d") format("truetype"),
+url("./flaticon_te.svg?63692c4f159134dcbc77625da8f3ff7d#flaticon_te") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_te !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon_te-map: (
+    "settings": "\f101",
+    "inspiration": "\f102",
+    "creativity": "\f103",
+    "technology": "\f104",
+    "technical-support": "\f105",
+    "coding": "\f106",
+    "extension": "\f107",
+    "it-service": "\f108",
+    "data-access": "\f109",
+    "curve": "\f10a",
+    "cyber-security": "\f10b",
+    "internet-security": "\f10c",
+    "arrow": "\f10d",
+    "document": "\f10e",
+    "verified": "\f10f",
+    "cyber-security-2": "\f110",
+    "hacker": "\f111",
+    "server": "\f112",
+    "folder": "\f113",
+    "cyber-security-3": "\f114",
+    "cybersecurity": "\f115",
+    "wreath": "\f116",
+    "security-testing": "\f117",
+    "profit-margin": "\f118",
+    "test": "\f119",
+);
+
+.flaticon-settings:before {
+    content: map-get($flaticon_te-map, "settings");
+}
+.flaticon-inspiration:before {
+    content: map-get($flaticon_te-map, "inspiration");
+}
+.flaticon-creativity:before {
+    content: map-get($flaticon_te-map, "creativity");
+}
+.flaticon-technology:before {
+    content: map-get($flaticon_te-map, "technology");
+}
+.flaticon-technical-support:before {
+    content: map-get($flaticon_te-map, "technical-support");
+}
+.flaticon-coding:before {
+    content: map-get($flaticon_te-map, "coding");
+}
+.flaticon-extension:before {
+    content: map-get($flaticon_te-map, "extension");
+}
+.flaticon-it-service:before {
+    content: map-get($flaticon_te-map, "it-service");
+}
+.flaticon-data-access:before {
+    content: map-get($flaticon_te-map, "data-access");
+}
+.flaticon-curve:before {
+    content: map-get($flaticon_te-map, "curve");
+}
+.flaticon-cyber-security:before {
+    content: map-get($flaticon_te-map, "cyber-security");
+}
+.flaticon-internet-security:before {
+    content: map-get($flaticon_te-map, "internet-security");
+}
+.flaticon-arrow:before {
+    content: map-get($flaticon_te-map, "arrow");
+}
+.flaticon-document:before {
+    content: map-get($flaticon_te-map, "document");
+}
+.flaticon-verified:before {
+    content: map-get($flaticon_te-map, "verified");
+}
+.flaticon-cyber-security-2:before {
+    content: map-get($flaticon_te-map, "cyber-security-2");
+}
+.flaticon-hacker:before {
+    content: map-get($flaticon_te-map, "hacker");
+}
+.flaticon-server:before {
+    content: map-get($flaticon_te-map, "server");
+}
+.flaticon-folder:before {
+    content: map-get($flaticon_te-map, "folder");
+}
+.flaticon-cyber-security-3:before {
+    content: map-get($flaticon_te-map, "cyber-security-3");
+}
+.flaticon-cybersecurity:before {
+    content: map-get($flaticon_te-map, "cybersecurity");
+}
+.flaticon-wreath:before {
+    content: map-get($flaticon_te-map, "wreath");
+}
+.flaticon-security-testing:before {
+    content: map-get($flaticon_te-map, "security-testing");
+}
+.flaticon-profit-margin:before {
+    content: map-get($flaticon_te-map, "profit-margin");
+}
+.flaticon-test:before {
+    content: map-get($flaticon_te-map, "test");
+}

@@ -1,0 +1,314 @@
+@use '../utils' as *;
+
+/*=============================
+    	07. Choose
+===============================*/
+.choose {
+    &__area {
+        background: var(--tg-theme-secondary);
+        padding: 160px 0;
+        position: relative;
+        z-index: 1;
+        @media #{$lg} {
+            padding: 120px 0;
+        }
+        @media #{$xs} {
+            padding: 60px 0;
+        }
+        &-two {
+            padding: 120px 0;
+            @media #{$xs} {
+                padding: 60px 0;
+            }
+        }
+    }
+    &__content {
+        @media #{$xs} {
+            margin-bottom: 40px;
+        }
+        & p {
+            margin-bottom: 35px;
+            font-weight: 500;
+            color: var(--tg-color-white-default);
+            text-transform: capitalize;
+        }
+        &-two {
+            margin-left: 90px;
+            @media #{$lg} {
+                margin-left: 40px;
+            }
+            @media #{$md} {
+                margin-left: 0;
+                margin-bottom: 0;
+            }
+            & p {
+                margin-bottom: 25px;
+            }
+        }
+        &-three {
+            & > p {
+                margin-bottom: 25px;
+                font-weight: 500;
+            }
+        }
+        &-four {
+            width: 90%;
+            @media #{$lg} {
+                width: 100%;
+            }
+            & > p {
+                font-weight: 600;
+                text-transform: capitalize;
+                color: var(--tg-heading-color);
+                margin-bottom: 25px;
+            }
+        }
+    }
+    &__list {
+        margin-left: 50px;
+        @media #{$md} {
+            margin-left: 0;
+        }
+        & li {
+            @include flexbox();
+            gap: 10px;
+            color: var(--tg-color-white-default);
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: capitalize;
+            margin-bottom: 17px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            & svg {
+                color: var(--tg-theme-primary);
+                width: 30px;
+                flex: 0 0 auto;
+                @media #{$lg} {
+                    width: 25px;
+                }
+            }
+        }
+        &-two {
+            margin-left: 0;
+            margin-bottom: 35px;
+        }
+        &-three {
+            margin-left: 0;
+            & li {
+                color: var(--tg-heading-color);
+                margin-bottom: 10px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                & svg {
+                    width: 26px;
+                    @media #{$lg} {
+                        width: 20px;
+                    }
+                }
+            }
+        }
+        &-four {
+            @include flexbox();
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            & li {
+                width: 50%;
+                flex: 0 0 auto;
+                @media #{$xs} {
+                    width: 100%;
+                }
+            }
+        }
+        &-five {
+            margin-bottom: 0;
+            & li {
+                font-weight: 500;
+            }
+        }
+    }
+    &__img {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 38%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        @media #{$lg} {
+            display: none;
+        }
+        &-two {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            @media #{$md} {
+                display: none;
+            }
+        }
+        &-three {
+            margin-left: 35px;
+            clip-path: polygon(22.689% 0%, 22.689% 0%, 23.219% 0.054%, 23.732% 0.213%, 24.224% 0.471%, 24.69% 0.823%, 25.126% 1.263%, 25.527% 1.787%, 25.889% 2.387%, 26.205% 3.059%, 26.472% 3.798%, 26.685% 4.598%, 27.342% 7.551%, 27.342% 7.551%, 27.555% 8.351%, 27.822% 9.09%, 28.138% 9.762%, 28.499% 10.363%, 28.9% 10.886%, 29.336% 11.326%, 29.803% 11.678%, 30.295% 11.936%, 30.808% 12.095%, 31.337% 12.15%, 95.745% 12.15%, 95.745% 12.15%, 96.435% 12.241%, 97.09% 12.507%, 97.7% 12.932%, 98.258% 13.502%, 98.754% 14.203%, 99.179% 15.019%, 99.525% 15.938%, 99.783% 16.943%, 99.944% 18.022%, 100% 19.159%, 100% 92.991%, 100% 92.991%, 99.944% 94.128%, 99.783% 95.206%, 99.525% 96.212%, 99.179% 97.13%, 98.754% 97.947%, 98.258% 98.648%, 97.7% 99.218%, 97.09% 99.643%, 96.435% 99.908%, 95.745% 100%, 4.255% 100%, 4.255% 100%, 3.565% 99.908%, 2.91% 99.643%, 2.3% 99.218%, 1.742% 98.648%, 1.246% 97.947%, 0.821% 97.13%, 0.475% 96.212%, 0.217% 95.206%, 0.056% 94.128%, 0% 92.991%, 0% 7.009%, 0% 7.009%, 0.056% 5.872%, 0.217% 4.794%, 0.475% 3.788%, 0.821% 2.87%, 1.246% 2.053%, 1.742% 1.352%, 2.3% 0.782%, 2.91% 0.357%, 3.565% 0.092%, 4.255% 0%, 22.689% 0%);
+            position: relative;
+            @media #{$lg} {
+                clip-path: polygon(27.918% 0%, 27.918% 0%, 28.634% 0.056%, 29.328% 0.221%, 29.993% 0.487%, 30.621% 0.851%, 31.208% 1.305%, 31.745% 1.845%, 32.227% 2.463%, 32.646% 3.155%, 32.997% 3.914%, 33.272% 4.735%, 34.014% 7.414%, 34.014% 7.414%, 34.289% 8.235%, 34.64% 8.995%, 35.06% 9.686%, 35.541% 10.305%, 36.079% 10.844%, 36.665% 11.299%, 37.294% 11.662%, 37.958% 11.929%, 38.652% 12.093%, 39.368% 12.15%, 94.34% 12.15%, 94.34% 12.15%, 95.258% 12.241%, 96.129% 12.507%, 96.941% 12.932%, 97.683% 13.502%, 98.342% 14.203%, 98.908% 15.019%, 99.368% 15.938%, 99.711% 16.943%, 99.926% 18.022%, 100% 19.159%, 100% 92.991%, 100% 92.991%, 99.926% 94.128%, 99.711% 95.206%, 99.368% 96.212%, 98.908% 97.13%, 98.342% 97.947%, 97.683% 98.648%, 96.941% 99.218%, 96.129% 99.643%, 95.258% 99.908%, 94.34% 100%, 5.66% 100%, 5.66% 100%, 4.742% 99.908%, 3.871% 99.643%, 3.059% 99.218%, 2.317% 98.648%, 1.658% 97.947%, 1.092% 97.13%, 0.632% 96.212%, 0.289% 95.206%, 0.074% 94.128%, 0% 92.991%, 0% 7.009%, 0% 7.009%, 0.074% 5.872%, 0.289% 4.794%, 0.632% 3.788%, 1.092% 2.87%, 1.658% 2.053%, 2.317% 1.352%, 3.059% 0.782%, 3.871% 0.357%, 4.742% 0.092%, 5.66% 0%, 27.918% 0%);
+                margin-left: 0;
+            }
+            @media #{$md} {
+                margin-bottom: 50px;
+            }
+            @media #{$xs} {
+                clip-path: polygon(36.954% 0%, 36.954% 0%, 37.594% 0.038%, 38.213% 0.15%, 38.805% 0.332%, 39.365% 0.579%, 39.886% 0.888%, 40.363% 1.254%, 40.789% 1.674%, 41.159% 2.143%, 41.466% 2.658%, 41.704% 3.214%, 43.716% 8.936%, 43.716% 8.936%, 43.955% 9.492%, 44.262% 10.006%, 44.631% 10.475%, 45.057% 10.895%, 45.534% 11.262%, 46.055% 11.571%, 46.615% 11.818%, 47.207% 11.999%, 47.826% 12.111%, 48.466% 12.15%, 95% 12.15%, 95% 12.15%, 95.811% 12.211%, 96.58% 12.388%, 97.298% 12.671%, 97.953% 13.051%, 98.536% 13.518%, 99.035% 14.063%, 99.442% 14.675%, 99.745% 15.345%, 99.935% 16.064%, 100% 16.822%, 100% 95.327%, 100% 95.327%, 99.935% 96.085%, 99.745% 96.804%, 99.442% 97.475%, 99.035% 98.087%, 98.536% 98.631%, 97.953% 99.098%, 97.298% 99.478%, 96.58% 99.762%, 95.811% 99.939%, 95% 100%, 5% 100%, 5% 100%, 4.189% 99.939%, 3.42% 99.762%, 2.702% 99.478%, 2.047% 99.098%, 1.464% 98.631%, 0.965% 98.087%, 0.558% 97.475%, 0.255% 96.804%, 0.065% 96.085%, 0% 95.327%, 0% 4.673%, 0% 4.673%, 0.065% 3.915%, 0.255% 3.196%, 0.558% 2.525%, 0.965% 1.913%, 1.464% 1.369%, 2.047% 0.902%, 2.702% 0.522%, 3.42% 0.238%, 4.189% 0.061%, 5% 0%, 36.954% 0%);
+            }
+            & img {
+                width: 100%;
+                height: 428px;
+                object-fit: cover;
+            }
+        }
+        &-four {
+            margin-right: 80px;
+            @media #{$lg} {
+                margin-right: 0;
+            }
+            @media #{$md} {
+                margin-bottom: 50px;
+            }
+            & img {
+                width: 100%;
+                @include border-radius(30px);
+                object-fit: cover;
+            }
+        }
+    }
+    &__shape {
+        & img {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        &-two {
+            & img {
+                position: absolute;
+                right: -65px;
+                bottom: 26%;
+                z-index: -1;
+                @media #{$xl} {
+                    bottom: 14%;
+                    width: 250px;
+                }
+                @media #{$lg} {
+                    bottom: 10%;
+                    width: 200px;
+                    right: -50px;
+                }
+                @media #{$xs} {
+                    bottom: 8%;
+                    width: 145px;
+                    right: -40px;
+                }
+            }
+        }
+    }
+}
+
+.progress {
+    &__item {
+        margin-bottom: 20px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        & .title {
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        & .progress {
+            border: 1px solid #b2b2b2;
+            height: 14px;
+            border-radius: 50px;
+            background: transparent;
+            padding: 2px;
+            overflow: inherit;
+            &-bar {
+                border-radius: 50px;
+                background-color: var(--tg-theme-primary);
+                position: relative;
+                overflow: inherit;
+                & .count {
+                    margin-bottom: 0;
+                    position: absolute;
+                    right: 0;
+                    bottom: 17px;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+    &__wrap {
+        overflow: hidden;
+        &-two {
+            & .progress {
+                border: none;
+                background: #DDE1E4;
+                padding: 0;
+                height: 8px;
+                &-bar {
+                    background-color: var(--tg-theme-primary);
+                    & .count {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.experience__wrap-two {
+    position: absolute;
+    left: 15px;
+    top: 14px;
+    background: var(--tg-color-white-default);
+    @include border-radius(20px);
+    padding: 26px 31px;
+    @media #{$lg} {
+        padding: 20px 25px;
+    }
+    @media #{$xs} {
+        padding: 20px 15px;
+    }
+    & .count {
+        margin-bottom: 18px;
+        @include flexbox();
+        align-items: flex-start;
+        line-height: .8;
+        color: var(--tg-theme-primary);
+        font-size: 30px;
+        @media #{$xs} {
+            margin-bottom: 10px;
+        }
+        & .counter-number {
+            font-size: 64px;
+            @media #{$xs} {
+                font-size: 48px;
+            }
+        }
+    }
+    & .text {
+        font-weight: 500;
+        font-size: 18px;
+        text-transform: capitalize;
+        line-height: 1.1;
+        display: block;
+        color: var(--tg-heading-color);
+        @media #{$xs} {
+            font-size: 16px;
+        }
+    }
+}

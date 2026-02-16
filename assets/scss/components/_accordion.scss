@@ -1,0 +1,78 @@
+@use '../utils' as *;
+
+/*=============================
+    	0. Accordion
+===============================*/
+.faq__wrap {
+    background: var(--tg-color-gray-2);
+    @include border-radius(20px);
+    padding: 60px 80px 30px 60px;
+    @media #{$lg} {
+        padding: 40px 40px 20px 35px;
+    }
+    @media #{$xs} {
+        padding: 25px 20px 20px 20px;
+    }
+    @media #{$sm} {
+        padding: 25px 30px 20px 30px;
+    }
+    & .title {
+        margin-bottom: 20px;
+        font-size: 28px;
+    }
+    & .accordion {
+        &-item {
+            background: transparent;
+            border: none;
+            border-radius: 0 !important;
+            border-bottom: 1px solid #cbd3db;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+        &-button {
+            background: transparent;
+            padding: 18px 24px 20px 0;
+            @include border-radius(0 !important);
+            box-shadow: none;
+            font-weight: 600;
+            font-size: 20px;
+            text-transform: capitalize;
+            position: relative;
+            color: var(--tg-heading-color);
+            &::after {
+                display: none;
+            }
+            &::before {
+                content: "";
+                display: inline-block;
+                width: 13px;
+                height: 13px;
+                color: var(--tg-theme-primary);
+                position: absolute;
+                right: 0;
+                top: 25px;
+                -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.5 14.5L14.5 1.5M14.5 1.5H1.5M14.5 1.5V14.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center / contain;
+                mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.5 14.5L14.5 1.5M14.5 1.5H1.5M14.5 1.5V14.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center / contain;
+                background-color: var(--tg-heading-color);
+            }
+            &:focus {
+                box-shadow: none;
+            }
+            &:not(.collapsed) {
+                color: var(--tg-theme-primary);
+                &::before {
+                    transform: rotate(90deg);
+                    background-color: var(--tg-theme-primary);
+                }
+            }
+        }
+        &-body {
+            padding: 0 0 25px 0;
+            & p {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+

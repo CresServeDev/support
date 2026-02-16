@@ -1,0 +1,122 @@
+@use '../utils' as *;
+
+/*=============================
+    	04. Brand
+===============================*/
+.brand {
+    &__area {
+        padding: 50px 50px;
+        background: var(--tg-color-gray-3);
+        @media #{$xl} {
+            padding: 50px 30px;
+        }
+        @media #{$lg} {
+            padding: 45px 20px;
+        }
+        &-two {
+            padding-top: 60px;
+        }
+        &-three {
+            padding: 24px 0;
+            margin-top: -80px;
+            z-index: -1;
+            position: inherit;
+            @media #{$lg} {
+                padding: 19px 0;
+                margin-top: -70px;
+            }
+        }
+    }
+    &__inner-wrap {
+        @include flexbox();
+        align-items: center;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+        @media #{$xs} {
+            flex-wrap: wrap;
+        }
+        &-two {
+            width: 72%;
+            @media #{$xxl} {
+                width: 70%;
+            }
+            @media #{$xl} {
+                width: 67%;
+            }
+            @media #{$lg} {
+                width: 72%;
+            }
+            @media #{$xs} {
+                width: 74%;
+            }
+        }
+    }
+    &__title {
+        margin-bottom: 0;
+        font-weight: 600;
+        font-size: 16px;
+        width: 12%;
+        flex: 0 0 auto;
+        padding-right: 30px;
+        position: relative;
+        line-height: 1.5;
+        border-right: 1px solid var(--tg-border-5);
+        @media #{$lg} {
+            width: 17%;
+        }
+        @media #{$md} {
+            width: 20%;
+            padding-right: 15px;
+        }
+        @media #{$xs} {
+            width: 100%;
+            padding-right: 0;
+            text-align: center;
+            padding-bottom: 15px;
+            border-right: none;
+            border-bottom: 1px solid var(--tg-border-5);
+        }
+        &::after,
+        &::before {
+            content: "";
+            position: absolute;
+            right: -4px;
+            top: -2px;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            width: 7px;
+            height: 7px;
+            background: var(--tg-border-5);
+            @media #{$xs} {
+                right: auto;
+                top: auto;
+                bottom: -4px;
+                left: 0;
+            }
+        }
+        &::after {
+            top: auto;
+            bottom: -2px;
+            @media #{$xs} {
+                right: 0;
+                top: auto;
+                bottom: -4px;
+                left: auto;
+            }
+        }
+        & br {
+            @media #{$xs} {
+                display: none;
+            }
+        }
+    }
+    &__item {
+        @include flexbox();
+        min-height: 32px;
+        align-items: center;
+        justify-content: center;
+        & img {
+            cursor: pointer;
+        }
+    }
+}

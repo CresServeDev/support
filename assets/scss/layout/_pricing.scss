@@ -1,0 +1,119 @@
+@use '../utils' as *;
+
+/*=============================
+    	18. Pricing
+===============================*/
+.pricing {
+    &__area {
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: -244px;
+            bottom: 193px;
+            width: 590px;
+            height: 590px;
+            background: #C56FD3;
+            pointer-events: none;
+            opacity: .2;
+            filter: blur(250px);
+            @include border-radius(50%);
+            z-index: -1;
+        }
+        &::before {
+            width: 640px;
+            height: 640px;
+            background: #DFA175;
+            filter: blur(200px);
+            top: 116px;
+            left: auto;
+            right: -237px;
+        }
+    }
+    &__box {
+        position: relative;
+        z-index: 1;
+        padding: 55px 50px 80px;
+        height: 100%;
+        @media #{$lg} {
+            padding: 55px 30px 65px;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            clip-path: polygon(97.699% 10.302%, 97.699% 10.302%, 98.121% 10.597%, 98.503% 10.912%, 98.844% 11.245%, 99.144% 11.596%, 99.4% 11.961%, 99.613% 12.338%, 99.781% 12.727%, 99.902% 13.125%, 99.975% 13.531%, 100% 13.941%, 100% 94.984%, 100% 94.984%, 99.903% 95.798%, 99.624% 96.57%, 99.177% 97.289%, 98.577% 97.947%, 97.84% 98.531%, 96.98% 99.032%, 96.014% 99.44%, 94.955% 99.744%, 93.82% 99.934%, 92.624% 100%, 19.04% 100%, 19.04% 100%, 18.476% 99.985%, 17.918% 99.942%, 17.37% 99.87%, 16.832% 99.77%, 16.308% 99.643%, 15.799% 99.49%, 15.308% 99.311%, 14.837% 99.106%, 14.389% 98.877%, 13.965% 98.624%, 2.301% 91.104%, 2.301% 91.104%, 1.879% 90.809%, 1.498% 90.493%, 1.156% 90.16%, 0.856% 89.81%, 0.6% 89.445%, 0.387% 89.067%, 0.219% 88.678%, 0.098% 88.28%, 0.025% 87.875%, 0% 87.464%, 0% 5.016%, 0% 5.016%, 0.097% 4.202%, 0.376% 3.43%, 0.823% 2.711%, 1.423% 2.053%, 2.16% 1.469%, 3.02% 0.968%, 3.986% 0.56%, 5.045% 0.256%, 6.18% 0.066%, 7.376% 0%, 78.78% 0%, 78.78% 0%, 79.344% 0.015%, 79.902% 0.058%, 80.451% 0.13%, 80.988% 0.23%, 81.512% 0.357%, 82.021% 0.51%, 82.512% 0.689%, 82.983% 0.894%, 83.432% 1.123%, 83.856% 1.376%, 97.699% 10.302%);
+            background: var(--tg-color-white-default);
+            z-index: -1;
+            pointer-events: none;
+        }
+    }
+    &__content {
+        position: relative;
+        z-index: 1;
+        border-bottom: 1px solid var(--tg-border-6);
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: -1px;
+            bottom: -4px;
+            height: 7px;
+            width: 7px;
+            background: var(--tg-border-6);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        &::before {
+            left: auto;
+            right: -2px;
+        }
+        & .title {
+            margin-bottom: 12px;
+            font-size: 24px;
+        }
+        & p {
+            margin-bottom: 0;
+            text-transform: capitalize;
+            font-weight: 500;
+        }
+    }
+    &__list {
+        margin-bottom: 30px;
+        & .list-wrap {
+            & li {
+                @include flexbox();
+                align-items: flex-start;
+                gap: 8px;
+                font-weight: 500;
+                color: var(--tg-body-color);
+                margin-bottom: 8px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                & svg {
+                    color: var(--tg-theme-primary);
+                    transform: translateY(5px);
+                }
+            }
+        }
+    }
+}
+
+.tg-badge {
+    font-weight: 700;
+    font-size: 14px;
+    background: var(--tg-theme-primary);
+    color: var(--tg-color-white-default);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -14px;
+    border-radius: 50px;
+    line-height: 1;
+    padding: 7px 14px 9px;
+}

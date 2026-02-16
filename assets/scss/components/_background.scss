@@ -1,0 +1,21 @@
+@use '../utils' as *;
+
+/*=============================
+    - Background color
+===============================*/
+.section-bg {
+    background: var(--tg-color-gray-2);
+    position: relative;
+    z-index: 1;
+}
+.section-bg-two {
+    background: var(--tg-color-gray-3);
+    position: relative;
+    z-index: 1;
+}
+.white-bg {
+	background: var(--tg-color-white-default);
+}
+.black-bg {
+	background: var(--tg-common-color-black);
+}

@@ -1,0 +1,64 @@
+@use '../utils' as *;
+
+/*=============================
+    	10. Marquee
+===============================*/
+.marquee {
+    &__area {
+        background: var(--tg-theme-primary);
+        padding: 15px 0 9px 0;
+    }
+    &__item {
+        margin-right: 12px;
+        display: inline;
+        line-height: 1;
+        font-weight: 600;
+        font-size: 20px;
+        text-transform: capitalize;
+        color: var(--tg-color-white-default);
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 0;
+        &-two {
+            margin-right: 20px;
+            display: inline;
+            line-height: 1;
+            &:nth-child(even) {
+                & a {
+                    color: var(--tg-heading-color);
+                    &:hover {
+                        color: transparent;
+                    }
+                }
+            }
+            & a {
+                font-size: 60px;
+                font-weight: 800;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: transparent;
+                -webkit-text-stroke: 1.5px var(--tg-heading-color);
+                display: inline-flex;
+                align-items: center;
+                @media #{$lg} {
+                    font-size: 50px;
+                }
+                @media #{$md} {
+                    font-size: 45px;
+                }
+                @media #{$xs} {
+                    font-size: 40px;
+                }
+                &:hover {
+                    color: var(--tg-heading-color);
+                    -webkit-text-stroke: 1.5px var(--tg-heading-color);
+                }
+                & svg {
+                    color: var(--tg-theme-primary);
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}

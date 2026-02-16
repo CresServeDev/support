@@ -1,0 +1,305 @@
+@use '../utils' as *;
+
+/*=============================
+    	11. Testimonial
+===============================*/
+.testimonial {
+    &__area {
+        &-two {
+            &::after,
+            &::before {
+                content: "";
+                position: absolute;
+                left: -35px;
+                bottom: -108px;
+                width: 430px;
+                height: 430px;
+                filter: blur(300px);
+                opacity: .2;
+                pointer-events: none;
+                @include border-radius(50%);
+                z-index: -1;
+                background: #4856F5;
+            }
+            &::after {
+                left: auto;
+                right: -180px;
+                bottom: auto;
+                top: 230px;
+                width: 625px;
+                height: 625px;
+                background: #4899F5;
+            }
+        }
+        &-three {
+            background: var(--tg-theme-primary);
+            position: relative;
+            z-index: 1;
+        }
+    }
+    &__top-wrap {
+        @include flexbox();
+        align-items: center;
+        gap: 50px;
+        justify-content: center;
+        margin-bottom: 50px;
+        @media #{$md} {
+            gap: 40px;
+            margin-bottom: 35px;
+        }
+        @media #{$xs} {
+            gap: 15px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        & .count {
+            margin-bottom: 0;
+            color: var(--tg-color-white-default);
+            font-size: 110px;
+            line-height: 1;
+            width: 24%;
+            flex: 0 0 auto;
+            @media #{$lg} {
+                font-size: 100px;
+            }
+            @media #{$md} {
+                font-size: 70px;
+            }
+            @media #{$xs} {
+                font-size: 50px;
+                width: 100%;
+            }
+        }
+        & .title {
+            margin-bottom: 0;
+            color: var(--tg-color-white-default);
+            font-weight: 500;
+            font-size: 40px;
+            position: relative;
+            z-index: 1;
+            @media #{$md} {
+                font-size: 30px;
+            }
+            @media #{$xs} {
+                font-size: 28px;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                left: -25px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 5px;
+                height: 90%;
+                @include border-radius(5px);
+                background: var(--tg-color-white-default);
+                @media #{$xs} {
+                    display: none;
+                }
+            }
+            & br {
+                @media #{$md} {
+                    display: none;
+                }
+            }
+            & span {
+                font-weight: 700;
+            }
+        }
+    }
+    &__content-wrap {
+        @media #{$md} {
+            margin-bottom: 40px;
+        }
+        & p {
+            margin-bottom: 0;
+            font-weight: 500;
+            font-size: 16px;
+            text-transform: capitalize;
+            width: 90%;
+            @media #{$lg} {
+                width: 100%;
+            }
+        }
+    }
+    &__item {
+        background: var(--tg-color-white-default);
+        padding: 40px 24px 40px 40px;
+        border-radius: 20px;
+        position: relative;
+        z-index: 1;
+        @media #{$xl} {
+            padding: 30px 24px 30px 24px;
+        }
+        @media #{$xs} {
+            padding: 40px 24px 40px 40px;
+        }
+        @media #{$sm} {
+            padding: 30px 24px 30px 24px;
+        }
+        & .rating {
+            margin-bottom: 17px;
+        }
+        & .title {
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        & p {
+            text-transform: capitalize;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+        & .shape {
+            position: absolute;
+            right: 24px;
+            bottom: -10px;
+            z-index: -1;
+        }
+        &-two {
+            background: var(--tg-color-white-default);
+            border-radius: 20px;
+            padding: 38px 35px;
+            position: relative;
+            z-index: 1;
+            @media #{$lg} {
+                padding: 38px 25px;
+            }
+            @media #{$md} {
+                padding: 38px 30px;
+            }
+            @media #{$sm} {
+                padding: 25px 20px;
+            }
+            & .rating {
+                margin-bottom: 22px;
+            }
+            & > p {
+                margin-bottom: 22px;
+                font-weight: 500;
+                text-transform: capitalize;
+            }
+            & .icon {
+                color: var(--tg-theme-primary);
+            }
+        }
+    }
+    &__bottom {
+        @include flexbox();
+        align-items: center;
+        gap: 10px;
+        justify-content: space-between;
+    }
+    &__avatar {
+        @include flexbox();
+        align-items: center;
+        gap: 12px 17px;
+        & .thumb {
+            width: 50px;
+            flex: 0 0 auto;
+            & img {
+                @include border-radius(50%);
+                width: 100%;
+            }
+        }
+        & .content {
+            & .name {
+                margin-bottom: 0;
+                font-weight: 700;
+                font-size: 18px;
+            }
+            & span {
+                text-transform: capitalize;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 1;
+            }
+        }
+        &-two {
+            @media #{$lg} {
+                gap: 10px 10px;
+            }
+            @media #{$sm} {
+                align-items: flex-start;
+            }
+            & .thumb {
+                width: 60px;
+                @media #{$lg} {
+                    width: 50px;
+                }
+            }
+            & .content {
+                & .name {
+                    @media #{$lg} {
+                        font-size: 17px;
+                    }
+                }
+            }
+        }
+    }
+    &__nav-wrap {
+        @include flexbox();
+        align-items: center;
+        gap: 5px;
+        margin-top: 30px;
+        & button {
+            width: 55px;
+            height: 55px;
+            @include flexbox();
+            align-items: center;
+            justify-content: center;
+            border: none;
+            padding: 0;
+            background: var(--tg-color-white-default);
+            color: var(--tg-theme-primary);
+            @include border-radius(10px);
+            &:hover {
+                color: var(--tg-color-white-default);
+                background: var(--tg-theme-primary);
+            }
+        }
+    }
+    &__shape {
+        & img {
+            position: absolute;
+            left: 62px;
+            bottom: -45px;
+            z-index: -1;
+            @media #{$md} {
+                left: 12px;
+                bottom: -33px;
+                width: 150px;
+            }
+        }
+    }
+}
+.testimonial-active {
+    margin-right: -270px;
+    @media #{$xl} {
+        margin-right: -450px;
+    }
+    @media #{$lg} {
+        margin-right: -350px;
+    }
+    @media #{$md} {
+        margin-right: -300px;
+    }
+    @media #{$xs} {
+        margin-right: 0;
+    }
+    @media #{$sm} {
+        margin-right: -90px;
+    }
+}
+
+.testimonial-active-two {
+    cursor: grab;
+}
+
+.rating {
+    @include flexbox();
+    align-items: center;
+    color: var(--tg-color-yellow-light);
+    gap: 4px;
+}
+

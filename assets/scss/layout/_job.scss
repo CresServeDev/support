@@ -1,0 +1,105 @@
+@use '../utils' as *;
+
+/*=============================
+    	21. Job
+===============================*/
+.job {
+    &__item {
+        background: var(--tg-color-white-default);
+        @include border-radius(30px);
+        padding: 60px 60px;
+        height: 100%;
+        @media #{$lg} {
+            padding: 30px 20px;
+        }
+        @media #{$md} {
+            padding: 30px 30px;
+        }
+        & .title {
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        & p {
+            margin-bottom: 40px;
+            text-transform: capitalize;
+            width: 89%;
+            @media #{$md} {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    &__meta {
+        @include flexbox();
+        align-items: center;
+        gap: 10px 13px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        & li {
+            @include flexbox();
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+            text-transform: capitalize;
+            & span {
+                background: var(--tg-color-gray-1);
+                line-height: 1;
+                color: var(--tg-theme-primary);
+                font-weight: 600;
+                text-transform: capitalize;
+                padding: 8px 20px;
+                @include border-radius(50px);
+            }
+        }
+    }
+    &__bottom {
+        @include flexbox();
+        gap: 15px;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        & .salary {
+            background: var(--tg-color-gray-1);
+            color: var(--tg-heading-color);
+            font-weight: 600;
+            @include border-radius(50px);
+            padding: 7px 16px;
+            line-height: 1.4;
+            display: block;
+            @media #{$lg} {
+                padding: 7px 10px;
+            }
+            @media #{$md} {
+                padding: 7px 16px;
+            }
+        }
+    }
+    &__info-wrap {
+        & .list-wrap {
+            & li {
+                font-weight: 600;
+                font-size: 16px;
+                margin-bottom: 30px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                span {
+                    font-weight: 700;
+                    font-size: 20px;
+                    display: block;
+                    line-height: 1;
+                    color: var(--tg-heading-color);
+                    margin-bottom: 5px;
+                }
+            }
+        }
+        & .tg-btn {
+            width: 100%;
+            justify-content: center;
+            @include border-radius(6px);
+            height: 60px;
+            margin-top: 45px;
+        }
+    }
+}

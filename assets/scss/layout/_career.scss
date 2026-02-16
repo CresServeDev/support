@@ -1,0 +1,129 @@
+@use '../utils' as *;
+
+/*=============================
+    	20. Career
+===============================*/
+.career {
+    &__img {
+        & img {
+            height: 620px;
+            width: 100%;
+            @include border-radius(24px);
+            object-fit: cover;
+            @media #{$lg} {
+                height: 530px;
+            }
+            @media #{$md} {
+                height: 450px;
+            }
+        }
+    }
+    &__slider-wrap {
+        position: relative;
+    }
+    &__nav-wrap {
+        & button {
+            width: 60px;
+            height: 60px;
+            @include flexbox();
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            @include border-radius(50%);
+            border: none;
+            position: absolute;
+            left: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+            background: var(--tg-color-white-default);
+            color: var(--tg-theme-primary);
+            @media #{$lg} {
+                left: 40px;
+            }
+            @media #{$xs} {
+                left: 25px;
+                width: 50px;
+                height: 50px;
+            }
+            &:hover {
+                background: var(--tg-theme-primary);
+                color: var(--tg-color-white-default);
+            }
+            &.career-button-next {
+                right: 70px;
+                left: auto;
+                @media #{$lg} {
+                    right: 40px;
+                }
+                @media #{$xs} {
+                    right: 25px;
+                }
+            }
+        }
+    }
+    &__content {
+        margin-top: 60px;
+        @media #{$md} {
+            margin-top: 40px;
+        }
+        & p {
+            margin-bottom: 0;
+        }
+    }
+    &__details {
+        &-content {
+            & .title {
+                margin-bottom: 18px;
+                font-size: 30px;
+                @media #{$xs} {
+                    font-size: 28px;
+                }
+            }
+            & p {
+                margin-bottom: 15px;
+            }
+            & .title-two {
+                margin-bottom: 16px;
+                font-size: 28px;
+                @media #{$xs} {
+                    font-size: 26px;
+                }
+            }
+            & .choose__list {
+                margin-bottom: 0;
+            }
+            &-inner {
+                margin-top: 40px;
+            }
+        }
+    }
+}
+
+.company__benefit {
+    &-content {
+        width: 90%;
+        @media #{$lg} {
+            width: 100%;
+        }
+        & p {
+            margin-bottom: 30px;
+        }
+    }
+    &-img {
+        margin-left: -30px;
+        @media #{$lg} {
+            margin-left: 0;
+        }
+        @media #{$md} {
+            margin-bottom: 50px;
+        }
+        @media #{$xs} {
+            margin-bottom: 30px;
+        }
+        & img {
+            @include border-radius(30px);
+            width: 100%;
+        }
+    }
+}
