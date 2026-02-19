@@ -14741,20 +14741,84 @@ blockquote cite {
   }
 }
 
-/* Mobile */
 @media (max-width: 576px) {
+
+  /* Keep row layout */
   .activity-item {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
   }
 
+  /* Make text smaller */
+  .activity-item h6 {
+    font-size: 14px;
+  }
+
+  .activity-item small {
+    font-size: 11px;
+  }
+
+  /* Smaller icon */
+  .activity-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  /* Keep actions on same line */
   .activity-actions {
     opacity: 1;
     transform: none;
   }
 
+  .activity-actions .btn {
+    padding: 3px 6px;
+    font-size: 12px;
+  }
+
   .activity-scroll {
     max-height: 300px;
   }
+}
+
+/* ===== STATUS BADGES ===== */
+.badge {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 6px;
+  font-weight: 500;
+}
+
+/* Status Colors */
+.status-open {
+  background: rgba(220,53,69,0.15);
+  color: #dc3545;
+}
+
+.status-progress {
+  background: rgba(255,193,7,0.15);
+  color: #ffc107;
+}
+
+.status-resolved {
+  background: rgba(25,135,84,0.15);
+  color: #198754;
+}
+
+.status-new {
+  background: rgba(13,110,253,0.15);
+  color: #0d6efd;
+}
+
+.status-closed {
+  background: rgba(33,37,41,0.15);
+  color: #212529;
+}
+
+/* Optional dark soft bg */
+.bg-dark-soft {
+  background: rgba(33,37,41,0.1);
+  color: #212529;
 }
