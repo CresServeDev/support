@@ -2707,6 +2707,7 @@ textarea {
 
 @media (max-width: 767.98px) {
   .tg-header__area .mobile-nav-toggler {
+    margin-left: 6px;
     width: 45px;
     height: 45px;
   }
@@ -3292,6 +3293,7 @@ textarea {
 
 @media (max-width: 1199.98px) {
   .tg-header__area-two .tgmenu__nav {
+    flex-wrap: nowrap;
     justify-content: space-between;
   }
 }
@@ -14488,24 +14490,36 @@ blockquote cite {
 
 
 
-/* ===== FLOATING SIDEBAR BASE ===== */
+/* ===== FLOATING BOTTOM SIDEBAR ===== */
 .floating-sidebar {
   position: fixed;
-  top: 50%;
-  left: 20px;
-  transform: translateY(-50%);
-  background: #111827;
-  padding: 12px 8px;
-  border-radius: 16px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  padding: 10px 18px;
+  border-radius: 25px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 18px;
   z-index: 999;
   transition: all 0.4s ease;
+  animation: floatBounce 3s ease-in-out infinite;
 }
 
-/* Sidebar items */
+/* Floating bounce animation */
+@keyframes floatBounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* Hide on scroll */
+.floating-sidebar.hide {
+  transform: translateX(-50%) translateY(120px);
+  opacity: 0;
+}
+
+/* Sidebar item */
 .sidebar-item {
   width: 48px;
   height: 48px;
@@ -14513,80 +14527,51 @@ blockquote cite {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #cbd5e1;
+  color: #94a3b8;
   font-size: 18px;
   transition: 0.3s;
-  text-decoration: none;
+  position: relative;
 }
 
+/* Hover */
 .sidebar-item:hover {
-  background: #1f2937;
+  background: #006aff;
   color: #fff;
   transform: scale(1.1);
 }
 
+/* Active */
 .sidebar-item.active {
+  color: #2563eb;
+}
+
+/* Active indicator line */
+.sidebar-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  width: 22px;
+  height: 3px;
   background: #2563eb;
-  color: #fff;
+  border-radius: 10px;
 }
 
-/* ===== COLLAPSED STATE ===== */
-.floating-sidebar.collapsed {
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  border-radius: 50%;
-  overflow: hidden;
-  background: #2563eb;
-  box-shadow: 0 0 15px rgba(37,99,235,0.6);
-}
-
-.floating-sidebar.collapsed .sidebar-item {
-  opacity: 0;
-  pointer-events: none;
-}
-/* ========================= */
-/* ===== TABLET VIEW ======= */
-/* ========================= */
-@media (max-width: 992px) {
-  .floating-sidebar {
-    left: 10px;
-    padding: 10px 6px;
-  }
-
-  .sidebar-item {
-    width: 42px;
-    height: 42px;
-    font-size: 16px;
-  }
-}
-
-/* ========================= */
-/* ===== MOBILE VIEW ======= */
-/* ========================= */
+/* ===== SMALL DEVICES ===== */
 @media (max-width: 576px) {
 
   .floating-sidebar {
-    top: auto;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    flex-direction: row;
-    padding: 8px 12px;
-    border-radius: 20px;
-    gap: 15px;
+    width: 95%;
+    padding: 10px 12px;
+    gap: 10px;
   }
 
   .sidebar-item {
-    width: 45px;
-    height: 45px;
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
   }
+
 }
-
-
-
-
-
 
 
 
@@ -14594,12 +14579,12 @@ blockquote cite {
 /* ===== DASHBOARD CARD ===== */
 
 /* ===== FIX CONTENT OVERLAP WITH FLOATING SIDEBAR ===== */
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   .dashboard-area {
-    padding-left: 80px; /* space for floating sidebar */
+    padding-left: 80px; 
     padding-right: 80px;
   }
-}
+} */
 .dashboard-card {
   background: #fff;
   border-radius: 14px;

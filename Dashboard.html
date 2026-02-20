@@ -571,27 +571,41 @@
 
   <div class="floating-sidebar" id="floatingSidebar">
 
-    <a href="#" class="sidebar-item active" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
+    <a href="/Dashboard.html" class="sidebar-item active" data-bs-toggle="tooltip" data-bs-placement="right"
+      title="Dashboard">
       <i class="bi bi-house-door"></i>
     </a>
 
+    <a href="/tikits.html" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Tikits">
+      <i class="bi bi-ticket-fill"></i>
+    </a>
+
     <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Analytics">
-      <i class="bi bi-speedometer2"></i>
+      <i class="bi bi-pie-chart-fill"></i>
     </a>
 
-    <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Orders">
-      <i class="bi bi-cart"></i>
+    <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Repaire">
+      <i class="bi bi-tools"></i>
     </a>
 
-    <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Products">
-      <i class="bi bi-box"></i>
+    <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Live Chat">
+      <i class="bi bi-chat-left-text-fill"></i>
     </a>
 
-    <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Customers">
-      <i class="bi bi-people"></i>
+    <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Client">
+      <i class="bi bi-buildings-fill"></i>
     </a>
-
+    <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Assets">
+      <i class="bi bi-laptop-fill"></i>
+    </a>
+    <a href="#" class="sidebar-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Knowledge Base">
+      <i class="bi bi-mortarboard-fill"></i>
+    </a>
   </div>
+
+
+
+
   <!-- main-area -->
   <main class="main-area fix">
     <section class="dashboard-area py-5">
@@ -812,7 +826,7 @@
                     </div>
                   </div>
 
-                  
+
 
 
                   <!-- Repeat items same structure -->
@@ -1044,12 +1058,12 @@
     window.addEventListener("scroll", function () {
       let currentScroll = window.pageYOffset;
 
-      if (currentScroll > lastScroll && currentScroll > 100) {
+      if (currentScroll > lastScroll && currentScroll > 80) {
         // scrolling down
-        sidebar.classList.add("collapsed");
+        sidebar.classList.add("hide");
       } else {
         // scrolling up
-        sidebar.classList.remove("collapsed");
+        sidebar.classList.remove("hide");
       }
 
       lastScroll = currentScroll;
