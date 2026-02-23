@@ -14504,14 +14504,14 @@ blockquote cite {
   gap: 18px;
   z-index: 999;
   transition: all 0.4s ease;
-  animation: floatBounce 3s ease-in-out infinite;
+  /* animation: floatBounce 3s ease-in-out infinite; */
 }
 
 /* Floating bounce animation */
-@keyframes floatBounce {
+/* @keyframes floatBounce {
   0%,100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(-6px); }
-}
+} */
 
 /* Hide on scroll */
 .floating-sidebar.hide {
