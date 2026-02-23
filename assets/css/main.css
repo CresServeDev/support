@@ -14345,7 +14345,7 @@ blockquote cite {
 /* Premium Container Card */
 .glass-card {
   background: #ffffff;
-  border-radius: 24px;
+  border-radius: 2px;
   padding: 30px;
   position: relative;
   overflow: hidden;
@@ -14363,6 +14363,7 @@ blockquote cite {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -14400,37 +14401,45 @@ blockquote cite {
   border-collapse: separate;
   border-spacing: 0 1px;
 }
+.table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 
 /* Table Header */
 .table thead th {
+  position: sticky;
+  top: 0;
   background: linear-gradient(90deg, var(--primaryt), var(--primaryt-dark));
   color: white;
   font-size: 13px;
   letter-spacing: 1px;
   border: none;
   padding: 14px;
+  z-index: 11;
+
 }
 
 /* Rounded Header */
-.table thead th:first-child {
+/* .table thead th:first-child {
   border-top-left-radius: 12px;
 }
 
 .table thead th:last-child {
   border-top-right-radius: 12px;
-}
+} */
 
 /* Table Rows Premium Card Style */
 .table tbody tr {
   background: #ffffff;
   box-shadow: 0 6px 18px rgba(0, 73, 88, 0.05);
-  border-radius: 14px;
+  /* border-radius: 2px; */
   transition: all 0.3s ease;
 }
 
 .table tbody tr:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 30px rgba(0, 73, 88, 0.12);
+  background: #85888d8a;
 }
 
 /* Remove default borders */
@@ -14441,7 +14450,7 @@ blockquote cite {
 }
 
 /* Rounded row corners */
-.table tbody tr td:first-child {
+/* .table tbody tr td:first-child {
   border-top-left-radius: 14px;
   border-bottom-left-radius: 14px;
 }
@@ -14449,7 +14458,7 @@ blockquote cite {
 .table tbody tr td:last-child {
   border-top-right-radius: 14px;
   border-bottom-right-radius: 14px;
-}
+} */
 
 /* Premium Status Badge */
 .badge-metal {
@@ -14462,10 +14471,12 @@ blockquote cite {
   letter-spacing: 0.5px;
   box-shadow: 0 4px 12px rgba(0, 73, 88, 0.25);
 }
+
 .badge-metal:hover {
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(49, 49, 49, 0.4);
 }
+
 /* Responsive Scrollbar */
 .table-responsive::-webkit-scrollbar {
   height: 6px;
@@ -14499,7 +14510,7 @@ blockquote cite {
   background: #ffffff;
   padding: 10px 18px;
   border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   display: flex;
   gap: 18px;
   z-index: 999;
@@ -14589,7 +14600,7 @@ blockquote cite {
   background: #fff;
   border-radius: 14px;
   padding: 25px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   transition: 0.3s;
 }
 
@@ -14619,10 +14630,25 @@ blockquote cite {
   font-size: 20px;
 }
 
-.bg-primary-soft { background: rgba(13,110,253,0.1); color: #0d6efd; }
-.bg-danger-soft { background: rgba(220,53,69,0.1); color: #dc3545; }
-.bg-warning-soft { background: rgba(255,193,7,0.1); color: #ffc107; }
-.bg-success-soft { background: rgba(25,135,84,0.1); color: #198754; }
+.bg-primary-soft {
+  background: rgba(13, 110, 253, 0.1);
+  color: #0d6efd;
+}
+
+.bg-danger-soft {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.bg-warning-soft {
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+}
+
+.bg-success-soft {
+  background: rgba(25, 135, 84, 0.1);
+  color: #198754;
+}
 
 
 
@@ -14650,13 +14676,13 @@ blockquote cite {
 }
 
 .activity-scroll::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
 .activity-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.2) transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
 /* ===== ACTIVITY ITEM ===== */
@@ -14675,7 +14701,7 @@ blockquote cite {
 }
 
 .activity-item:hover {
-  background: rgba(0,0,0,0.02);
+  background: rgba(0, 0, 0, 0.02);
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -14778,32 +14804,162 @@ blockquote cite {
 
 /* Status Colors */
 .status-open {
-  background: rgba(220,53,69,0.15);
+  background: rgba(220, 53, 69, 0.15);
   color: #dc3545;
 }
 
 .status-progress {
-  background: rgba(255,193,7,0.15);
+  background: rgba(255, 193, 7, 0.15);
   color: #ffc107;
 }
 
 .status-resolved {
-  background: rgba(25,135,84,0.15);
+  background: rgba(25, 135, 84, 0.15);
   color: #198754;
 }
 
 .status-new {
-  background: rgba(13,110,253,0.15);
+  background: rgba(13, 110, 253, 0.15);
   color: #0d6efd;
 }
 
 .status-closed {
-  background: rgba(33,37,41,0.15);
+  background: rgba(33, 37, 41, 0.15);
   color: #212529;
 }
 
 /* Optional dark soft bg */
 .bg-dark-soft {
-  background: rgba(33,37,41,0.1);
+  background: rgba(33, 37, 41, 0.1);
   color: #212529;
+}
+
+
+
+
+
+
+/* tikit area? */
+
+.ticket-scroll {
+  max-height: 500px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.ticket-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ticket-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+/* Status */
+.status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.status.open {
+  background: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+}
+
+.status.resolved {
+  background: rgba(25, 135, 84, 0.15);
+  color: #198754;
+}
+
+/* Priority */
+.priority {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.priority.high {
+  background: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+}
+
+.priority.medium {
+  background: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+}
+
+.priority.low {
+  background: rgba(13, 110, 253, 0.15);
+  color: #0d6efd;
+}
+
+.tag,
+.assigned {
+  background: #f1f1f1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.action-icon {
+  cursor: pointer;
+  margin: 0 5px;
+  transition: 0.3s;
+}
+
+.action-icon:hover {
+  color: #006aff;
+}
+
+
+
+
+
+
+
+
+/* ===== TOP INFO BAR ===== */
+.per-page-select {
+  width: 70px;
+  border-radius: 8px;
+}
+
+/* Sort Buttons */
+.btn-sort {
+  border: 1px solid #dee2e6;
+  background: #fff;
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 5px 12px;
+  transition: 0.3s ease;
+}
+
+.btn-sort:hover {
+  background: rgba(0, 73, 88, 0.08);
+}
+
+.active-sort {
+  background: var(--primaryt);
+  color: #fff;
+  border-color: var(--primaryt);
+}
+
+/* ===== PAGINATION ===== */
+.pagination .page-link {
+  border-radius: 50px;
+  margin: 0 4px;
+  border: none;
+  color: var(--primaryt);
+  transition: 0.3s;
+}
+
+.pagination .page-item.active .page-link {
+  background: var(--primaryt);
+  color: #fff;
+}
+
+.pagination .page-link:hover {
+  background: rgba(0, 73, 88, 0.1);
 }

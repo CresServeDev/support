@@ -1,0 +1,69 @@
+<!-- TABLE CARD -->
+                <div class="glass-card p-0">
+
+                    <div class="table-responsive ticket-scroll">
+                        <table class="table align-middle mb-0 ticket-table">
+
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="selectAll"></th>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Category</th>
+                                    <th>Department</th>
+                                    <th>Assigned To</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <!-- Row 1 -->
+                                <tr>
+                                    <td><input type="checkbox" class="rowCheck"></td>
+                                    <td>#1</td>
+                                    <td>
+                                        <strong>Test Ticket</strong>
+                                        <div class="small text-muted">Test ticket for repair</div>
+                                    </td>
+                                    <td><span class="status open">Open</span></td>
+                                    <td><span class="priority medium">Medium</span></td>
+                                    <td><span class="tag">Hardware</span></td>
+                                    <td>IT Management</td>
+                                    <td><span class="assigned">USER</span></td>
+                                    <td>21 Feb 2026</td>
+                                    <td>
+                                        <i class="bi bi-eye-fill action-icon"></i>
+                                        <i class="bi bi-pencil-fill action-icon"></i>
+                                        <i class="bi bi-trash3-fill action-icon"></i>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" class="rowCheck"></td>
+                                    <td>#1</td>
+                                    <td>
+                                        <strong>Test Ticket</strong>
+                                        <div class="small text-muted">Test ticket for repair</div>
+                                    </td>
+                                    <td><span class="status open">Open</span></td>
+                                    <td><span class="priority medium">Medium</span></td>
+                                    <td><span class="tag">Hardware</span></td>
+                                    <td>IT Management</td>
+                                    <td><span class="assigned">USER</span></td>
+                                    <td>21 Feb 2026</td>
+                                    <td>
+                                        <i class="bi bi-eye-fill action-icon"></i>
+                                        <i class="bi bi-pencil-fill action-icon"></i>
+                                        <i class="bi bi-trash3-fill action-icon"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
