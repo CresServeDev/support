@@ -14963,3 +14963,88 @@ blockquote cite {
 .pagination .page-link:hover {
   background: rgba(0, 73, 88, 0.1);
 }
+
+
+
+
+
+
+
+
+
+
+
+/* ============================= */
+/* MOBILE CARD VIEW FOR TICKETS */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody tr {
+    display: block;
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  }
+
+  .table tbody td {
+    display: block;
+    border: none !important;
+    padding: 6px 0;
+  }
+
+  /* Hide unnecessary fields */
+  .table td[data-label="Category"],
+  .table td[data-label="Department"],
+  .table td[data-label="Assigned"] {
+    display: none;
+  }
+
+  /* TOP ROW: ID + STATUS + DATE */
+  .table td[data-label="ID"] {
+    display: inline-block;
+    font-weight: 600;
+    color: #6c757d;
+    margin-right: 10px;
+  }
+
+  .table td[data-label="Status"] {
+    display: inline-block;
+  }
+
+  .table td[data-label="Created"] {
+    float: right;
+    font-size: 12px;
+    color: #6c757d;
+  }
+
+  /* Title */
+  .table td[data-label="Title"] {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* Priority bottom */
+  .table td[data-label="Priority"] {
+    margin-top: 10px;
+  }
+
+  /* Actions bottom right */
+  .table td[data-label="Actions"] {
+    text-align: right;
+    margin-top: 8px;
+  }
+
+  /* Remove checkbox on mobile */
+  .table td[data-label="Select"] {
+    display: none;
+  }
+
+}
