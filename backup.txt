@@ -67,3 +67,970 @@
                     </div>
 
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Ticket Modal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* =============================================
+       CREATE TICKET MODAL — Theme-Matched Styles
+       prefix: ct- (create-ticket)
+    ============================================= */
+
+    :root {
+      --ct-primary:     #004958;
+      --ct-primary-hover: #003844;
+      --ct-body-font:   'Plus Jakarta Sans', sans-serif;
+      --ct-body-color:  #585b6f;
+      --ct-heading-color: #0A165E;
+      --ct-border:      #dee1e3;
+      --ct-bg-input:    #f5f6f7;
+      --ct-radius:      10px;
+      --ct-step-done:   #004958;
+      --ct-step-inactive: #b0b8c9;
+    }
+
+    /* ---- Modal shell ---- */
+    .ct-modal .modal-dialog {
+      max-width: 860px;
+    }
+
+    .ct-modal .modal-content {
+      border-radius: 16px;
+      border: none;
+      font-family: var(--ct-body-font);
+      overflow: hidden;
+    }
+
+    .ct-modal .modal-header {
+      background: #fff;
+      border-bottom: 1px solid var(--ct-border);
+      padding: 20px 28px;
+    }
+
+    .ct-modal .modal-title {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--ct-heading-color);
+    }
+
+    .ct-modal .modal-body {
+      background: #f0f2f5;
+      padding: 24px 28px 28px;
+    }
+
+    /* ---- Cancel button ---- */
+    .ct-btn-cancel {
+      border: 2px solid var(--ct-primary);
+      color: var(--ct-primary);
+      background: transparent;
+      border-radius: var(--ct-radius);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 7px 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+    .ct-btn-cancel:hover {
+      background: var(--ct-primary);
+      color: #fff;
+    }
+
+    /* ---- Stepper ---- */
+    .ct-stepper {
+      background: #fff;
+      border-radius: var(--ct-radius);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 18px;
+    }
+
+    .ct-step {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .ct-step-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--ct-step-inactive);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .ct-step.active .ct-step-circle {
+      background: var(--ct-primary);
+    }
+
+    .ct-step.done .ct-step-circle {
+      background: var(--ct-step-done);
+    }
+
+    .ct-step-label {
+      margin-left: 10px;
+      font-weight: 600;
+      font-size: 13.5px;
+      color: var(--ct-step-inactive);
+      white-space: nowrap;
+      transition: color 0.3s;
+    }
+
+    .ct-step.active .ct-step-label,
+    .ct-step.done .ct-step-label {
+      color: var(--ct-heading-color);
+    }
+
+    .ct-step-line {
+      flex: 1;
+      height: 1.5px;
+      background: var(--ct-border);
+      margin: 0 16px;
+      transition: background 0.3s;
+    }
+
+    .ct-step-line.done {
+      background: var(--ct-step-done);
+    }
+
+    /* ---- Form card ---- */
+    .ct-form-card {
+      background: #fff;
+      border-radius: var(--ct-radius);
+      padding: 28px;
+    }
+
+    /* ---- Input & Textarea ---- */
+    .ct-form-control {
+      width: 100%;
+      border: 1px solid var(--ct-border);
+      border-radius: 8px;
+      background: var(--ct-bg-input);
+      font-family: var(--ct-body-font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ct-heading-color);
+      padding: 10px 14px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .ct-form-control:focus {
+      outline: none;
+      border-color: var(--ct-primary);
+      box-shadow: 0 0 0 3px rgba(0,73,88,0.1);
+      background: #fff;
+    }
+
+    .ct-form-control::placeholder {
+      color: #aab0c4;
+      font-weight: 400;
+    }
+
+    .ct-textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .ct-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ct-body-color);
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .ct-hint {
+      font-size: 12px;
+      color: #aab0c4;
+      margin-top: 4px;
+    }
+
+    /* ---- Select wrapper ---- */
+    .ct-select-wrap {
+      position: relative;
+    }
+
+    .ct-select-wrap::after {
+      content: "\F282";
+      font-family: "bootstrap-icons";
+      font-size: 14px;
+      color: var(--ct-body-color);
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .ct-select {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      border: 1px solid var(--ct-border);
+      border-radius: 8px;
+      background: var(--ct-bg-input);
+      font-family: var(--ct-body-font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ct-heading-color);
+      padding: 10px 36px 10px 14px;
+      cursor: pointer;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .ct-select:focus {
+      outline: none;
+      border-color: var(--ct-primary);
+      box-shadow: 0 0 0 3px rgba(0,73,88,0.1);
+      background: #fff;
+    }
+
+    .ct-select option[value=""] {
+      color: #aab0c4;
+    }
+
+    /* Title input with icon */
+    .ct-input-icon-wrap {
+      position: relative;
+    }
+
+    .ct-input-icon-wrap .ct-form-control {
+      padding-left: 40px;
+    }
+
+    .ct-input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aab0c4;
+      font-size: 16px;
+    }
+
+    /* ---- Buttons ---- */
+    .ct-btn-back {
+      border: 1.5px solid var(--ct-border);
+      background: #fff;
+      color: var(--ct-body-color);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 24px;
+      transition: all 0.25s;
+      font-family: var(--ct-body-font);
+    }
+
+    .ct-btn-back:hover {
+      border-color: var(--ct-primary);
+      color: var(--ct-primary);
+    }
+
+    .ct-btn-back:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .ct-btn-next {
+      background: var(--ct-primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 30px;
+      transition: background 0.25s;
+      font-family: var(--ct-body-font);
+    }
+
+    .ct-btn-next:hover {
+      background: var(--ct-primary-hover);
+      color: #fff;
+    }
+
+    .ct-btn-submit {
+      background: var(--ct-primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 28px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.25s;
+      font-family: var(--ct-body-font);
+    }
+
+    .ct-btn-submit:hover {
+      background: var(--ct-primary-hover);
+      color: #fff;
+    }
+
+    /* ---- Review Step ---- */
+    .ct-review-card {
+      background: #f8f9fb;
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+    }
+
+    .ct-review-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 32px;
+    }
+
+    .ct-review-field label {
+      font-size: 12px;
+      color: var(--ct-body-color);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .ct-review-field p {
+      font-weight: 700;
+      color: var(--ct-heading-color);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .ct-review-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .ct-badge-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid var(--ct-border);
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ct-heading-color);
+    }
+
+    .ct-priority-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .ct-priority-critical { background: #dc3545; color: #fff; }
+    .ct-priority-high     { background: rgba(220,53,69,0.15); color: #dc3545; }
+    .ct-priority-medium   { background: rgba(255,193,7,0.15); color: #b38600; }
+    .ct-priority-low      { background: rgba(13,110,253,0.15); color: #0d6efd; }
+
+    /* Info notice */
+    .ct-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid var(--ct-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13.5px;
+      color: var(--ct-body-color);
+      background: #fff;
+    }
+
+    .ct-notice i {
+      color: var(--ct-primary);
+      font-size: 17px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Divider between nav */
+    .ct-footer-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+    }
+
+    /* Step panels */
+    .ct-step-panel { display: none; }
+    .ct-step-panel.active { display: block; }
+
+    /* Validation error */
+    .ct-error {
+      font-size: 12px;
+      color: #dc3545;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .ct-form-control.is-invalid,
+    .ct-select.is-invalid {
+      border-color: #dc3545 !important;
+    }
+
+    /* Trigger button (for demo) */
+    .ct-open-btn {
+      background: var(--ct-primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 11px 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--ct-body-font);
+      transition: background 0.25s;
+      cursor: pointer;
+    }
+    .ct-open-btn:hover { background: var(--ct-primary-hover); }
+
+    @media (max-width: 600px) {
+      .ct-review-row { grid-template-columns: 1fr; }
+      .ct-step-label { display: none; }
+      .ct-modal .modal-body { padding: 16px; }
+      .ct-form-card { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body style="background:#eef1f5; display:flex; align-items:center; justify-content:center; min-height:100vh; font-family:'Plus Jakarta Sans',sans-serif;">
+
+  <!-- ===== Trigger button (paste this wherever you need it) ===== -->
+  <button class="ct-open-btn" data-bs-toggle="modal" data-bs-target="#createTicketModal">
+    <i class="bi bi-plus-lg"></i> Create Ticket
+  </button>
+
+  <!-- ===================================================
+       CREATE TICKET MODAL
+  ==================================================== -->
+  <div class="modal fade ct-modal" id="createTicketModal" tabindex="-1" aria-labelledby="createTicketModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+
+        <!-- Header -->
+        <div class="modal-header d-flex justify-content-between align-items-center">
+          <h5 class="modal-title" id="createTicketModalLabel">Create New Ticket</h5>
+          <button class="ct-btn-cancel" data-bs-dismiss="modal" onclick="resetModal()">
+            <i class="bi bi-x-circle"></i> Cancel
+          </button>
+        </div>
+
+        <!-- Body -->
+        <div class="modal-body">
+
+          <!-- STEPPER -->
+          <div class="ct-stepper" id="ctStepper">
+            <div class="ct-step active" id="ctStep1">
+              <div class="ct-step-circle" id="ctCircle1">1</div>
+              <span class="ct-step-label">Basic Information</span>
+            </div>
+            <div class="ct-step-line" id="ctLine1"></div>
+            <div class="ct-step" id="ctStep2">
+              <div class="ct-step-circle" id="ctCircle2">2</div>
+              <span class="ct-step-label">Details &amp; Priority</span>
+            </div>
+            <div class="ct-step-line" id="ctLine2"></div>
+            <div class="ct-step" id="ctStep3">
+              <div class="ct-step-circle" id="ctCircle3">3</div>
+              <span class="ct-step-label">Review &amp; Submit</span>
+            </div>
+          </div>
+
+          <!-- ================= STEP 1: Basic Information ================= -->
+          <div class="ct-form-card ct-step-panel active" id="ctPanel1">
+
+            <div class="mb-3">
+              <label class="ct-label">Ticket Title <span class="text-danger">*</span></label>
+              <div class="ct-input-icon-wrap">
+                <i class="bi bi-file-text ct-input-icon"></i>
+                <input type="text" class="ct-form-control" id="ctTitle" placeholder="Brief description of the issue"/>
+              </div>
+              <div class="ct-error" id="ctTitleError">Ticket title is required.</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="ct-label">Description <span class="text-danger">*</span></label>
+              <textarea class="ct-form-control ct-textarea" id="ctDescription" placeholder="Detailed description of the problem"></textarea>
+              <div class="ct-error" id="ctDescError">Description is required.</div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="ct-label">Client <span class="text-danger">*</span></label>
+                <div class="ct-select-wrap">
+                  <select class="ct-select" id="ctClient" onchange="handleClientChange()">
+                    <option value="">Client</option>
+                    <option value="client1">Acme Corp</option>
+                    <option value="client2">Beta Solutions</option>
+                    <option value="client3">Gamma Industries</option>
+                  </select>
+                </div>
+                <div class="ct-error" id="ctClientError">Please select a client.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="ct-label">Asset (Optional)</label>
+                <div class="ct-select-wrap">
+                  <select class="ct-select" id="ctAsset" disabled>
+                    <option value="">Asset (Optional)</option>
+                    <option value="asset1">Laptop #1042</option>
+                    <option value="asset2">Server #205</option>
+                    <option value="asset3">Printer #88</option>
+                  </select>
+                </div>
+                <div class="ct-hint" id="ctAssetHint">Select a client first</div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="ct-label">Category</label>
+                <div class="ct-select-wrap">
+                  <select class="ct-select" id="ctCategory">
+                    <option value="">Category</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Network">Network</option>
+                    <option value="Security">Security</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="ct-label">Department</label>
+                <div class="ct-select-wrap">
+                  <select class="ct-select" id="ctDepartment">
+                    <option value="">Department</option>
+                    <option value="IT">IT</option>
+                    <option value="HR">HR</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Operations">Operations</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="ct-label">Link to Repair (Optional)</label>
+              <div class="ct-select-wrap">
+                <select class="ct-select" id="ctRepair">
+                  <option value="">Link to Repair (Optional)</option>
+                  <option value="rep001">REP-001 — Screen Replacement</option>
+                  <option value="rep002">REP-002 — Battery Swap</option>
+                  <option value="rep003">REP-003 — Keyboard Fix</option>
+                </select>
+              </div>
+              <div class="ct-hint">Select a repair to link to this ticket</div>
+            </div>
+
+            <div class="ct-footer-nav">
+              <button class="ct-btn-back" disabled>Back</button>
+              <button class="ct-btn-next" onclick="goToStep(2)">Next</button>
+            </div>
+          </div>
+
+          <!-- ================= STEP 2: Details & Priority ================= -->
+          <div class="ct-form-card ct-step-panel" id="ctPanel2">
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="ct-label">Priority</label>
+                <div class="ct-select-wrap">
+                  <select class="ct-select" id="ctPriority">
+                    <option value="">Priority</option>
+                    <option value="Critical">Critical</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="ct-label">Assign To</label>
+                <div class="ct-select-wrap">
+                  <select class="ct-select" id="ctAssignTo">
+                    <option value="">Assign To</option>
+                    <option value="John Smith">John Smith</option>
+                    <option value="Sarah Lee">Sarah Lee</option>
+                    <option value="Mike Johnson">Mike Johnson</option>
+                    <option value="Unassigned">Unassigned</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="ct-label">Preferred Contact Method</label>
+              <div class="ct-select-wrap" style="max-width:360px;">
+                <select class="ct-select" id="ctContact">
+                  <option value="">Preferred Contact Method</option>
+                  <option value="Email">Email</option>
+                  <option value="Phone">Phone</option>
+                  <option value="SMS">SMS</option>
+                  <option value="In-Person">In-Person</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="ct-label">Additional Notes</label>
+              <textarea class="ct-form-control ct-textarea" id="ctNotes" placeholder="Additional Notes"></textarea>
+            </div>
+
+            <div class="ct-footer-nav">
+              <button class="ct-btn-back" onclick="goToStep(1)">Back</button>
+              <button class="ct-btn-next" onclick="goToStep(3)">Next</button>
+            </div>
+          </div>
+
+          <!-- ================= STEP 3: Review & Submit ================= -->
+          <div class="ct-form-card ct-step-panel" id="ctPanel3">
+            <h6 style="font-weight:800; color:var(--ct-heading-color); margin-bottom:18px; font-size:16px;">Review Your Ticket</h6>
+
+            <div class="ct-review-card">
+              <div class="ct-review-row">
+                <div class="ct-review-field">
+                  <label>Title</label>
+                  <p id="rv-title">—</p>
+                </div>
+                <div class="ct-review-field">
+                  <label>Category</label>
+                  <div id="rv-category">—</div>
+                </div>
+                <div class="ct-review-field">
+                  <label>Priority</label>
+                  <div id="rv-priority">—</div>
+                </div>
+                <div class="ct-review-field">
+                  <label>Department</label>
+                  <p id="rv-department">—</p>
+                </div>
+                <div class="ct-review-field">
+                  <label>Client</label>
+                  <p id="rv-client">—</p>
+                </div>
+                <div class="ct-review-field">
+                  <label>Assigned To</label>
+                  <p id="rv-assign">—</p>
+                </div>
+                <div class="ct-review-field full">
+                  <label>Description</label>
+                  <p id="rv-description">—</p>
+                </div>
+                <div class="ct-review-field full" id="rv-notes-wrap" style="display:none;">
+                  <label>Additional Notes</label>
+                  <p id="rv-notes">—</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="ct-notice" id="rv-notice">
+              <i class="bi bi-info-circle-fill"></i>
+              <span id="rv-notice-text">Your ticket will be assigned to an IT engineer based on the category and priority. We will contact you via your preferred method.</span>
+            </div>
+
+            <div class="ct-footer-nav">
+              <button class="ct-btn-back" onclick="goToStep(2)">Back</button>
+              <button class="ct-btn-submit" onclick="submitTicket()">
+                <i class="bi bi-save2"></i> Submit Ticket
+              </button>
+            </div>
+          </div>
+
+        </div><!-- /modal-body -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       SUCCESS TOAST
+  ==================================================== -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+    <div id="ctToast" class="toast align-items-center text-bg-success border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body fw-semibold">
+          <i class="bi bi-check-circle me-2"></i> Ticket submitted successfully!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* =============================================
+       CREATE TICKET MODAL — JavaScript
+    ============================================= */
+
+    let currentStep = 1;
+
+    // Enable asset select when client is chosen
+    function handleClientChange() {
+      const client = document.getElementById('ctClient');
+      const asset  = document.getElementById('ctAsset');
+      const hint   = document.getElementById('ctAssetHint');
+      if (client.value) {
+        asset.disabled = false;
+        hint.style.display = 'none';
+      } else {
+        asset.disabled = true;
+        asset.value = '';
+        hint.style.display = 'block';
+      }
+    }
+
+    // Step navigation
+    function goToStep(step) {
+      if (step > currentStep && !validateStep(currentStep)) return;
+
+      // Update panels
+      document.querySelectorAll('.ct-step-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('ctPanel' + step).classList.add('active');
+
+      // Update stepper UI
+      for (let i = 1; i <= 3; i++) {
+        const stepEl   = document.getElementById('ctStep' + i);
+        const circleEl = document.getElementById('ctCircle' + i);
+        stepEl.classList.remove('active', 'done');
+        if (i < step) {
+          stepEl.classList.add('done');
+          circleEl.innerHTML = '<i class="bi bi-check-lg" style="font-size:14px;"></i>';
+        } else if (i === step) {
+          stepEl.classList.add('active');
+          circleEl.textContent = i;
+        } else {
+          circleEl.textContent = i;
+        }
+      }
+
+      // Update connector lines
+      document.getElementById('ctLine1').classList.toggle('done', step > 1);
+      document.getElementById('ctLine2').classList.toggle('done', step > 2);
+
+      currentStep = step;
+
+      // If step 3, populate review
+      if (step === 3) populateReview();
+    }
+
+    // Validate current step fields
+    function validateStep(step) {
+      let valid = true;
+
+      if (step === 1) {
+        const title  = document.getElementById('ctTitle');
+        const desc   = document.getElementById('ctDescription');
+        const client = document.getElementById('ctClient');
+
+        // Title
+        if (!title.value.trim()) {
+          showError(title, 'ctTitleError'); valid = false;
+        } else { clearError(title, 'ctTitleError'); }
+
+        // Description
+        if (!desc.value.trim()) {
+          showError(desc, 'ctDescError'); valid = false;
+        } else { clearError(desc, 'ctDescError'); }
+
+        // Client
+        if (!client.value) {
+          showError(client, 'ctClientError'); valid = false;
+        } else { clearError(client, 'ctClientError'); }
+      }
+
+      return valid;
+    }
+
+    function showError(el, errId) {
+      el.classList.add('is-invalid');
+      const err = document.getElementById(errId);
+      if (err) err.style.display = 'block';
+    }
+
+    function clearError(el, errId) {
+      el.classList.remove('is-invalid');
+      const err = document.getElementById(errId);
+      if (err) err.style.display = 'none';
+    }
+
+    // Clear errors on input
+    ['ctTitle', 'ctDescription', 'ctClient'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', () => {
+          el.classList.remove('is-invalid');
+          const errMap = { ctTitle: 'ctTitleError', ctDescription: 'ctDescError', ctClient: 'ctClientError' };
+          const errEl = document.getElementById(errMap[id]);
+          if (errEl) errEl.style.display = 'none';
+        });
+        el.addEventListener('change', () => {
+          el.classList.remove('is-invalid');
+          const errMap = { ctTitle: 'ctTitleError', ctDescription: 'ctDescError', ctClient: 'ctClientError' };
+          const errEl = document.getElementById(errMap[id]);
+          if (errEl) errEl.style.display = 'none';
+        });
+      }
+    });
+
+    // Populate review step
+    function populateReview() {
+      const get = id => document.getElementById(id);
+      const val = id => get(id).value;
+      const txt = id => get(id).options[get(id).selectedIndex]?.text || '—';
+
+      // Title
+      get('rv-title').textContent = val('ctTitle') || '—';
+
+      // Category badge
+      const cat = val('ctCategory');
+      const catIcons = { Hardware: 'bi-cpu', Software: 'bi-laptop', Network: 'bi-wifi', Security: 'bi-shield-lock', Other: 'bi-three-dots' };
+      if (cat) {
+        get('rv-category').innerHTML = `<span class="ct-badge-category"><i class="bi ${catIcons[cat] || 'bi-tag'}"></i> ${cat}</span>`;
+      } else {
+        get('rv-category').textContent = '—';
+      }
+
+      // Priority badge
+      const pri = val('ctPriority');
+      const priClass = { Critical: 'ct-priority-critical', High: 'ct-priority-high', Medium: 'ct-priority-medium', Low: 'ct-priority-low' };
+      if (pri) {
+        get('rv-priority').innerHTML = `<span class="ct-priority-badge ${priClass[pri] || ''}">${pri}</span>`;
+      } else {
+        get('rv-priority').textContent = '—';
+      }
+
+      // Department
+      get('rv-department').textContent = val('ctDepartment') || '—';
+
+      // Client
+      get('rv-client').textContent = txt('ctClient') !== 'Client' ? txt('ctClient') : '—';
+
+      // Assign
+      get('rv-assign').textContent = val('ctAssignTo') || 'Unassigned';
+
+      // Description
+      get('rv-description').textContent = val('ctDescription') || '—';
+
+      // Notes
+      const notes = val('ctNotes');
+      if (notes.trim()) {
+        get('rv-notes-wrap').style.display = '';
+        get('rv-notes').textContent = notes;
+      } else {
+        get('rv-notes-wrap').style.display = 'none';
+      }
+
+      // Notice
+      const contact = val('ctContact');
+      const assign  = val('ctAssignTo');
+      const noticeTxt = `Your ticket will be assigned to ${assign || 'an IT engineer'} based on the category and priority.${contact ? ` Notifications will be sent via ${contact}.` : ''}`;
+      get('rv-notice-text').textContent = noticeTxt;
+    }
+
+    // Submit
+    function submitTicket() {
+      // Here you'd POST to your backend
+      const modal = bootstrap.Modal.getInstance(document.getElementById('createTicketModal'));
+      modal.hide();
+
+      // Show success toast
+      const toastEl = document.getElementById('ctToast');
+      const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+      toast.show();
+
+      // Reset after close
+      resetModal();
+    }
+
+    // Reset everything
+    function resetModal() {
+      // Reset step
+      goToStep(1);
+      currentStep = 1;
+
+      // Clear fields
+      ['ctTitle','ctDescription','ctNotes'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      ['ctClient','ctAsset','ctCategory','ctDepartment','ctRepair','ctPriority','ctAssignTo','ctContact'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+
+      // Reset asset state
+      document.getElementById('ctAsset').disabled = true;
+      document.getElementById('ctAssetHint').style.display = 'block';
+
+      // Clear all errors
+      document.querySelectorAll('.ct-error').forEach(e => e.style.display = 'none');
+      document.querySelectorAll('.ct-form-control, .ct-select').forEach(e => e.classList.remove('is-invalid'));
+
+      // Reset stepper visually
+      for (let i = 1; i <= 3; i++) {
+        const stepEl   = document.getElementById('ctStep' + i);
+        const circleEl = document.getElementById('ctCircle' + i);
+        stepEl.classList.remove('active', 'done');
+        circleEl.textContent = i;
+      }
+      document.getElementById('ctStep1').classList.add('active');
+      document.getElementById('ctLine1').classList.remove('done');
+      document.getElementById('ctLine2').classList.remove('done');
+    }
+
+    // Reset modal when dismissed via backdrop/Esc
+    document.getElementById('createTicketModal').addEventListener('hidden.bs.modal', () => {
+      resetModal();
+    });
+  </script>
+</body>
+</html>

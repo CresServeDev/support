@@ -15048,3 +15048,475 @@ blockquote cite {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* =============================================
+       CREATE TICKET MODAL — Theme-Matched Styles
+       prefix: ct- (create-ticket)
+    ============================================= */
+
+    :root {
+      --ct-primary:     #004958;
+      --ct-primary-hover: #003844;
+      --ct-body-font:   'Plus Jakarta Sans', sans-serif;
+      --ct-body-color:  #585b6f;
+      --ct-heading-color: #0A165E;
+      --ct-border:      #dee1e3;
+      --ct-bg-input:    #f5f6f7;
+      --ct-radius:      10px;
+      --ct-step-done:   #004958;
+      --ct-step-inactive: #b0b8c9;
+    }
+
+    /* ---- Modal shell ---- */
+    .ct-modal .modal-dialog {
+      max-width: 860px;
+    }
+
+    .ct-modal .modal-content {
+      border-radius: 16px;
+      border: none;
+      font-family: var(--ct-body-font);
+      overflow: hidden;
+    }
+
+    .ct-modal .modal-header {
+      background: #fff;
+      border-bottom: 1px solid var(--ct-border);
+      padding: 20px 28px;
+    }
+
+    .ct-modal .modal-title {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--ct-heading-color);
+    }
+
+    .ct-modal .modal-body {
+      background: #f0f2f5;
+      padding: 24px 28px 28px;
+    }
+
+    /* ---- Cancel button ---- */
+    .ct-btn-cancel {
+      border: 2px solid var(--ct-primary);
+      color: var(--ct-primary);
+      background: transparent;
+      border-radius: var(--ct-radius);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 7px 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+    .ct-btn-cancel:hover {
+      background: var(--ct-primary);
+      color: #fff;
+    }
+
+    /* ---- Stepper ---- */
+    .ct-stepper {
+      background: #fff;
+      border-radius: var(--ct-radius);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 18px;
+    }
+
+    .ct-step {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .ct-step-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--ct-step-inactive);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .ct-step.active .ct-step-circle {
+      background: var(--ct-primary);
+    }
+
+    .ct-step.done .ct-step-circle {
+      background: var(--ct-step-done);
+    }
+
+    .ct-step-label {
+      margin-left: 10px;
+      font-weight: 600;
+      font-size: 13.5px;
+      color: var(--ct-step-inactive);
+      white-space: nowrap;
+      transition: color 0.3s;
+    }
+
+    .ct-step.active .ct-step-label,
+    .ct-step.done .ct-step-label {
+      color: var(--ct-heading-color);
+    }
+
+    .ct-step-line {
+      flex: 1;
+      height: 1.5px;
+      background: var(--ct-border);
+      margin: 0 16px;
+      transition: background 0.3s;
+    }
+
+    .ct-step-line.done {
+      background: var(--ct-step-done);
+    }
+
+    /* ---- Form card ---- */
+    .ct-form-card {
+      background: #fff;
+      border-radius: var(--ct-radius);
+      padding: 28px;
+    }
+
+    /* ---- Input & Textarea ---- */
+    .ct-form-control {
+      width: 100%;
+      border: 1px solid var(--ct-border);
+      border-radius: 8px;
+      background: var(--ct-bg-input);
+      font-family: var(--ct-body-font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ct-heading-color);
+      padding: 10px 14px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .ct-form-control:focus {
+      outline: none;
+      border-color: var(--ct-primary);
+      box-shadow: 0 0 0 3px rgba(0,73,88,0.1);
+      background: #fff;
+    }
+
+    .ct-form-control::placeholder {
+      color: #aab0c4;
+      font-weight: 400;
+    }
+
+    .ct-textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .ct-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ct-body-color);
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .ct-hint {
+      font-size: 12px;
+      color: #aab0c4;
+      margin-top: 4px;
+    }
+
+    /* ---- Select wrapper ---- */
+    .ct-select-wrap {
+      position: relative;
+    }
+
+    .ct-select-wrap::after {
+      content: "\F282";
+      font-family: "bootstrap-icons";
+      font-size: 14px;
+      color: var(--ct-body-color);
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .ct-select {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      border: 1px solid var(--ct-border);
+      border-radius: 8px;
+      background: var(--ct-bg-input);
+      font-family: var(--ct-body-font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ct-heading-color);
+      padding: 10px 36px 10px 14px;
+      cursor: pointer;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .ct-select:focus {
+      outline: none;
+      border-color: var(--ct-primary);
+      box-shadow: 0 0 0 3px rgba(0,73,88,0.1);
+      background: #fff;
+    }
+
+    .ct-select option[value=""] {
+      color: #aab0c4;
+    }
+
+    /* Title input with icon */
+    .ct-input-icon-wrap {
+      position: relative;
+    }
+
+    .ct-input-icon-wrap .ct-form-control {
+      padding-left: 40px;
+    }
+
+    .ct-input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aab0c4;
+      font-size: 16px;
+    }
+
+    /* ---- Buttons ---- */
+    .ct-btn-back {
+      border: 1.5px solid var(--ct-border);
+      background: #fff;
+      color: var(--ct-body-color);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 24px;
+      transition: all 0.25s;
+      font-family: var(--ct-body-font);
+    }
+
+    .ct-btn-back:hover {
+      border-color: var(--ct-primary);
+      color: var(--ct-primary);
+    }
+
+    .ct-btn-back:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .ct-btn-next {
+      background: var(--ct-primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 30px;
+      transition: background 0.25s;
+      font-family: var(--ct-body-font);
+    }
+
+    .ct-btn-next:hover {
+      background: var(--ct-primary-hover);
+      color: #fff;
+    }
+
+    .ct-btn-submit {
+      background: var(--ct-primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 28px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.25s;
+      font-family: var(--ct-body-font);
+    }
+
+    .ct-btn-submit:hover {
+      background: var(--ct-primary-hover);
+      color: #fff;
+    }
+
+    /* ---- Review Step ---- */
+    .ct-review-card {
+      background: #f8f9fb;
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+    }
+
+    .ct-review-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 32px;
+    }
+
+    .ct-review-field label {
+      font-size: 12px;
+      color: var(--ct-body-color);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .ct-review-field p {
+      font-weight: 700;
+      color: var(--ct-heading-color);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .ct-review-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .ct-badge-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid var(--ct-border);
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ct-heading-color);
+    }
+
+    .ct-priority-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .ct-priority-critical { background: #dc3545; color: #fff; }
+    .ct-priority-high     { background: rgba(220,53,69,0.15); color: #dc3545; }
+    .ct-priority-medium   { background: rgba(255,193,7,0.15); color: #b38600; }
+    .ct-priority-low      { background: rgba(13,110,253,0.15); color: #0d6efd; }
+
+    /* Info notice */
+    .ct-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid var(--ct-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13.5px;
+      color: var(--ct-body-color);
+      background: #fff;
+    }
+
+    .ct-notice i {
+      color: var(--ct-primary);
+      font-size: 17px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Divider between nav */
+    .ct-footer-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+    }
+
+    /* Step panels */
+    .ct-step-panel { display: none; }
+    .ct-step-panel.active { display: block; }
+
+    /* Validation error */
+    .ct-error {
+      font-size: 12px;
+      color: #dc3545;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .ct-form-control.is-invalid,
+    .ct-select.is-invalid {
+      border-color: #dc3545 !important;
+    }
+
+    /* Trigger button (for demo) */
+    .ct-open-btn {
+      background: var(--ct-primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 11px 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--ct-body-font);
+      transition: background 0.25s;
+      cursor: pointer;
+    }
+    .ct-open-btn:hover { background: var(--ct-primary-hover); }
+
+    @media (max-width: 600px) {
+      .ct-review-row { grid-template-columns: 1fr; }
+      .ct-step-label { display: none; }
+      .ct-modal .modal-body { padding: 16px; }
+      .ct-form-card { padding: 18px; }
+    }
+
+
+
+
