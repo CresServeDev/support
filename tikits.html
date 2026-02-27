@@ -158,6 +158,7 @@
     }
 </style>
 
+
 <body>
     <!--Preloader-->
     <div id="preloader">
@@ -643,970 +644,888 @@
 
     <!-- main-area -->
     <main class="main-area fix">
-        <section class="tikit-area py-4">
-            <div class="container custom-container-four">
+<!-- ========================
+     MAIN
+========================= -->
 
-                <!-- HEADER -->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h4 class="fw-bold mb-0">Tickets</h4>
-                    <a data-bs-toggle="modal" class="tg-btn" data-bs-target="#createTicketModal"><i
-                            class="bi bi-plus-circle-fill"></i>Create Ticket</a>
+    <div class="container custom-container-four py-4">
+
+        <!-- Page Header -->
+        <div class="tk-page-header">
+            <div>
+                <h1 class="tk-page-title">Tickets</h1>
+                <div class="tk-breadcrumb">
+                    <a href="dashboard.html">Dashboard</a>
+                    <i class="bi bi-chevron-right"></i>
+                    <span>Tickets</span>
                 </div>
-                <!-- <button class="ct-open-btn" data-bs-toggle="modal" data-bs-target="#createTicketModal">
-                    <i class="bi bi-plus-lg"></i> Create Ticket
-                </button> -->
-                <!-- SEARCH + FILTER BAR -->
-                <div class="glass-card p-4 mb-4">
+            </div>
+            <button class="tk-btn-create" data-bs-toggle="modal" data-bs-target="#createTicketModal">
+                <i class="bi bi-plus-lg"></i> Create Ticket
+            </button>
+        </div>
 
-                    <div class="row g-3 align-items-center">
+        <!-- Stats Cards -->
+        <div class="tk-stats-grid">
+            <div class="tk-stat-card" style="--stat-color:#004958;--stat-bg:rgba(0,73,88,.08);">
+                <div class="tk-stat-icon"><i class="bi bi-ticket-detailed-fill"></i></div>
+                <div class="tk-stat-info">
+                    <div class="tk-stat-value">24</div>
+                    <div class="tk-stat-label">Total Tickets</div>
+                    <div class="tk-stat-trend up"><i class="bi bi-arrow-up-short"></i> 12% this week</div>
+                </div>
+            </div>
+            <div class="tk-stat-card" style="--stat-color:#ef4444;--stat-bg:rgba(239,68,68,.08);">
+                <div class="tk-stat-icon"><i class="bi bi-exclamation-circle-fill"></i></div>
+                <div class="tk-stat-info">
+                    <div class="tk-stat-value">8</div>
+                    <div class="tk-stat-label">Open</div>
+                    <div class="tk-stat-trend down"><i class="bi bi-arrow-down-short"></i> 3 from yesterday</div>
+                </div>
+            </div>
+            <div class="tk-stat-card" style="--stat-color:#d97706;--stat-bg:rgba(245,158,11,.08);">
+                <div class="tk-stat-icon"><i class="bi bi-clock-fill"></i></div>
+                <div class="tk-stat-info">
+                    <div class="tk-stat-value">11</div>
+                    <div class="tk-stat-label">In Progress</div>
+                    <div class="tk-stat-trend up"><i class="bi bi-arrow-up-short"></i> 5 assigned today</div>
+                </div>
+            </div>
+            <div class="tk-stat-card" style="--stat-color:#16a34a;--stat-bg:rgba(22,163,74,.08);">
+                <div class="tk-stat-icon"><i class="bi bi-check-circle-fill"></i></div>
+                <div class="tk-stat-info">
+                    <div class="tk-stat-value">5</div>
+                    <div class="tk-stat-label">Resolved</div>
+                    <div class="tk-stat-trend up"><i class="bi bi-arrow-up-short"></i> 2 today</div>
+                </div>
+            </div>
+        </div>
 
-                        <!-- Search -->
-                        <div class="col-lg-5">
-                            <div class="position-relative">
-                                <i
-                                    class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-                                <input type="text" class="form-control ps-5" placeholder="Search tickets...">
-                            </div>
-                        </div>
+        <!-- Quick Filter Tabs -->
+        <div class="tk-tabs">
+            <button class="tk-tab active" onclick="filterTab(this, 'all')">
+                All <span class="tab-count">24</span>
+            </button>
+            <button class="tk-tab" onclick="filterTab(this, 'open')">
+                Open <span class="tab-count">8</span>
+            </button>
+            <button class="tk-tab" onclick="filterTab(this, 'in-progress')">
+                In Progress <span class="tab-count">11</span>
+            </button>
+            <button class="tk-tab" onclick="filterTab(this, 'resolved')">
+                Resolved <span class="tab-count">5</span>
+            </button>
+            <button class="tk-tab" onclick="filterTab(this, 'critical')">
+                Critical <span class="tab-count">3</span>
+            </button>
+        </div>
 
-                        <!-- Filter Button -->
-                        <div class="col-lg-3">
-                            <button class="btn btn-outline-secondary w-100" id="filterToggle">
-                                <i class="bi bi-funnel me-2"></i>Filters
-                            </button>
-                        </div>
+        <!-- Search + Filter Card -->
+        <div class="tk-card tk-filter-card">
+            <div class="tk-filter-top">
+                <div class="tk-search-wrap">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="ticketSearch" placeholder="Search by title, ID, client..." oninput="searchTickets()">
+                </div>
+                <button class="tk-filter-btn outline" id="filterToggleBtn" onclick="toggleFilters()">
+                    <i class="bi bi-funnel"></i> Filters
+                </button>
+                <button class="tk-filter-btn ghost" id="clearBtn" onclick="clearAll()">
+                    <i class="bi bi-x-lg"></i> Clear
+                </button>
+            </div>
 
-                        <!-- Clear -->
-                        <div class="col-lg-4">
-                            <button class="btn btn-outline-secondary w-100" id="clearFilters">
-                                <i class="bi bi-x-lg me-2"></i>Clear
-                            </button>
-                        </div>
-
+            <!-- Advanced Filters -->
+            <div class="tk-filter-panel" id="filterPanel">
+                <div class="row g-3">
+                    <div class="col-lg-2 col-md-4 col-6">
+                        <label class="tk-filter-label">Assigned To</label>
+                        <select class="tk-filter-select" id="fAssigned">
+                            <option value="">All</option>
+                            <option>John Smith</option>
+                            <option>Sarah Lee</option>
+                            <option>Mike Johnson</option>
+                        </select>
                     </div>
-
-                    <!-- COLLAPSIBLE FILTER SECTION -->
-                    <div class="row g-3 mt-3 d-none" id="filterSection">
-
-                        <div class="col-lg-2">
-                            <select class="form-select">
-                                <option>Assigned To</option>
-                                <option>VIVEK PATIL</option>
-                            </select>
-                        </div>
-
-                        <div class="col-lg-2">
-                            <select class="form-select">
-                                <option>Status</option>
-                                <option>Open</option>
-                                <option>In Progress</option>
-                                <option>Resolved</option>
-                            </select>
-                        </div>
-
-                        <div class="col-lg-2">
-                            <select class="form-select">
-                                <option>Priority</option>
-                                <option>High</option>
-                                <option>Medium</option>
-                                <option>Low</option>
-                            </select>
-                        </div>
-
-                        <div class="col-lg-2">
-                            <select class="form-select">
-                                <option>Category</option>
-                                <option>Hardware</option>
-                                <option>Email</option>
-                            </select>
-                        </div>
-
-                        <div class="col-lg-2">
-                            <select class="form-select">
-                                <option>Department</option>
-                                <option>IT Management</option>
-                            </select>
-                        </div>
-
-                        <div class="col-lg-2">
-                            <input type="date" class="form-control">
-                        </div>
-
+                    <div class="col-lg-2 col-md-4 col-6">
+                        <label class="tk-filter-label">Status</label>
+                        <select class="tk-filter-select" id="fStatus">
+                            <option value="">All</option>
+                            <option>Open</option>
+                            <option>In Progress</option>
+                            <option>Resolved</option>
+                            <option>Closed</option>
+                        </select>
                     </div>
+                    <div class="col-lg-2 col-md-4 col-6">
+                        <label class="tk-filter-label">Priority</label>
+                        <select class="tk-filter-select" id="fPriority">
+                            <option value="">All</option>
+                            <option>Critical</option>
+                            <option>High</option>
+                            <option>Medium</option>
+                            <option>Low</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6">
+                        <label class="tk-filter-label">Category</label>
+                        <select class="tk-filter-select" id="fCategory">
+                            <option value="">All</option>
+                            <option>Hardware</option>
+                            <option>Software</option>
+                            <option>Network</option>
+                            <option>Security</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6">
+                        <label class="tk-filter-label">Department</label>
+                        <select class="tk-filter-select" id="fDepartment">
+                            <option value="">All</option>
+                            <option>IT</option>
+                            <option>HR</option>
+                            <option>Finance</option>
+                            <option>Operations</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6">
+                        <label class="tk-filter-label">Date From</label>
+                        <input type="date" class="tk-filter-select" style="background-image:none;">
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Table Card -->
+        <div class="tk-card tk-table-card">
+
+            <!-- Top bar -->
+            <div class="tk-table-topbar">
+                <div class="tk-table-count">
+                    <strong id="ticketCountLabel">2 Tickets Found</strong>
+                    <span>Showing 1–2 of 2</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                    <div class="tk-per-page">
+                        <span>Per page</span>
+                        <select>
+                            <option>10</option>
+                            <option selected>25</option>
+                            <option>50</option>
+                        </select>
+                    </div>
+                    <div class="tk-sort-group">
+                        <span class="tk-sort-label">Sort:</span>
+                        <button class="tk-sort-btn active" onclick="sortBy(this, 'date')">
+                            <i class="bi bi-calendar3"></i> Date
+                        </button>
+                        <button class="tk-sort-btn" onclick="sortBy(this, 'priority')">
+                            <i class="bi bi-flag"></i> Priority
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="tk-table-scroll">
+                <table class="tk-table">
+                    <thead>
+                        <tr>
+                            <th style="width:40px;"><input type="checkbox" class="tk-check" id="selectAll" onchange="selectAllRows()"></th>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Category</th>
+                            <th>Department</th>
+                            <th>Assigned To</th>
+                            <th>Created</th>
+                            <th style="width:100px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticketTableBody">
+                        <tr data-status="open" data-priority="medium" data-category="Hardware">
+                            <td><input type="checkbox" class="tk-check rowCheck"></td>
+                            <td><span class="tk-ticket-id">#1042</span></td>
+                            <td>
+                                <span class="tk-ticket-title">Laptop screen flickering</span>
+                                <span class="tk-ticket-sub">Hardware — Acme Corp</span>
+                            </td>
+                            <td><span class="tk-status open">Open</span></td>
+                            <td><span class="tk-priority medium"><i class="bi bi-circle-fill"></i> Medium</span></td>
+                            <td><span class="tk-tag">Hardware</span></td>
+                            <td>IT</td>
+                            <td>
+                                <div class="tk-assigned">
+                                    <div class="tk-avatar-xs">JS</div>
+                                    <span style="font-size:13px;font-weight:500;color:var(--head-color);">John Smith</span>
+                                </div>
+                            </td>
+                            <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">21 Feb 2026</td>
+                            <td>
+                                <div class="tk-actions">
+                                    <button class="tk-action-btn" title="View"><i class="bi bi-eye-fill"></i></button>
+                                    <button class="tk-action-btn edit" title="Edit"><i class="bi bi-pencil-fill"></i></button>
+                                    <button class="tk-action-btn del" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"><i class="bi bi-trash3-fill"></i></button>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-status="in-progress" data-priority="high" data-category="Software">
+                            <td><input type="checkbox" class="tk-check rowCheck"></td>
+                            <td><span class="tk-ticket-id">#1041</span></td>
+                            <td>
+                                <span class="tk-ticket-title">Email server not responding</span>
+                                <span class="tk-ticket-sub">Software — Beta Solutions</span>
+                            </td>
+                            <td><span class="tk-status in-progress">In Progress</span></td>
+                            <td><span class="tk-priority high"><i class="bi bi-circle-fill"></i> High</span></td>
+                            <td><span class="tk-tag">Software</span></td>
+                            <td>Operations</td>
+                            <td>
+                                <div class="tk-assigned">
+                                    <div class="tk-avatar-xs" style="background:#d97706;">SL</div>
+                                    <span style="font-size:13px;font-weight:500;color:var(--head-color);">Sarah Lee</span>
+                                </div>
+                            </td>
+                            <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">20 Feb 2026</td>
+                            <td>
+                                <div class="tk-actions">
+                                    <button class="tk-action-btn" title="View"><i class="bi bi-eye-fill"></i></button>
+                                    <button class="tk-action-btn edit" title="Edit"><i class="bi bi-pencil-fill"></i></button>
+                                    <button class="tk-action-btn del" title="Delete"><i class="bi bi-trash3-fill"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-status="resolved" data-priority="low" data-category="Network">
+                            <td><input type="checkbox" class="tk-check rowCheck"></td>
+                            <td><span class="tk-ticket-id">#1040</span></td>
+                            <td>
+                                <span class="tk-ticket-title">WiFi drops in conference room B</span>
+                                <span class="tk-ticket-sub">Network — Gamma Industries</span>
+                            </td>
+                            <td><span class="tk-status resolved">Resolved</span></td>
+                            <td><span class="tk-priority low"><i class="bi bi-circle-fill"></i> Low</span></td>
+                            <td><span class="tk-tag">Network</span></td>
+                            <td>IT</td>
+                            <td>
+                                <div class="tk-assigned">
+                                    <div class="tk-avatar-xs" style="background:#16a34a;">MJ</div>
+                                    <span style="font-size:13px;font-weight:500;color:var(--head-color);">Mike Johnson</span>
+                                </div>
+                            </td>
+                            <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">18 Feb 2026</td>
+                            <td>
+                                <div class="tk-actions">
+                                    <button class="tk-action-btn" title="View"><i class="bi bi-eye-fill"></i></button>
+                                    <button class="tk-action-btn edit" title="Edit"><i class="bi bi-pencil-fill"></i></button>
+                                    <button class="tk-action-btn del" title="Delete"><i class="bi bi-trash3-fill"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-status="open" data-priority="critical" data-category="Security">
+                            <td><input type="checkbox" class="tk-check rowCheck"></td>
+                            <td><span class="tk-ticket-id">#1039</span></td>
+                            <td>
+                                <span class="tk-ticket-title">Unauthorized access attempt detected</span>
+                                <span class="tk-ticket-sub">Security — Acme Corp</span>
+                            </td>
+                            <td><span class="tk-status open">Open</span></td>
+                            <td><span class="tk-priority critical"><i class="bi bi-circle-fill"></i> Critical</span></td>
+                            <td><span class="tk-tag">Security</span></td>
+                            <td>IT</td>
+                            <td>
+                                <div class="tk-assigned">
+                                    <div class="tk-avatar-xs">JS</div>
+                                    <span style="font-size:13px;font-weight:500;color:var(--head-color);">John Smith</span>
+                                </div>
+                            </td>
+                            <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">17 Feb 2026</td>
+                            <td>
+                                <div class="tk-actions">
+                                    <button class="tk-action-btn" title="View"><i class="bi bi-eye-fill"></i></button>
+                                    <button class="tk-action-btn edit" title="Edit"><i class="bi bi-pencil-fill"></i></button>
+                                    <button class="tk-action-btn del" title="Delete"><i class="bi bi-trash3-fill"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-status="in-progress" data-priority="medium" data-category="Hardware">
+                            <td><input type="checkbox" class="tk-check rowCheck"></td>
+                            <td><span class="tk-ticket-id">#1038</span></td>
+                            <td>
+                                <span class="tk-ticket-title">Printer not connecting to network</span>
+                                <span class="tk-ticket-sub">Hardware — Beta Solutions</span>
+                            </td>
+                            <td><span class="tk-status in-progress">In Progress</span></td>
+                            <td><span class="tk-priority medium"><i class="bi bi-circle-fill"></i> Medium</span></td>
+                            <td><span class="tk-tag">Hardware</span></td>
+                            <td>Finance</td>
+                            <td>
+                                <div class="tk-assigned">
+                                    <div class="tk-avatar-xs" style="background:#d97706;">SL</div>
+                                    <span style="font-size:13px;font-weight:500;color:var(--head-color);">Sarah Lee</span>
+                                </div>
+                            </td>
+                            <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">16 Feb 2026</td>
+                            <td>
+                                <div class="tk-actions">
+                                    <button class="tk-action-btn" title="View"><i class="bi bi-eye-fill"></i></button>
+                                    <button class="tk-action-btn edit" title="Edit"><i class="bi bi-pencil-fill"></i></button>
+                                    <button class="tk-action-btn del" title="Delete"><i class="bi bi-trash3-fill"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="tk-pagination-wrap">
+                <div class="tk-pagination-info">Showing 1–5 of 24 tickets</div>
+                <ul class="tk-pagination">
+                    <li class="disabled"><button><i class="bi bi-chevron-double-left"></i></button></li>
+                    <li class="disabled"><button><i class="bi bi-chevron-left"></i></button></li>
+                    <li class="active"><button>1</button></li>
+                    <li><button>2</button></li>
+                    <li><button>3</button></li>
+                    <li><button><i class="bi bi-chevron-right"></i></button></li>
+                    <li><button><i class="bi bi-chevron-double-right"></i></button></li>
+                </ul>
+            </div>
+
+        </div><!-- /table-card -->
+
+    </div><!-- /container -->
+</main>
+<!-- =========================
+     DELETE CONFIRM MODAL
+========================= -->
+<div class="modal fade tk-delete-modal" id="deleteConfirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body text-center">
+
+                <div class="tk-delete-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
                 </div>
 
-                <!-- TABLE CARD -->
-                <div class="glass-card p-0">
+                <h5 class="tk-delete-title">
+                    Delete Ticket?
+                </h5>
 
-                    <!-- TOP INFO BAR -->
-                    <div class="d-flex justify-content-between align-items-center p-3 border-bottom flex-wrap gap-3">
+                <p class="tk-delete-text">
+                    This action cannot be undone.  
+                    Are you sure you want to delete this ticket?
+                </p>
 
-                        <div>
-                            <strong>20 Tickets Found</strong>
-                            <span class="text-muted ms-2">Showing 1–20 of 20</span>
+                <div class="tk-delete-actions">
+                    <button class="tk-btn-cancel" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+
+                    <button class="tk-btn-danger">
+                        Yes, Delete
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================
+     CREATE TICKET MODAL
+========================= -->
+<div class="modal fade ct-modal" id="createTicketModal" tabindex="-1" aria-labelledby="createTicketModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header d-flex justify-content-between align-items-center">
+                <h5 class="modal-title" id="createTicketModalLabel">Create New Ticket</h5>
+                <button class="ct-btn-cancel" data-bs-dismiss="modal" onclick="resetModal()">
+                    <i class="bi bi-x-circle"></i> Cancel
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- Stepper -->
+                <div class="ct-stepper">
+                    <div class="ct-step active" id="ctStep1">
+                        <div class="ct-step-circle" id="ctCircle1">1</div>
+                        <span class="ct-step-label">Basic Information</span>
+                    </div>
+                    <div class="ct-step-line" id="ctLine1"></div>
+                    <div class="ct-step" id="ctStep2">
+                        <div class="ct-step-circle" id="ctCircle2">2</div>
+                        <span class="ct-step-label">Details &amp; Priority</span>
+                    </div>
+                    <div class="ct-step-line" id="ctLine2"></div>
+                    <div class="ct-step" id="ctStep3">
+                        <div class="ct-step-circle" id="ctCircle3">3</div>
+                        <span class="ct-step-label">Review &amp; Submit</span>
+                    </div>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="ct-form-card ct-step-panel active" id="ctPanel1">
+                    <div class="mb-3">
+                        <label class="ct-label">Ticket Title <span class="text-danger">*</span></label>
+                        <div class="ct-input-icon-wrap">
+                            <i class="bi bi-file-text ct-input-icon"></i>
+                            <input type="text" class="ct-form-control" id="ctTitle" placeholder="Brief description of the issue"/>
                         </div>
-
-                        <div class="d-flex align-items-center gap-3 flex-wrap">
-
-                            <!-- Per Page -->
-                            <div class="d-flex align-items-center gap-2">
-                                <small class="text-muted">Per Page</small>
-                                <select class="form-select form-select-sm per-page-select">
-                                    <option>10</option>
-                                    <option selected>25</option>
-                                    <option>50</option>
+                        <div class="ct-error" id="ctTitleError">Ticket title is required.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="ct-label">Description <span class="text-danger">*</span></label>
+                        <textarea class="ct-form-control ct-textarea" id="ctDescription" placeholder="Detailed description of the problem"></textarea>
+                        <div class="ct-error" id="ctDescError">Description is required.</div>
+                    </div>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="ct-label">Client <span class="text-danger">*</span></label>
+                            <div class="ct-select-wrap">
+                                <select class="ct-select" id="ctClient" onchange="handleClientChange()">
+                                    <option value="">Select Client</option>
+                                    <option value="client1">Acme Corp</option>
+                                    <option value="client2">Beta Solutions</option>
+                                    <option value="client3">Gamma Industries</option>
                                 </select>
                             </div>
-
-                            <!-- Sort -->
-                            <div class="d-flex align-items-center gap-2">
-                                <small class="text-muted">Sort by:</small>
-                                <button class="btn btn-sm btn-sort active-sort">
-                                    <i class="bi bi-calendar3 me-1"></i> Date
-                                </button>
-                                <button class="btn btn-sm btn-sort">
-                                    <i class="bi bi-flag me-1"></i> Priority
-                                </button>
+                            <div class="ct-error" id="ctClientError">Please select a client.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="ct-label">Asset <span style="color:#aab0c4;font-weight:400;">(Optional)</span></label>
+                            <div class="ct-select-wrap">
+                                <select class="ct-select" id="ctAsset" disabled>
+                                    <option value="">Asset (Optional)</option>
+                                    <option value="asset1">Laptop #1042</option>
+                                    <option value="asset2">Server #205</option>
+                                    <option value="asset3">Printer #88</option>
+                                </select>
                             </div>
-
+                            <div class="ct-hint" id="ctAssetHint">Select a client first</div>
                         </div>
                     </div>
-
-                    <!-- TABLE -->
-                    <div class="table-responsive ticket-scroll">
-                        <table class="table align-middle mb-0 ticket-table">
-
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" id="selectAll"></th>
-                                    <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Status</th>
-                                    <th>Priority</th>
-                                    <th>Category</th>
-                                    <th>Department</th>
-                                    <th>Assigned To</th>
-                                    <th>Created</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                <!-- Row 1 -->
-                                <tr>
-                                    <td><input type="checkbox" class="rowCheck"></td>
-                                    <td>#1</td>
-                                    <td>
-                                        <strong>Test Ticket</strong>
-                                        <div class="small text-muted">Test ticket for repair</div>
-                                    </td>
-                                    <td><span class="status open">Open</span></td>
-                                    <td><span class="priority medium">Medium</span></td>
-                                    <td><span class="tag">Hardware</span></td>
-                                    <td>IT Management</td>
-                                    <td><span class="assigned">USER</span></td>
-                                    <td>21 Feb 2026</td>
-                                    <td>
-                                        <i class="bi bi-eye-fill action-icon"></i>
-                                        <i class="bi bi-pencil-fill action-icon"></i>
-                                        <i class="bi bi-trash3-fill action-icon"></i>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td data-label="Select">
-                                        <input type="checkbox" class="rowCheck">
-                                    </td>
-
-                                    <td data-label="ID">#1</td>
-
-                                    <td data-label="Title">
-                                        <strong>Test Ticket</strong>
-                                        <div class="small text-muted">Test ticket for repair</div>
-                                    </td>
-
-                                    <td data-label="Status">
-                                        <span class="status open">Open</span>
-                                    </td>
-
-                                    <td data-label="Priority">
-                                        <span class="priority medium">Medium</span>
-                                    </td>
-
-                                    <td data-label="Category">
-                                        <span class="tag">Hardware</span>
-                                    </td>
-
-                                    <td data-label="Department">
-                                        IT Management
-                                    </td>
-
-                                    <td data-label="Assigned">
-                                        <span class="assigned">USER</span>
-                                    </td>
-
-                                    <td data-label="Created">
-                                        21 Feb 2026, 10:30 am
-                                    </td>
-
-                                    <td data-label="Actions">
-                                        <i class="bi bi-eye-fill action-icon"></i>
-                                        <i class="bi bi-pencil-fill action-icon"></i>
-                                        <i class="bi bi-trash3-fill action-icon"></i>
-                                    </td>
-                                </tr>
-
-
-                            </tbody>
-
-                        </table>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="ct-label">Category</label>
+                            <div class="ct-select-wrap">
+                                <select class="ct-select" id="ctCategory">
+                                    <option value="">Select Category</option>
+                                    <option value="Hardware">Hardware</option>
+                                    <option value="Software">Software</option>
+                                    <option value="Network">Network</option>
+                                    <option value="Security">Security</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="ct-label">Department</label>
+                            <div class="ct-select-wrap">
+                                <select class="ct-select" id="ctDepartment">
+                                    <option value="">Select Department</option>
+                                    <option value="IT">IT</option>
+                                    <option value="HR">HR</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Operations">Operations</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- PAGINATION -->
-                    <div class="p-3 border-top">
-                        <nav>
-                            <ul class="pagination justify-content-center mb-0">
-
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#"><i class="bi bi-chevron-double-left"></i></a>
-                                </li>
-
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
-                                </li>
-
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
-                                </li>
-
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#"><i class="bi bi-chevron-double-right"></i></a>
-                                </li>
-
-                            </ul>
-                        </nav>
+                    <div class="mb-3">
+                        <label class="ct-label">Link to Repair <span style="color:#aab0c4;font-weight:400;">(Optional)</span></label>
+                        <div class="ct-select-wrap">
+                            <select class="ct-select" id="ctRepair">
+                                <option value="">Link to Repair (Optional)</option>
+                                <option value="rep001">REP-001 — Screen Replacement</option>
+                                <option value="rep002">REP-002 — Battery Swap</option>
+                                <option value="rep003">REP-003 — Keyboard Fix</option>
+                            </select>
+                        </div>
+                        <div class="ct-hint">Select a repair to link to this ticket</div>
                     </div>
-
+                    <div class="ct-footer-nav">
+                        <button class="ct-btn-back" disabled>Back</button>
+                        <button class="ct-btn-next" onclick="goToStep(2)">Next <i class="bi bi-arrow-right ms-1"></i></button>
+                    </div>
                 </div>
 
-            </div>
-
-
-
-
-            <!-- ===================================================
-       CREATE TICKET MODAL
-  ==================================================== -->
-            <div class="modal fade ct-modal" id="createTicketModal" tabindex="-1"
-                aria-labelledby="createTicketModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-
-                        <!-- Header -->
-                        <div class="modal-header d-flex justify-content-between align-items-center">
-                            <h5 class="modal-title" id="createTicketModalLabel">Create New Ticket</h5>
-                            <button class="ct-btn-cancel" data-bs-dismiss="modal" onclick="resetModal()">
-                                <i class="bi bi-x-circle"></i> Cancel
-                            </button>
+                <!-- Step 2 -->
+                <div class="ct-form-card ct-step-panel" id="ctPanel2">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="ct-label">Priority</label>
+                            <div class="ct-select-wrap">
+                                <select class="ct-select" id="ctPriority">
+                                    <option value="">Select Priority</option>
+                                    <option value="Critical">🔴 Critical</option>
+                                    <option value="High">🟠 High</option>
+                                    <option value="Medium">🔵 Medium</option>
+                                    <option value="Low">🟢 Low</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <!-- Body -->
-                        <div class="modal-body">
-
-                            <!-- STEPPER -->
-                            <div class="ct-stepper" id="ctStepper">
-                                <div class="ct-step active" id="ctStep1">
-                                    <div class="ct-step-circle" id="ctCircle1">1</div>
-                                    <span class="ct-step-label">Basic Information</span>
-                                </div>
-                                <div class="ct-step-line" id="ctLine1"></div>
-                                <div class="ct-step" id="ctStep2">
-                                    <div class="ct-step-circle" id="ctCircle2">2</div>
-                                    <span class="ct-step-label">Details &amp; Priority</span>
-                                </div>
-                                <div class="ct-step-line" id="ctLine2"></div>
-                                <div class="ct-step" id="ctStep3">
-                                    <div class="ct-step-circle" id="ctCircle3">3</div>
-                                    <span class="ct-step-label">Review &amp; Submit</span>
-                                </div>
+                        <div class="col-md-6">
+                            <label class="ct-label">Assign To</label>
+                            <div class="ct-select-wrap">
+                                <select class="ct-select" id="ctAssignTo">
+                                    <option value="">Select Engineer</option>
+                                    <option value="John Smith">John Smith</option>
+                                    <option value="Sarah Lee">Sarah Lee</option>
+                                    <option value="Mike Johnson">Mike Johnson</option>
+                                    <option value="Unassigned">Unassigned</option>
+                                </select>
                             </div>
-
-                            <!-- ================= STEP 1: Basic Information ================= -->
-                            <div class="ct-form-card ct-step-panel active" id="ctPanel1">
-
-                                <div class="mb-3">
-                                    <label class="ct-label">Ticket Title <span class="text-danger">*</span></label>
-                                    <div class="ct-input-icon-wrap">
-                                        <i class="bi bi-file-text ct-input-icon"></i>
-                                        <input type="text" class="ct-form-control" id="ctTitle"
-                                            placeholder="Brief description of the issue" />
-                                    </div>
-                                    <div class="ct-error" id="ctTitleError">Ticket title is required.</div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="ct-label">Description <span class="text-danger">*</span></label>
-                                    <textarea class="ct-form-control ct-textarea" id="ctDescription"
-                                        placeholder="Detailed description of the problem"></textarea>
-                                    <div class="ct-error" id="ctDescError">Description is required.</div>
-                                </div>
-
-                                <div class="row g-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="ct-label">Client <span class="text-danger">*</span></label>
-                                        <div class="ct-select-wrap">
-                                            <select class="ct-select" id="ctClient" onchange="handleClientChange()">
-                                                <option value="">Client</option>
-                                                <option value="client1">Acme Corp</option>
-                                                <option value="client2">Beta Solutions</option>
-                                                <option value="client3">Gamma Industries</option>
-                                            </select>
-                                        </div>
-                                        <div class="ct-error" id="ctClientError">Please select a client.</div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="ct-label">Asset (Optional)</label>
-                                        <div class="ct-select-wrap">
-                                            <select class="ct-select" id="ctAsset" disabled>
-                                                <option value="">Asset (Optional)</option>
-                                                <option value="asset1">Laptop #1042</option>
-                                                <option value="asset2">Server #205</option>
-                                                <option value="asset3">Printer #88</option>
-                                            </select>
-                                        </div>
-                                        <div class="ct-hint" id="ctAssetHint">Select a client first</div>
-                                    </div>
-                                </div>
-
-                                <div class="row g-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="ct-label">Category</label>
-                                        <div class="ct-select-wrap">
-                                            <select class="ct-select" id="ctCategory">
-                                                <option value="">Category</option>
-                                                <option value="Hardware">Hardware</option>
-                                                <option value="Software">Software</option>
-                                                <option value="Network">Network</option>
-                                                <option value="Security">Security</option>
-                                                <option value="Other">Other</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="ct-label">Department</label>
-                                        <div class="ct-select-wrap">
-                                            <select class="ct-select" id="ctDepartment">
-                                                <option value="">Department</option>
-                                                <option value="IT">IT</option>
-                                                <option value="HR">HR</option>
-                                                <option value="Finance">Finance</option>
-                                                <option value="Operations">Operations</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="ct-label">Link to Repair (Optional)</label>
-                                    <div class="ct-select-wrap">
-                                        <select class="ct-select" id="ctRepair">
-                                            <option value="">Link to Repair (Optional)</option>
-                                            <option value="rep001">REP-001 — Screen Replacement</option>
-                                            <option value="rep002">REP-002 — Battery Swap</option>
-                                            <option value="rep003">REP-003 — Keyboard Fix</option>
-                                        </select>
-                                    </div>
-                                    <div class="ct-hint">Select a repair to link to this ticket</div>
-                                </div>
-
-                                <div class="ct-footer-nav">
-                                    <button class="ct-btn-back" disabled>Back</button>
-                                    <button class="ct-btn-next" onclick="goToStep(2)">Next</button>
-                                </div>
-                            </div>
-
-                            <!-- ================= STEP 2: Details & Priority ================= -->
-                            <div class="ct-form-card ct-step-panel" id="ctPanel2">
-
-                                <div class="row g-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="ct-label">Priority</label>
-                                        <div class="ct-select-wrap">
-                                            <select class="ct-select" id="ctPriority">
-                                                <option value="">Priority</option>
-                                                <option value="Critical">Critical</option>
-                                                <option value="High">High</option>
-                                                <option value="Medium">Medium</option>
-                                                <option value="Low">Low</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="ct-label">Assign To</label>
-                                        <div class="ct-select-wrap">
-                                            <select class="ct-select" id="ctAssignTo">
-                                                <option value="">Assign To</option>
-                                                <option value="John Smith">John Smith</option>
-                                                <option value="Sarah Lee">Sarah Lee</option>
-                                                <option value="Mike Johnson">Mike Johnson</option>
-                                                <option value="Unassigned">Unassigned</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="ct-label">Preferred Contact Method</label>
-                                    <div class="ct-select-wrap" style="max-width:360px;">
-                                        <select class="ct-select" id="ctContact">
-                                            <option value="">Preferred Contact Method</option>
-                                            <option value="Email">Email</option>
-                                            <option value="Phone">Phone</option>
-                                            <option value="SMS">SMS</option>
-                                            <option value="In-Person">In-Person</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="ct-label">Additional Notes</label>
-                                    <textarea class="ct-form-control ct-textarea" id="ctNotes"
-                                        placeholder="Additional Notes"></textarea>
-                                </div>
-
-                                <div class="ct-footer-nav">
-                                    <button class="ct-btn-back" onclick="goToStep(1)">Back</button>
-                                    <button class="ct-btn-next" onclick="goToStep(3)">Next</button>
-                                </div>
-                            </div>
-
-                            <!-- ================= STEP 3: Review & Submit ================= -->
-                            <div class="ct-form-card ct-step-panel" id="ctPanel3">
-                                <h6
-                                    style="font-weight:800; color:var(--ct-heading-color); margin-bottom:18px; font-size:16px;">
-                                    Review Your Ticket</h6>
-
-                                <div class="ct-review-card">
-                                    <div class="ct-review-row">
-                                        <div class="ct-review-field">
-                                            <label>Title</label>
-                                            <p id="rv-title">—</p>
-                                        </div>
-                                        <div class="ct-review-field">
-                                            <label>Category</label>
-                                            <div id="rv-category">—</div>
-                                        </div>
-                                        <div class="ct-review-field">
-                                            <label>Priority</label>
-                                            <div id="rv-priority">—</div>
-                                        </div>
-                                        <div class="ct-review-field">
-                                            <label>Department</label>
-                                            <p id="rv-department">—</p>
-                                        </div>
-                                        <div class="ct-review-field">
-                                            <label>Client</label>
-                                            <p id="rv-client">—</p>
-                                        </div>
-                                        <div class="ct-review-field">
-                                            <label>Assigned To</label>
-                                            <p id="rv-assign">—</p>
-                                        </div>
-                                        <div class="ct-review-field full">
-                                            <label>Description</label>
-                                            <p id="rv-description">—</p>
-                                        </div>
-                                        <div class="ct-review-field full" id="rv-notes-wrap" style="display:none;">
-                                            <label>Additional Notes</label>
-                                            <p id="rv-notes">—</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="ct-notice" id="rv-notice">
-                                    <i class="bi bi-info-circle-fill"></i>
-                                    <span id="rv-notice-text">Your ticket will be assigned to an IT engineer based on
-                                        the category and priority. We will contact you via your preferred method.</span>
-                                </div>
-
-                                <div class="ct-footer-nav">
-                                    <button class="ct-btn-back" onclick="goToStep(2)">Back</button>
-                                    <button class="ct-btn-submit" onclick="submitTicket()">
-                                        <i class="bi bi-save2"></i> Submit Ticket
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div><!-- /modal-body -->
+                        </div>
+                    </div>
+                    <div class="mb-3" style="max-width:360px;">
+                        <label class="ct-label">Preferred Contact Method</label>
+                        <div class="ct-select-wrap">
+                            <select class="ct-select" id="ctContact">
+                                <option value="">Select Contact Method</option>
+                                <option value="Email">📧 Email</option>
+                                <option value="Phone">📞 Phone</option>
+                                <option value="SMS">💬 SMS</option>
+                                <option value="In-Person">🤝 In-Person</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="ct-label">Additional Notes</label>
+                        <textarea class="ct-form-control ct-textarea" id="ctNotes" placeholder="Any additional information or context..."></textarea>
+                    </div>
+                    <div class="ct-footer-nav">
+                        <button class="ct-btn-back" onclick="goToStep(1)"><i class="bi bi-arrow-left me-1"></i> Back</button>
+                        <button class="ct-btn-next" onclick="goToStep(3)">Review <i class="bi bi-arrow-right ms-1"></i></button>
                     </div>
                 </div>
-            </div>
 
-            <!-- ===================================================
-       SUCCESS TOAST
-  ==================================================== -->
-            <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
-                <div id="ctToast" class="toast align-items-center text-bg-success border-0" role="alert">
-                    <div class="d-flex">
-                        <div class="toast-body fw-semibold">
-                            <i class="bi bi-check-circle me-2"></i> Ticket submitted successfully!
+                <!-- Step 3 -->
+                <div class="ct-form-card ct-step-panel" id="ctPanel3">
+                    <h6 style="font-weight:800;color:var(--head-color);margin-bottom:18px;font-size:16px;letter-spacing:-0.3px;">Review Your Ticket</h6>
+                    <div class="ct-review-card">
+                        <div class="ct-review-row">
+                            <div class="ct-review-field">
+                                <label>Title</label>
+                                <p id="rv-title">—</p>
+                            </div>
+                            <div class="ct-review-field">
+                                <label>Category</label>
+                                <div id="rv-category">—</div>
+                            </div>
+                            <div class="ct-review-field">
+                                <label>Priority</label>
+                                <div id="rv-priority">—</div>
+                            </div>
+                            <div class="ct-review-field">
+                                <label>Department</label>
+                                <p id="rv-department">—</p>
+                            </div>
+                            <div class="ct-review-field">
+                                <label>Client</label>
+                                <p id="rv-client">—</p>
+                            </div>
+                            <div class="ct-review-field">
+                                <label>Assigned To</label>
+                                <p id="rv-assign">—</p>
+                            </div>
+                            <div class="ct-review-field full">
+                                <label>Description</label>
+                                <p id="rv-description">—</p>
+                            </div>
+                            <div class="ct-review-field full" id="rv-notes-wrap" style="display:none;">
+                                <label>Additional Notes</label>
+                                <p id="rv-notes">—</p>
+                            </div>
                         </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
-                            data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="ct-notice">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <span id="rv-notice-text">Your ticket will be assigned to an IT engineer based on the category and priority. We will contact you via your preferred method.</span>
+                    </div>
+                    <div class="ct-footer-nav">
+                        <button class="ct-btn-back" onclick="goToStep(2)"><i class="bi bi-arrow-left me-1"></i> Back</button>
+                        <button class="ct-btn-submit" onclick="submitTicket()">
+                            <i class="bi bi-send-fill"></i> Submit Ticket
+                        </button>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
 
-
-
-
-    <!-- footer-area -->
-    <footer class="footer__area-two fix">
-        <div class="container">
-            <div class="footer__top footer__top-three">
-                <div class="row">
-                    <div class="col-lg-4 col-md-5">
-                        <div class="footer__widget">
-                            <div class="footer__logo">
-                                <a href="index.html"><img src="assets/img/logo/logo02.svg" alt="logo"></a>
-                            </div>
-                            <div class="footer__content mb-15">
-                                <p>Great Quality Products WithDuis facilisis conv nislnemoraecenas egestas type specimen
-                                    book Good</p>
-                            </div>
-                            <div class="footer__contact">
-                                <a href="tel:0123456789" class="phone">1800 6565 222</a>
-                                <a href="mailto:info@gmail.com" class="mail">info@gmail.com</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-6">
-                        <div class="footer__widget">
-                            <h4 class="footer__widget-title">Quick Links</h4>
-                            <ul class="list-wrap footer__link">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="pricing.html">Pricing Table</a></li>
-                                <li><a href="services.html">Services</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="footer__widget">
-                            <h4 class="footer__widget-title">Support</h4>
-                            <ul class="list-wrap footer__link">
-                                <li><a href="contact.html">Support</a></li>
-                                <li><a href="blog.html">Guide & tutorial</a></li>
-                                <li><a href="login.html">Community</a></li>
-                                <li><a href="services.html">Services status</a></li>
-                                <li><a href="contact.html">Term & Condition</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer__widget">
-                            <h4 class="footer__widget-title">Information</h4>
-                            <ul class="list-wrap footer__link">
-                                <li><a href="contact.html">Working Process</a></li>
-                                <li><a href="about.html">Privacy Policy</a></li>
-                                <li><a href="contact.html">Terms & Conditions</a></li>
-                                <li><a href="services.html">Faqs</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="footer__bottom footer__bottom-two">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-sm-6">
-                        <div class="footer__social footer__social-two">
-                            <ul class="list-wrap">
-                                <li>
-                                    <a href="https://www.facebook.com/" target="_blank">
-                                        <svg width="11" height="20" viewBox="0 0 11 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M9.86031 11.25L10.4075 7.63046H6.9863V5.28164C6.9863 4.2914 7.46421 3.32617 8.99646 3.32617H10.5518V0.244531C10.5518 0.244531 9.14037 0 7.7909 0C4.97345 0 3.13183 1.73359 3.13183 4.87187V7.63046H0V11.25H3.13183V20H6.9863V11.25H9.86031Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://x.com/" target="_blank">
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M10.2337 7.28122L16.6351 0H15.118L9.55989 6.32204L5.12043 0H0L6.71329 9.56016L0 17.1955H1.51707L7.38684 10.5192L12.0751 17.1955H17.1955L10.2333 7.28122H10.2337ZM8.15595 9.64426L2.06363 1.11744H4.39374L15.1187 16.1288H12.7889L8.15595 9.64466V9.64426Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.instagram.com/" target="_blank">
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.79512 4.29904C6.29988 4.29904 4.28722 6.31911 4.28722 8.82352C4.28722 11.3279 6.29988 13.348 8.79512 13.348C11.2904 13.348 13.303 11.3279 13.303 8.82352C13.303 6.31911 11.2904 4.29904 8.79512 4.29904ZM8.79512 11.765C7.18263 11.765 5.86439 10.4459 5.86439 8.82352C5.86439 7.20117 7.17871 5.88202 8.79512 5.88202C10.4115 5.88202 11.7258 7.20117 11.7258 8.82352C11.7258 10.4459 10.4076 11.765 8.79512 11.765ZM14.5389 4.11397C14.5389 4.70069 14.0681 5.16929 13.4874 5.16929C12.9028 5.16929 12.436 4.69676 12.436 4.11397C12.436 3.53118 12.9068 3.05865 13.4874 3.05865C14.0681 3.05865 14.5389 3.53118 14.5389 4.11397ZM17.5245 5.18504C17.4578 3.77138 17.1361 2.51918 16.1043 1.48749C15.0764 0.455795 13.8287 0.132899 12.4203 0.0620196C10.9686 -0.0206732 6.61767 -0.0206732 5.16604 0.0620196C3.76149 0.128961 2.51387 0.451857 1.48204 1.48355C0.450202 2.51524 0.132412 3.76745 0.0617924 5.1811C-0.0205975 6.63807 -0.0205975 11.005 0.0617924 12.462C0.128489 13.8757 0.450202 15.1279 1.48204 16.1596C2.51387 17.1912 3.75757 17.5141 5.16604 17.585C6.61767 17.6677 10.9686 17.6677 12.4203 17.585C13.8287 17.5181 15.0764 17.1952 16.1043 16.1596C17.1322 15.1279 17.4539 13.8757 17.5245 12.462C17.6069 11.005 17.6069 6.64201 17.5245 5.18504ZM15.6492 14.0253C15.3432 14.7971 14.7507 15.3917 13.9778 15.7028C12.8205 16.1635 10.0741 16.0572 8.79512 16.0572C7.51611 16.0572 4.76586 16.1596 3.6124 15.7028C2.84343 15.3956 2.25101 14.801 1.94107 14.0253C1.48204 12.8637 1.58797 10.1072 1.58797 8.82352C1.58797 7.53981 1.48596 4.77945 1.94107 3.62175C2.24709 2.84995 2.83951 2.25535 3.6124 1.94427C4.76978 1.48355 7.51611 1.58987 8.79512 1.58987C10.0741 1.58987 12.8244 1.48749 13.9778 1.94427C14.7468 2.25141 15.3392 2.84601 15.6492 3.62175C16.1082 4.78339 16.0023 7.53981 16.0023 8.82352C16.0023 10.1072 16.1082 12.8676 15.6492 14.0253Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.pinterest.com/" target="_blank">
-                                        <svg width="16" height="20" viewBox="0 0 16 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.09703 0C4.0247 0 0 2.74089 0 7.1768C0 9.99783 1.57178 11.6007 2.52437 11.6007C2.91731 11.6007 3.14355 10.4947 3.14355 10.1822C3.14355 9.8095 2.20287 9.01608 2.20287 7.46532C2.20287 4.24357 4.63198 1.9595 7.77553 1.9595C10.4785 1.9595 12.479 3.51026 12.479 6.35934C12.479 8.48714 11.6335 12.4783 8.89483 12.4783C7.90651 12.4783 7.06109 11.757 7.06109 10.7231C7.06109 9.20843 8.10894 7.74181 8.10894 6.17902C8.10894 3.52629 4.38192 4.00715 4.38192 7.21287C4.38192 7.88607 4.46527 8.6314 4.76296 9.24449C4.21522 11.6247 3.09592 15.1711 3.09592 17.6234C3.09592 18.3808 3.20309 19.1261 3.27453 19.8835C3.40949 20.0357 3.34201 20.0197 3.5484 19.9436C5.54885 17.1786 5.4774 16.6377 6.38237 13.0192C6.87057 13.9569 8.13275 14.4618 9.13297 14.4618C13.3482 14.4618 15.2415 10.3144 15.2415 6.57573C15.2415 2.59663 11.836 0 8.09703 0Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="copyright__text copyright__text-two">
-                            <p>Copyright © Techzo | All Right Reserved</p>
-                        </div>
-                    </div>
-                </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+    <div id="ctToast" class="toast align-items-center border-0" role="alert"
+         style="background:var(--pri);color:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(0,73,88,.4);">
+        <div class="d-flex">
+            <div class="toast-body fw-semibold" style="font-family:var(--body-font);font-size:14px;">
+                <i class="bi bi-check-circle-fill me-2"></i> Ticket submitted successfully!
             </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
         </div>
-        <div class="footer__shape-two">
-            <img src="assets/img/images/h3_footer_shape01.svg" alt="shape" data-sal="slide-up" data-sal-duration="800"
-                data-sal-delay="200">
-            <img src="assets/img/images/h3_footer_shape01.svg" alt="shape" data-sal="slide-left" data-sal-duration="700"
-                data-sal-delay="100">
-        </div>
-    </footer>
-    <!-- footer-area-end -->
+    </div>
+</div>
 
+<!-- JS -->
+<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
 
+<script>
+/* ============================
+   TOOLTIPS
+==============================*/
+if (window.innerWidth > 576) {
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+}
 
+/* ============================
+   FILTER TOGGLE
+==============================*/
+function toggleFilters() {
+    const panel = document.getElementById('filterPanel');
+    const btn   = document.getElementById('filterToggleBtn');
+    panel.classList.toggle('open');
+    btn.innerHTML = panel.classList.contains('open')
+        ? '<i class="bi bi-funnel-fill"></i> Filters'
+        : '<i class="bi bi-funnel"></i> Filters';
+}
 
+function clearAll() {
+    document.getElementById('ticketSearch').value = '';
+    ['fAssigned','fStatus','fPriority','fCategory','fDepartment'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.querySelectorAll('.tk-filter-panel input[type="date"]').forEach(el => el.value = '');
+    searchTickets();
+}
 
-    <!-- JS here -->
-    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/jquery.appear.js"></script>
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/jquery.marquee.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/parallax.min.js"></script>
-    <script src="assets/js/ajax-form.js"></script>
-    <script src="assets/js/sal.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        if (window.innerWidth > 576) {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
+/* ============================
+   QUICK TAB FILTER
+==============================*/
+function filterTab(btn, status) {
+    document.querySelectorAll('.tk-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    const rows = document.querySelectorAll('#ticketTableBody tr');
+    rows.forEach(row => {
+        if (status === 'all') {
+            row.style.display = '';
+        } else if (status === 'critical') {
+            row.style.display = row.dataset.priority === 'critical' ? '' : 'none';
+        } else {
+            row.style.display = row.dataset.status === status ? '' : 'none';
         }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- 
-    <script>
-        const ctx1 = document.getElementById('statusChart');
-        new Chart(ctx1, {
-            type: 'doughnut',
-            data: {
-                labels: ['Open', 'In Progress', 'Resolved'],
-                datasets: [{
-                    data: [3, 5, 7],
-                    backgroundColor: ['#dc3545', '#ffc107', '#198754']
-                }]
-            }
-        });
+    });
+    updateCount();
+}
 
-        const ctx2 = document.getElementById('categoryChart');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Technical', 'Billing', 'General'],
-                datasets: [{
-                    label: 'Tickets',
-                    data: [5, 7, 4],
-                    backgroundColor: '#0d6efd'
-                }]
-            }
-        });
-    </script> -->
+/* ============================
+   SEARCH
+==============================*/
+function searchTickets() {
+    const q = document.getElementById('ticketSearch').value.toLowerCase();
+    const rows = document.querySelectorAll('#ticketTableBody tr');
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(q) ? '' : 'none';
+    });
+    updateCount();
+}
 
-    <script>
-        document.getElementById("filterToggle").addEventListener("click", function () {
-            document.getElementById("filterSection").classList.toggle("d-none");
-        });
+function updateCount() {
+    const visible = document.querySelectorAll('#ticketTableBody tr:not([style*="none"])').length;
+    document.getElementById('ticketCountLabel').textContent = visible + ' Ticket' + (visible !== 1 ? 's' : '') + ' Found';
+}
 
-        document.getElementById("selectAll").addEventListener("change", function () {
-            document.querySelectorAll(".rowCheck").forEach(cb => {
-                cb.checked = this.checked;
-            });
-        });
-    </script>
+/* ============================
+   SELECT ALL
+==============================*/
+function selectAllRows() {
+    const all = document.getElementById('selectAll').checked;
+    document.querySelectorAll('.rowCheck').forEach(cb => cb.checked = all);
+}
 
-    <script>
-        document.getElementById("clearFilters").addEventListener("click", function () {
+/* ============================
+   SORT
+==============================*/
+function sortBy(btn, type) {
+    document.querySelectorAll('.tk-sort-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
 
-            // Clear all inputs
-            document.querySelectorAll(".glass-card input").forEach(input => {
-                input.value = "";
-            });
+/* ============================
+   PAGINATION
+==============================*/
+document.querySelectorAll('.tk-pagination li:not(.disabled):not(.active) button').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.tk-pagination li').forEach(li => li.classList.remove('active'));
+        this.closest('li').classList.add('active');
+    });
+});
 
-            // Reset all selects
-            document.querySelectorAll(".glass-card select").forEach(select => {
-                select.selectedIndex = 0;
-            });
+/* ============================
+   CREATE TICKET MODAL
+==============================*/
+let currentStep = 1;
 
-        });
-    </script>
-    <script>
-        document.querySelectorAll(".btn-sort").forEach(btn => {
-            btn.addEventListener("click", function () {
-                document.querySelectorAll(".btn-sort").forEach(b => b.classList.remove("active-sort"));
-                this.classList.add("active-sort");
-            });
-        });
-    </script>
-    <script>
-        /* =============================================
-           CREATE TICKET MODAL — JavaScript
-        ============================================= */
+function handleClientChange() {
+    const client = document.getElementById('ctClient');
+    const asset  = document.getElementById('ctAsset');
+    const hint   = document.getElementById('ctAssetHint');
+    if (client.value) {
+        asset.disabled = false;
+        hint.style.display = 'none';
+    } else {
+        asset.disabled = true;
+        asset.value = '';
+        hint.style.display = 'block';
+    }
+}
 
-        let currentStep = 1;
+function goToStep(step) {
+    if (step > currentStep && !validateStep(currentStep)) return;
 
-        // Enable asset select when client is chosen
-        function handleClientChange() {
-            const client = document.getElementById('ctClient');
-            const asset = document.getElementById('ctAsset');
-            const hint = document.getElementById('ctAssetHint');
-            if (client.value) {
-                asset.disabled = false;
-                hint.style.display = 'none';
-            } else {
-                asset.disabled = true;
-                asset.value = '';
-                hint.style.display = 'block';
-            }
+    document.querySelectorAll('.ct-step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('ctPanel' + step).classList.add('active');
+
+    for (let i = 1; i <= 3; i++) {
+        const stepEl   = document.getElementById('ctStep' + i);
+        const circleEl = document.getElementById('ctCircle' + i);
+        stepEl.classList.remove('active', 'done');
+        if (i < step) {
+            stepEl.classList.add('done');
+            circleEl.innerHTML = '<i class="bi bi-check-lg" style="font-size:13px;"></i>';
+        } else if (i === step) {
+            stepEl.classList.add('active');
+            circleEl.textContent = i;
+        } else {
+            circleEl.textContent = i;
         }
+    }
 
-        // Step navigation
-        function goToStep(step) {
-            if (step > currentStep && !validateStep(currentStep)) return;
+    document.getElementById('ctLine1').classList.toggle('done', step > 1);
+    document.getElementById('ctLine2').classList.toggle('done', step > 2);
+    currentStep = step;
 
-            // Update panels
-            document.querySelectorAll('.ct-step-panel').forEach(p => p.classList.remove('active'));
-            document.getElementById('ctPanel' + step).classList.add('active');
+    if (step === 3) populateReview();
+}
 
-            // Update stepper UI
-            for (let i = 1; i <= 3; i++) {
-                const stepEl = document.getElementById('ctStep' + i);
-                const circleEl = document.getElementById('ctCircle' + i);
-                stepEl.classList.remove('active', 'done');
-                if (i < step) {
-                    stepEl.classList.add('done');
-                    circleEl.innerHTML = '<i class="bi bi-check-lg" style="font-size:14px;"></i>';
-                } else if (i === step) {
-                    stepEl.classList.add('active');
-                    circleEl.textContent = i;
-                } else {
-                    circleEl.textContent = i;
-                }
-            }
+function validateStep(step) {
+    let valid = true;
+    if (step === 1) {
+        const title  = document.getElementById('ctTitle');
+        const desc   = document.getElementById('ctDescription');
+        const client = document.getElementById('ctClient');
+        if (!title.value.trim())  { showErr(title, 'ctTitleError');  valid = false; } else clearErr(title, 'ctTitleError');
+        if (!desc.value.trim())   { showErr(desc,  'ctDescError');   valid = false; } else clearErr(desc,  'ctDescError');
+        if (!client.value)        { showErr(client,'ctClientError'); valid = false; } else clearErr(client,'ctClientError');
+    }
+    return valid;
+}
 
-            // Update connector lines
-            document.getElementById('ctLine1').classList.toggle('done', step > 1);
-            document.getElementById('ctLine2').classList.toggle('done', step > 2);
+function showErr(el, id) {
+    el.classList.add('is-invalid');
+    const e = document.getElementById(id);
+    if (e) e.style.display = 'block';
+}
 
-            currentStep = step;
+function clearErr(el, id) {
+    el.classList.remove('is-invalid');
+    const e = document.getElementById(id);
+    if (e) e.style.display = 'none';
+}
 
-            // If step 3, populate review
-            if (step === 3) populateReview();
-        }
+['ctTitle','ctDescription','ctClient'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const errMap = { ctTitle: 'ctTitleError', ctDescription: 'ctDescError', ctClient: 'ctClientError' };
+    ['input','change'].forEach(ev => el.addEventListener(ev, () => clearErr(el, errMap[id])));
+});
 
-        // Validate current step fields
-        function validateStep(step) {
-            let valid = true;
+function populateReview() {
+    const get = id => document.getElementById(id);
+    const val = id => get(id).value;
+    const txt = id => {
+        const el = get(id);
+        return el.options[el.selectedIndex]?.text?.replace(/^[\p{Emoji}\s]+/u, '').trim() || '—';
+    };
 
-            if (step === 1) {
-                const title = document.getElementById('ctTitle');
-                const desc = document.getElementById('ctDescription');
-                const client = document.getElementById('ctClient');
+    get('rv-title').textContent = val('ctTitle') || '—';
 
-                // Title
-                if (!title.value.trim()) {
-                    showError(title, 'ctTitleError'); valid = false;
-                } else { clearError(title, 'ctTitleError'); }
+    const cat = val('ctCategory');
+    const icons = { Hardware:'bi-cpu', Software:'bi-laptop', Network:'bi-wifi', Security:'bi-shield-lock', Other:'bi-three-dots' };
+    get('rv-category').innerHTML = cat
+        ? `<span class="ct-badge-category"><i class="bi ${icons[cat]||'bi-tag'}"></i> ${cat}</span>`
+        : '—';
 
-                // Description
-                if (!desc.value.trim()) {
-                    showError(desc, 'ctDescError'); valid = false;
-                } else { clearError(desc, 'ctDescError'); }
+    const pri = val('ctPriority');
+    const cls = { Critical:'ct-priority-critical', High:'ct-priority-high', Medium:'ct-priority-medium', Low:'ct-priority-low' };
+    get('rv-priority').innerHTML = pri
+        ? `<span class="ct-priority-badge ${cls[pri]||''}">${pri}</span>`
+        : '—';
 
-                // Client
-                if (!client.value) {
-                    showError(client, 'ctClientError'); valid = false;
-                } else { clearError(client, 'ctClientError'); }
-            }
+    get('rv-department').textContent = val('ctDepartment') || '—';
+    get('rv-client').textContent     = txt('ctClient') !== 'Select Client' ? txt('ctClient') : '—';
+    get('rv-assign').textContent     = val('ctAssignTo') || 'Unassigned';
+    get('rv-description').textContent = val('ctDescription') || '—';
 
-            return valid;
-        }
+    const notes = val('ctNotes');
+    get('rv-notes-wrap').style.display = notes.trim() ? '' : 'none';
+    get('rv-notes').textContent = notes;
 
-        function showError(el, errId) {
-            el.classList.add('is-invalid');
-            const err = document.getElementById(errId);
-            if (err) err.style.display = 'block';
-        }
+    const contact = val('ctContact');
+    const assign  = val('ctAssignTo');
+    get('rv-notice-text').textContent =
+        `Your ticket will be assigned to ${assign || 'an IT engineer'} based on the category and priority.${contact ? ` Notifications will be sent via ${contact}.` : ''}`;
+}
 
-        function clearError(el, errId) {
-            el.classList.remove('is-invalid');
-            const err = document.getElementById(errId);
-            if (err) err.style.display = 'none';
-        }
+function submitTicket() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('createTicketModal'));
+    modal.hide();
 
-        // Clear errors on input
-        ['ctTitle', 'ctDescription', 'ctClient'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('input', () => {
-                    el.classList.remove('is-invalid');
-                    const errMap = { ctTitle: 'ctTitleError', ctDescription: 'ctDescError', ctClient: 'ctClientError' };
-                    const errEl = document.getElementById(errMap[id]);
-                    if (errEl) errEl.style.display = 'none';
-                });
-                el.addEventListener('change', () => {
-                    el.classList.remove('is-invalid');
-                    const errMap = { ctTitle: 'ctTitleError', ctDescription: 'ctDescError', ctClient: 'ctClientError' };
-                    const errEl = document.getElementById(errMap[id]);
-                    if (errEl) errEl.style.display = 'none';
-                });
-            }
-        });
+    const toast = new bootstrap.Toast(document.getElementById('ctToast'), { delay: 1800 });
+    toast.show();
 
-        // Populate review step
-        function populateReview() {
-            const get = id => document.getElementById(id);
-            const val = id => get(id).value;
-            const txt = id => get(id).options[get(id).selectedIndex]?.text || '—';
+    setTimeout(() => { window.location.href = 'tikits.html'; }, 1800);
+}
 
-            // Title
-            get('rv-title').textContent = val('ctTitle') || '—';
+function resetModal() {
+    currentStep = 1;
+    ['ctTitle','ctDescription','ctNotes'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    ['ctClient','ctAsset','ctCategory','ctDepartment','ctRepair','ctPriority','ctAssignTo','ctContact'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('ctAsset').disabled = true;
+    document.getElementById('ctAssetHint').style.display = 'block';
+    document.querySelectorAll('.ct-error').forEach(e => e.style.display = 'none');
+    document.querySelectorAll('.ct-form-control, .ct-select').forEach(e => e.classList.remove('is-invalid'));
+    for (let i = 1; i <= 3; i++) {
+        const s = document.getElementById('ctStep' + i);
+        const c = document.getElementById('ctCircle' + i);
+        s.classList.remove('active','done');
+        c.textContent = i;
+    }
+    document.getElementById('ctStep1').classList.add('active');
+    document.querySelectorAll('.ct-step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('ctPanel1').classList.add('active');
+    document.getElementById('ctLine1').classList.remove('done');
+    document.getElementById('ctLine2').classList.remove('done');
+}
 
-            // Category badge
-            const cat = val('ctCategory');
-            const catIcons = { Hardware: 'bi-cpu', Software: 'bi-laptop', Network: 'bi-wifi', Security: 'bi-shield-lock', Other: 'bi-three-dots' };
-            if (cat) {
-                get('rv-category').innerHTML = `<span class="ct-badge-category"><i class="bi ${catIcons[cat] || 'bi-tag'}"></i> ${cat}</span>`;
-            } else {
-                get('rv-category').textContent = '—';
-            }
-
-            // Priority badge
-            const pri = val('ctPriority');
-            const priClass = { Critical: 'ct-priority-critical', High: 'ct-priority-high', Medium: 'ct-priority-medium', Low: 'ct-priority-low' };
-            if (pri) {
-                get('rv-priority').innerHTML = `<span class="ct-priority-badge ${priClass[pri] || ''}">${pri}</span>`;
-            } else {
-                get('rv-priority').textContent = '—';
-            }
-
-            // Department
-            get('rv-department').textContent = val('ctDepartment') || '—';
-
-            // Client
-            get('rv-client').textContent = txt('ctClient') !== 'Client' ? txt('ctClient') : '—';
-
-            // Assign
-            get('rv-assign').textContent = val('ctAssignTo') || 'Unassigned';
-
-            // Description
-            get('rv-description').textContent = val('ctDescription') || '—';
-
-            // Notes
-            const notes = val('ctNotes');
-            if (notes.trim()) {
-                get('rv-notes-wrap').style.display = '';
-                get('rv-notes').textContent = notes;
-            } else {
-                get('rv-notes-wrap').style.display = 'none';
-            }
-
-            // Notice
-            const contact = val('ctContact');
-            const assign = val('ctAssignTo');
-            const noticeTxt = `Your ticket will be assigned to ${assign || 'an IT engineer'} based on the category and priority.${contact ? ` Notifications will be sent via ${contact}.` : ''}`;
-            get('rv-notice-text').textContent = noticeTxt;
-        }
-
-        // Submit
-        function submitTicket() {
-            // Here you'd POST to your backend
-            const modal = bootstrap.Modal.getInstance(document.getElementById('createTicketModal'));
-            modal.hide();
-
-            // Show success toast
-            const toastEl = document.getElementById('ctToast');
-            const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
-            toast.show();
-
-            // Reset after close
-            resetModal();
-        }
-
-        // Reset everything
-        function resetModal() {
-            // Reset step
-            goToStep(1);
-            currentStep = 1;
-
-            // Clear fields
-            ['ctTitle', 'ctDescription', 'ctNotes'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.value = '';
-            });
-            ['ctClient', 'ctAsset', 'ctCategory', 'ctDepartment', 'ctRepair', 'ctPriority', 'ctAssignTo', 'ctContact'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.value = '';
-            });
-
-            // Reset asset state
-            document.getElementById('ctAsset').disabled = true;
-            document.getElementById('ctAssetHint').style.display = 'block';
-
-            // Clear all errors
-            document.querySelectorAll('.ct-error').forEach(e => e.style.display = 'none');
-            document.querySelectorAll('.ct-form-control, .ct-select').forEach(e => e.classList.remove('is-invalid'));
-
-            // Reset stepper visually
-            for (let i = 1; i <= 3; i++) {
-                const stepEl = document.getElementById('ctStep' + i);
-                const circleEl = document.getElementById('ctCircle' + i);
-                stepEl.classList.remove('active', 'done');
-                circleEl.textContent = i;
-            }
-            document.getElementById('ctStep1').classList.add('active');
-            document.getElementById('ctLine1').classList.remove('done');
-            document.getElementById('ctLine2').classList.remove('done');
-        }
-
-        // Reset modal when dismissed via backdrop/Esc
-        document.getElementById('createTicketModal').addEventListener('hidden.bs.modal', () => {
-            resetModal();
-        });
-    </script>
+document.getElementById('createTicketModal').addEventListener('hidden.bs.modal', resetModal);
+</script>
 </body>
-
 </html>
