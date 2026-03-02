@@ -16332,3 +16332,896 @@ blockquote cite {
     }
 }
 
+
+
+
+
+
+
+
+
+
+    /* ===================================================
+   TICKET VIEW PAGE — tkv-* prefix
+   Matches tikits.html design tokens exactly
+=================================================== */
+    :root {
+        --tk-pri: #004958;
+        --tk-pri-hov: #003844;
+        --tk-pri-light: rgba(0, 73, 88, .08);
+        --tk-border: #e4e8ef;
+        --tk-bg-page: #f0f3f7;
+        --tk-bg-card: #ffffff;
+        --tk-head: #0d1b2a;
+        --tk-muted: #aab0c4;
+        --tk-body-c: #5a6278;
+        --tk-radius: 14px;
+        --tk-radius-sm: 8px;
+        --tk-shadow: 0 2px 10px rgba(0, 0, 0, .07);
+        --tk-shadow-lg: 0 8px 32px rgba(0, 0, 0, .10);
+    }
+
+
+  
+
+    /* ---- Top bar ---- */
+    .tkv-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .tkv-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        height: 36px;
+        padding: 0 16px;
+        border-radius: var(--tk-radius-sm);
+        border: 1.5px solid var(--tk-border);
+        background: #fff;
+        color: var(--tk-body-c);
+        font-family: var(--tg-body-font-family);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all .2s;
+    }
+
+    .tkv-back-btn:hover {
+        border-color: var(--tk-pri);
+        color: var(--tk-pri);
+        background: var(--tk-pri-light);
+    }
+
+    .tkv-back-btn i {
+        font-size: 12px;
+    }
+
+    .tkv-topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .tkv-ticket-number {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--tk-head);
+        letter-spacing: -0.4px;
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-edit-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 38px;
+        padding: 0 20px;
+        border-radius: var(--tk-radius-sm);
+        background: var(--tk-pri);
+        color: #fff;
+        border: none;
+        font-family: var(--tg-body-font-family);
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all .2s;
+        box-shadow: 0 4px 12px rgba(0, 73, 88, .25);
+    }
+
+    .tkv-edit-btn:hover {
+        background: var(--tk-pri-hov);
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+    /* ---- Layout ---- */
+    .tkv-layout {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 18px;
+        align-items: start;
+    }
+
+    /* ---- Card base ---- */
+    .tkv-card {
+        background: var(--tk-bg-card);
+        border-radius: var(--tk-radius);
+        border: 1px solid var(--tk-border);
+        box-shadow: var(--tk-shadow);
+        margin-bottom: 16px;
+    }
+
+    .tkv-card:last-child {
+        margin-bottom: 0;
+    }
+
+    .tkv-card-header {
+        padding: 16px 22px 14px;
+        border-bottom: 1px solid var(--tk-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .tkv-card-title {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--tk-head);
+        font-family: var(--tg-body-font-family);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .tkv-card-title i {
+        color: var(--tk-pri);
+    }
+
+    .tkv-card-body {
+        padding: 18px 22px;
+    }
+
+    /* ---- Ticket main card ---- */
+    .tkv-title {
+        font-size: 19px;
+        font-weight: 800;
+        color: var(--tk-head);
+        margin-bottom: 12px;
+        letter-spacing: -0.3px;
+        font-family: var(--tg-body-font-family);
+    }
+
+    /* ---- Inline badge row ---- */
+    .tkv-badge-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+    }
+
+    .tkv-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12.5px;
+        font-weight: 700;
+        font-family: var(--tg-body-font-family);
+        white-space: nowrap;
+    }
+
+    .tkv-status-badge::before {
+        content: '';
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+    }
+
+    .tkv-status-badge.open {
+        background: rgba(239, 68, 68, .1);
+        color: #ef4444;
+    }
+
+    .tkv-status-badge.in-progress {
+        background: rgba(245, 158, 11, .1);
+        color: #d97706;
+    }
+
+    .tkv-status-badge.resolved {
+        background: rgba(22, 163, 74, .1);
+        color: #16a34a;
+    }
+
+    .tkv-status-badge.closed {
+        background: rgba(107, 114, 128, .1);
+        color: #6b7280;
+    }
+
+    .tkv-priority-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12.5px;
+        font-weight: 700;
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-priority-badge i {
+        font-size: 8px;
+    }
+
+    .tkv-priority-badge.critical {
+        background: rgba(239, 68, 68, .1);
+        color: #ef4444;
+    }
+
+    .tkv-priority-badge.high {
+        background: rgba(245, 158, 11, .1);
+        color: #d97706;
+    }
+
+    .tkv-priority-badge.medium {
+        background: rgba(59, 130, 246, .1);
+        color: #3b82f6;
+    }
+
+    .tkv-priority-badge.low {
+        background: rgba(22, 163, 74, .1);
+        color: #16a34a;
+    }
+
+    .tkv-cat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: var(--tk-radius-sm);
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--tk-body-c);
+        background: #f0f3f7;
+        border: 1.5px solid var(--tk-border);
+        font-family: var(--tg-body-font-family);
+    }
+
+    /* ---- Inline controls ---- */
+    .tkv-inline-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+    }
+
+    .tkv-control-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .tkv-control-label {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--tk-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-inline-select {
+        height: 34px;
+        border: 1.5px solid var(--tk-border);
+        border-radius: 7px;
+        background: #f8f9fb;
+        font-family: var(--tg-body-font-family);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--tk-head);
+        padding: 0 28px 0 10px;
+        cursor: pointer;
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23aab0c4' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        background-size: 11px;
+        transition: border-color .2s;
+        min-width: 110px;
+    }
+
+    .tkv-inline-select:focus {
+        border-color: var(--tk-pri);
+        background-color: #fff;
+        box-shadow: 0 0 0 3px var(--tk-pri-light);
+    }
+
+    .tkv-assignee-control {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border: 1.5px solid var(--tk-border);
+        border-radius: 7px;
+        padding: 4px 28px 4px 8px;
+        background: #f8f9fb;
+        cursor: pointer;
+        position: relative;
+        transition: border-color .2s;
+        min-width: 180px;
+    }
+
+    .tkv-assignee-control:hover {
+        border-color: var(--tk-pri);
+    }
+
+    .tkv-assignee-avatar {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        font-weight: 800;
+        color: #fff;
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-assignee-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--tk-head);
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-assignee-arrow {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--tk-muted);
+        font-size: 11px;
+    }
+
+    /* ---- Description ---- */
+    .tkv-description {
+        font-size: 14px;
+        color: var(--tk-body-c);
+        line-height: 1.7;
+        font-family: var(--tg-body-font-family);
+        margin-bottom: 20px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--tk-border);
+    }
+
+    /* ---- Details grid ---- */
+    .tkv-details-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 32px;
+    }
+
+    .tkv-detail-field {}
+
+    .tkv-detail-label {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--tk-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-detail-value {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--tk-head);
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-detail-value.muted {
+        color: var(--tk-body-c);
+        font-weight: 500;
+    }
+
+    /* ---- Comments ---- */
+    .tkv-comments-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 22px;
+        border-bottom: 1px solid var(--tk-border);
+    }
+
+    .tkv-comment-item {
+        padding: 16px 22px;
+        border-bottom: 1px solid #f4f5f7;
+    }
+
+    .tkv-comment-item:last-child {
+        border-bottom: none;
+    }
+
+    .tkv-comment-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+    }
+
+    .tkv-comment-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 800;
+        color: #fff;
+        background: var(--tk-pri);
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-comment-author {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--tk-head);
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-comment-time {
+        font-size: 12px;
+        color: var(--tk-muted);
+        margin-left: auto;
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-internal-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        background: rgba(245, 158, 11, .12);
+        color: #d97706;
+        border: 1px solid rgba(245, 158, 11, .2);
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-comment-body {
+        font-size: 13.5px;
+        color: var(--tk-body-c);
+        line-height: 1.6;
+        font-family: var(--tg-body-font-family);
+        background: #fefcf3;
+        border-radius: var(--tk-radius-sm);
+        padding: 12px 14px;
+        border: 1px solid #f5e9c0;
+    }
+
+    .tkv-comment-body.public {
+        background: #f7faff;
+        border-color: #dbeafe;
+    }
+
+    /* ---- Reply box ---- */
+    .tkv-reply-wrap {
+        padding: 16px 22px;
+        border-top: 1px solid var(--tk-border);
+    }
+
+    .tkv-reply-textarea {
+        width: 100%;
+        min-height: 80px;
+        border: 1.5px solid var(--tk-border);
+        border-radius: var(--tk-radius-sm);
+        padding: 12px 14px;
+        resize: vertical;
+        font-family: var(--tg-body-font-family);
+        font-size: 13.5px;
+        color: var(--tk-head);
+        background: #f8f9fb;
+        outline: none;
+        transition: all .2s;
+    }
+
+    .tkv-reply-textarea:focus {
+        border-color: var(--tk-pri);
+        background: #fff;
+        box-shadow: 0 0 0 3px var(--tk-pri-light);
+    }
+
+    .tkv-reply-textarea::placeholder {
+        color: #c4c9d9;
+    }
+
+    .tkv-reply-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tkv-reply-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tkv-toggle-wrap {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .tkv-toggle {
+        width: 36px;
+        height: 20px;
+        border-radius: 10px;
+        background: #dce1ee;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        transition: background .2s;
+        flex-shrink: 0;
+    }
+
+    .tkv-toggle::after {
+        content: '';
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #fff;
+        top: 3px;
+        left: 3px;
+        transition: transform .2s;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+    }
+
+    .tkv-toggle.active {
+        background: var(--tk-pri);
+    }
+
+    .tkv-toggle.active::after {
+        transform: translateX(16px);
+    }
+
+    .tkv-toggle-label {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--tk-body-c);
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-canned-btn {
+        height: 32px;
+        padding: 0 14px;
+        border-radius: 7px;
+        border: 1.5px solid var(--tk-border);
+        background: #fff;
+        color: var(--tk-body-c);
+        font-family: var(--tg-body-font-family);
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all .2s;
+    }
+
+    .tkv-canned-btn:hover {
+        border-color: var(--tk-pri);
+        color: var(--tk-pri);
+    }
+
+    .tkv-send-btn {
+        height: 36px;
+        padding: 0 20px;
+        border-radius: 7px;
+        background: var(--tk-pri);
+        color: #fff;
+        border: none;
+        font-family: var(--tg-body-font-family);
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: all .2s;
+        box-shadow: 0 3px 10px rgba(0, 73, 88, .22);
+    }
+
+    .tkv-send-btn:hover {
+        background: var(--tk-pri-hov);
+        transform: translateY(-1px);
+    }
+
+    .tkv-send-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* ---- Right sidebar cards ---- */
+    .tkv-sidebar {}
+
+    .tkv-asset-field {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f3f4f8;
+    }
+
+    .tkv-asset-field:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .tkv-asset-label {
+        font-size: 11.5px;
+        color: var(--tk-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-asset-value {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--tk-head);
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-asset-tag {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        border: 1.5px solid var(--tk-border);
+        background: #f0f3f7;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--tk-head);
+        font-family: var(--tg-body-font-family);
+    }
+
+    /* ---- Linked repair ---- */
+    .tkv-repair-item {
+        padding: 13px 0;
+        border-bottom: 1px solid #f3f4f8;
+    }
+
+    .tkv-repair-id {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--tk-head);
+        font-family: var(--tg-body-font-family);
+        margin-bottom: 2px;
+    }
+
+    .tkv-repair-sub {
+        font-size: 12px;
+        color: var(--tk-muted);
+        font-family: var(--tg-body-font-family);
+        margin-bottom: 4px;
+    }
+
+    .tkv-repair-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 9px;
+        border-radius: 20px;
+        font-size: 11.5px;
+        font-weight: 700;
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-repair-status-badge.wip {
+        background: rgba(245, 158, 11, .1);
+        color: #d97706;
+    }
+
+    .tkv-repair-status-badge.done {
+        background: rgba(22, 163, 74, .1);
+        color: #16a34a;
+    }
+
+    .tkv-repair-select {
+        width: 100%;
+        height: 34px;
+        border: 1.5px solid var(--tk-border);
+        border-radius: 7px;
+        padding: 0 28px 0 10px;
+        font-family: var(--tg-body-font-family);
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--tk-body-c);
+        background: #f8f9fb url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23aab0c4' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") no-repeat right 8px center/11px;
+        appearance: none;
+        outline: none;
+        margin-top: 10px;
+        transition: border-color .2s;
+        cursor: pointer;
+    }
+
+    .tkv-repair-select:focus {
+        border-color: var(--tk-pri);
+    }
+
+    .tkv-repair-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+        margin-right: 4px;
+    }
+
+    .tkv-create-repair-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 32px;
+        padding: 0 14px;
+        border-radius: 7px;
+        border: 1.5px solid var(--tk-border);
+        background: #fff;
+        color: var(--tk-body-c);
+        font-family: var(--tg-body-font-family);
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all .2s;
+    }
+
+    .tkv-create-repair-btn:hover {
+        border-color: var(--tk-pri);
+        color: var(--tk-pri);
+        background: var(--tk-pri-light);
+    }
+
+    /* ---- History timeline ---- */
+    .tkv-history-item {
+        display: flex;
+        gap: 11px;
+        padding: 12px 0;
+        border-bottom: 1px solid #f3f4f8;
+        position: relative;
+    }
+
+    .tkv-history-item:last-child {
+        border-bottom: none;
+    }
+
+    .tkv-history-dot {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        margin-top: 1px;
+    }
+
+    .tkv-history-dot.create {
+        background: var(--tk-pri-light);
+        color: var(--tk-pri);
+    }
+
+    .tkv-history-dot.comment {
+        background: rgba(59, 130, 246, .1);
+        color: #3b82f6;
+    }
+
+    .tkv-history-dot.edit {
+        background: rgba(245, 158, 11, .1);
+        color: #d97706;
+    }
+
+    .tkv-history-dot.resolve {
+        background: rgba(22, 163, 74, .1);
+        color: #16a34a;
+    }
+
+    .tkv-history-event {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--tk-head);
+        font-family: var(--tg-body-font-family);
+    }
+
+    .tkv-history-sub {
+        font-size: 12px;
+        color: var(--tk-muted);
+        font-family: var(--tg-body-font-family);
+        margin-top: 1px;
+    }
+
+    .tkv-history-time {
+        font-size: 11px;
+        color: var(--tk-muted);
+        font-family: var(--tg-body-font-family);
+        white-space: nowrap;
+        margin-left: auto;
+    }
+
+    /* ---- Ticket saved toast ---- */
+    .tkv-save-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #16a34a;
+        font-family: var(--tg-body-font-family);
+        opacity: 0;
+        transition: opacity .3s;
+    }
+
+    .tkv-save-indicator.show {
+        opacity: 1;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 1024px) {
+        .tkv-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .tkv-sidebar {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .tkv-sidebar .tkv-card {
+            margin-bottom: 0;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .floating-sidebar {
+            display: none;
+        }
+
+        .main-area.fix {
+            margin-left: 0;
+        }
+
+        .tkv-details-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .tkv-sidebar {
+            grid-template-columns: 1fr;
+        }
+    }

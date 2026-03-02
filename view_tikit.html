@@ -644,669 +644,314 @@
 
     <!-- main-area -->
     <main class="main-area fix">
-        <!-- ========================
-     MAIN
-========================= -->
 
-        <div class="container custom-container-four py-4">
-
-            <!-- Page Header -->
-            <div class="tk-page-header">
-                <div>
-                    <h1 class="tk-page-title">Tickets</h1>
-                    <div class="tk-breadcrumb">
-                        <a href="dashboard.html">Dashboard</a>
-                        <i class="bi bi-chevron-right"></i>
-                        <span>Tickets</span>
-                    </div>
-                </div>
-                <button class="tk-btn-create" data-bs-toggle="modal" data-bs-target="#createTicketModal">
-                    <i class="bi bi-plus-lg"></i> Create Ticket
-                </button>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="tk-stats-grid">
-                <div class="tk-stat-card" style="--stat-color:#004958;--stat-bg:rgba(0,73,88,.08);">
-                    <div class="tk-stat-icon"><i class="bi bi-ticket-detailed-fill"></i></div>
-                    <div class="tk-stat-info">
-                        <div class="tk-stat-value">24</div>
-                        <div class="tk-stat-label">Total Tickets</div>
-                        <div class="tk-stat-trend up"><i class="bi bi-arrow-up-short"></i> 12% this week</div>
-                    </div>
-                </div>
-                <div class="tk-stat-card" style="--stat-color:#ef4444;--stat-bg:rgba(239,68,68,.08);">
-                    <div class="tk-stat-icon"><i class="bi bi-exclamation-circle-fill"></i></div>
-                    <div class="tk-stat-info">
-                        <div class="tk-stat-value">8</div>
-                        <div class="tk-stat-label">Open</div>
-                        <div class="tk-stat-trend down"><i class="bi bi-arrow-down-short"></i> 3 from yesterday</div>
-                    </div>
-                </div>
-                <div class="tk-stat-card" style="--stat-color:#d97706;--stat-bg:rgba(245,158,11,.08);">
-                    <div class="tk-stat-icon"><i class="bi bi-clock-fill"></i></div>
-                    <div class="tk-stat-info">
-                        <div class="tk-stat-value">11</div>
-                        <div class="tk-stat-label">In Progress</div>
-                        <div class="tk-stat-trend up"><i class="bi bi-arrow-up-short"></i> 5 assigned today</div>
-                    </div>
-                </div>
-                <div class="tk-stat-card" style="--stat-color:#16a34a;--stat-bg:rgba(22,163,74,.08);">
-                    <div class="tk-stat-icon"><i class="bi bi-check-circle-fill"></i></div>
-                    <div class="tk-stat-info">
-                        <div class="tk-stat-value">5</div>
-                        <div class="tk-stat-label">Resolved</div>
-                        <div class="tk-stat-trend up"><i class="bi bi-arrow-up-short"></i> 2 today</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Filter Tabs -->
-            <div class="tk-tabs">
-                <button class="tk-tab active" onclick="filterTab(this, 'all')">
-                    All <span class="tab-count">24</span>
-                </button>
-                <button class="tk-tab" onclick="filterTab(this, 'open')">
-                    Open <span class="tab-count">8</span>
-                </button>
-                <button class="tk-tab" onclick="filterTab(this, 'in-progress')">
-                    In Progress <span class="tab-count">11</span>
-                </button>
-                <button class="tk-tab" onclick="filterTab(this, 'resolved')">
-                    Resolved <span class="tab-count">5</span>
-                </button>
-                <button class="tk-tab" onclick="filterTab(this, 'critical')">
-                    Critical <span class="tab-count">3</span>
-                </button>
-            </div>
-
-            <!-- Search + Filter Card -->
-            <div class="tk-card tk-filter-card">
-                <div class="tk-filter-top">
-                    <div class="tk-search-wrap">
-                        <i class="bi bi-search"></i>
-                        <input type="text" id="ticketSearch" placeholder="Search by title, ID, client..."
-                            oninput="searchTickets()">
-                    </div>
-                    <button class="tk-filter-btn outline" id="filterToggleBtn" onclick="toggleFilters()">
-                        <i class="bi bi-funnel"></i> Filters
-                    </button>
-                    <button class="tk-filter-btn ghost" id="clearBtn" onclick="clearAll()">
-                        <i class="bi bi-x-lg"></i> Clear
-                    </button>
-                </div>
-
-                <!-- Advanced Filters -->
-                <div class="tk-filter-panel" id="filterPanel">
-                    <div class="row g-3">
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <label class="tk-filter-label">Assigned To</label>
-                            <select class="tk-filter-select" id="fAssigned">
-                                <option value="">All</option>
-                                <option>John Smith</option>
-                                <option>Sarah Lee</option>
-                                <option>Mike Johnson</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <label class="tk-filter-label">Status</label>
-                            <select class="tk-filter-select" id="fStatus">
-                                <option value="">All</option>
-                                <option>Open</option>
-                                <option>In Progress</option>
-                                <option>Resolved</option>
-                                <option>Closed</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <label class="tk-filter-label">Priority</label>
-                            <select class="tk-filter-select" id="fPriority">
-                                <option value="">All</option>
-                                <option>Critical</option>
-                                <option>High</option>
-                                <option>Medium</option>
-                                <option>Low</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <label class="tk-filter-label">Category</label>
-                            <select class="tk-filter-select" id="fCategory">
-                                <option value="">All</option>
-                                <option>Hardware</option>
-                                <option>Software</option>
-                                <option>Network</option>
-                                <option>Security</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <label class="tk-filter-label">Department</label>
-                            <select class="tk-filter-select" id="fDepartment">
-                                <option value="">All</option>
-                                <option>IT</option>
-                                <option>HR</option>
-                                <option>Finance</option>
-                                <option>Operations</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <label class="tk-filter-label">Date From</label>
-                            <input type="date" class="tk-filter-select" style="background-image:none;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Table Card -->
-            <div class="tk-card tk-table-card">
+        <div class="tkv-page">
+            <div class="container custom-container-four">
 
                 <!-- Top bar -->
-                <div class="tk-table-topbar">
-                    <div class="tk-table-count">
-                        <strong id="ticketCountLabel">2 Tickets Found</strong>
-                        <span>Showing 1–2 of 2</span>
+                <div class="tkv-topbar">
+                    <div class="tkv-topbar-left">
+                        <a href="tikits.html" class="tkv-back-btn"><i class="bi bi-arrow-left"></i> Back to Tickets</a>
+                        <span class="tkv-ticket-number" id="page-ticket-number">Ticket #1042</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-                        <div class="tk-per-page">
-                            <span>Per page</span>
-                            <select>
-                                <option>10</option>
-                                <option selected>25</option>
-                                <option>50</option>
-                            </select>
-                        </div>
-                        <div class="tk-sort-group">
-                            <span class="tk-sort-label">Sort:</span>
-                            <button class="tk-sort-btn active" onclick="sortBy(this, 'date')">
-                                <i class="bi bi-calendar3"></i> Date
-                            </button>
-                            <button class="tk-sort-btn" onclick="sortBy(this, 'priority')">
-                                <i class="bi bi-flag"></i> Priority
-                            </button>
-                        </div>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span class="tkv-save-indicator" id="saveIndicator"><i class="bi bi-check-circle-fill"></i>
+                            Changes saved</span>
+                        <button class="tkv-edit-btn" onclick="toggleEditMode()">
+                            <i class="bi bi-pencil-fill" id="editBtnIcon"></i>
+                            <span id="editBtnText">Edit Ticket</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Table -->
-                <div class="tk-table-scroll">
-                    <table class="tk-table">
-                        <thead>
-                            <tr>
-                                <th style="width:40px;"><input type="checkbox" class="tk-check" id="selectAll"
-                                        onchange="selectAllRows()"></th>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Status</th>
-                                <th>Priority</th>
-                                <th>Category</th>
-                                <th>Department</th>
-                                <th>Assigned To</th>
-                                <th>Created</th>
-                                <th style="width:100px;">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ticketTableBody">
-                            <tr data-status="open" data-priority="medium" data-category="Hardware">
-                                <td><input type="checkbox" class="tk-check rowCheck"></td>
-                                <td><span class="tk-ticket-id">#1042</span></td>
-                                <td>
-                                    <span class="tk-ticket-title">Laptop screen flickering</span>
-                                    <span class="tk-ticket-sub">Hardware — Acme Corp</span>
-                                </td>
-                                <td><span class="tk-status open">Open</span></td>
-                                <td><span class="tk-priority medium"><i class="bi bi-circle-fill"></i> Medium</span>
-                                </td>
-                                <td><span class="tk-tag">Hardware</span></td>
-                                <td>IT</td>
-                                <td>
-                                    <div class="tk-assigned">
-                                        <div class="tk-avatar-xs">JS</div>
-                                        <span style="font-size:13px;font-weight:500;color:var(--head-color);">John
-                                            Smith</span>
-                                    </div>
-                                </td>
-                                <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">21 Feb 2026</td>
-                                <td>
-                                    <div class="tk-actions">
-                                        <button class="tk-action-btn" title="View" onclick="openViewModal(this)"><i
-                                                class="bi bi-eye-fill"></i></button>
-                                        <button class="tk-action-btn edit" title="Edit"><i
-                                                class="bi bi-pencil-fill"></i></button>
-                                        <button class="tk-action-btn del" title="Delete" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmModal"><i
-                                                class="bi bi-trash3-fill"></i></button>
+                <!-- Two-column layout -->
+                <div class="tkv-layout">
 
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr data-status="in-progress" data-priority="high" data-category="Software">
-                                <td><input type="checkbox" class="tk-check rowCheck"></td>
-                                <td><span class="tk-ticket-id">#1041</span></td>
-                                <td>
-                                    <span class="tk-ticket-title">Email server not responding</span>
-                                    <span class="tk-ticket-sub">Software — Beta Solutions</span>
-                                </td>
-                                <td><span class="tk-status in-progress">In Progress</span></td>
-                                <td><span class="tk-priority high"><i class="bi bi-circle-fill"></i> High</span></td>
-                                <td><span class="tk-tag">Software</span></td>
-                                <td>Operations</td>
-                                <td>
-                                    <div class="tk-assigned">
-                                        <div class="tk-avatar-xs" style="background:#d97706;">SL</div>
-                                        <span style="font-size:13px;font-weight:500;color:var(--head-color);">Sarah
-                                            Lee</span>
-                                    </div>
-                                </td>
-                                <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">20 Feb 2026</td>
-                                <td>
-                                    <div class="tk-actions">
-                                        <button class="tk-action-btn" title="View" onclick="openViewModal(this)"><i
-                                                class="bi bi-eye-fill"></i></button>
-                                        <button class="tk-action-btn edit" title="Edit"><i
-                                                class="bi bi-pencil-fill"></i></button>
-                                        <button class="tk-action-btn del" title="Delete"><i
-                                                class="bi bi-trash3-fill"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr data-status="resolved" data-priority="low" data-category="Network">
-                                <td><input type="checkbox" class="tk-check rowCheck"></td>
-                                <td><span class="tk-ticket-id">#1040</span></td>
-                                <td>
-                                    <span class="tk-ticket-title">WiFi drops in conference room B</span>
-                                    <span class="tk-ticket-sub">Network — Gamma Industries</span>
-                                </td>
-                                <td><span class="tk-status resolved">Resolved</span></td>
-                                <td><span class="tk-priority low"><i class="bi bi-circle-fill"></i> Low</span></td>
-                                <td><span class="tk-tag">Network</span></td>
-                                <td>IT</td>
-                                <td>
-                                    <div class="tk-assigned">
-                                        <div class="tk-avatar-xs" style="background:#16a34a;">MJ</div>
-                                        <span style="font-size:13px;font-weight:500;color:var(--head-color);">Mike
-                                            Johnson</span>
-                                    </div>
-                                </td>
-                                <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">18 Feb 2026</td>
-                                <td>
-                                    <div class="tk-actions">
-                                        <button class="tk-action-btn" title="View"><i
-                                                class="bi bi-eye-fill"></i></button>
-                                        <button class="tk-action-btn edit" title="Edit"><i
-                                                class="bi bi-pencil-fill"></i></button>
-                                        <button class="tk-action-btn del" title="Delete"><i
-                                                class="bi bi-trash3-fill"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr data-status="open" data-priority="critical" data-category="Security">
-                                <td><input type="checkbox" class="tk-check rowCheck"></td>
-                                <td><span class="tk-ticket-id">#1039</span></td>
-                                <td>
-                                    <span class="tk-ticket-title">Unauthorized access attempt detected</span>
-                                    <span class="tk-ticket-sub">Security — Acme Corp</span>
-                                </td>
-                                <td><span class="tk-status open">Open</span></td>
-                                <td><span class="tk-priority critical"><i class="bi bi-circle-fill"></i> Critical</span>
-                                </td>
-                                <td><span class="tk-tag">Security</span></td>
-                                <td>IT</td>
-                                <td>
-                                    <div class="tk-assigned">
-                                        <div class="tk-avatar-xs">JS</div>
-                                        <span style="font-size:13px;font-weight:500;color:var(--head-color);">John
-                                            Smith</span>
-                                    </div>
-                                </td>
-                                <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">17 Feb 2026</td>
-                                <td>
-                                    <div class="tk-actions">
-                                        <button class="tk-action-btn" title="View"><i
-                                                class="bi bi-eye-fill"></i></button>
-                                        <button class="tk-action-btn edit" title="Edit"><i
-                                                class="bi bi-pencil-fill"></i></button>
-                                        <button class="tk-action-btn del" title="Delete"><i
-                                                class="bi bi-trash3-fill"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr data-status="in-progress" data-priority="medium" data-category="Hardware">
-                                <td><input type="checkbox" class="tk-check rowCheck"></td>
-                                <td><span class="tk-ticket-id">#1038</span></td>
-                                <td>
-                                    <span class="tk-ticket-title">Printer not connecting to network</span>
-                                    <span class="tk-ticket-sub">Hardware — Beta Solutions</span>
-                                </td>
-                                <td><span class="tk-status in-progress">In Progress</span></td>
-                                <td><span class="tk-priority medium"><i class="bi bi-circle-fill"></i> Medium</span>
-                                </td>
-                                <td><span class="tk-tag">Hardware</span></td>
-                                <td>Finance</td>
-                                <td>
-                                    <div class="tk-assigned">
-                                        <div class="tk-avatar-xs" style="background:#d97706;">SL</div>
-                                        <span style="font-size:13px;font-weight:500;color:var(--head-color);">Sarah
-                                            Lee</span>
-                                    </div>
-                                </td>
-                                <td style="font-size:12.5px;color:#aab0c4;white-space:nowrap;">16 Feb 2026</td>
-                                <td>
-                                    <div class="tk-actions">
-                                        <button class="tk-action-btn" title="View"><i
-                                                class="bi bi-eye-fill"></i></button>
-                                        <button class="tk-action-btn edit" title="Edit"><i
-                                                class="bi bi-pencil-fill"></i></button>
-                                        <button class="tk-action-btn del" title="Delete"><i
-                                                class="bi bi-trash3-fill"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
+                    <!-- ---- LEFT COLUMN ---- -->
+                    <div class="tkv-main">
 
-                        </tbody>
-                    </table>
-                </div>
+                        <!-- Main ticket card -->
+                        <div class="tkv-card">
+                            <div class="tkv-card-body">
 
-                <!-- Pagination -->
-                <div class="tk-pagination-wrap">
-                    <div class="tk-pagination-info">Showing 1–5 of 24 tickets</div>
-                    <ul class="tk-pagination">
-                        <li class="disabled"><button><i class="bi bi-chevron-double-left"></i></button></li>
-                        <li class="disabled"><button><i class="bi bi-chevron-left"></i></button></li>
-                        <li class="active"><button>1</button></li>
-                        <li><button>2</button></li>
-                        <li><button>3</button></li>
-                        <li><button><i class="bi bi-chevron-right"></i></button></li>
-                        <li><button><i class="bi bi-chevron-double-right"></i></button></li>
-                    </ul>
-                </div>
+                                <!-- Title -->
+                                <h2 class="tkv-title" id="tkv-title">Laptop screen flickering</h2>
 
-            </div><!-- /table-card -->
+                                <!-- Status / Priority / Category badges -->
+                                <div class="tkv-badge-row" id="tkv-badge-row">
+                                    <span class="tkv-status-badge open" id="tkv-status-disp">Open</span>
+                                    <span class="tkv-priority-badge medium" id="tkv-priority-disp"><i
+                                            class="bi bi-circle-fill"></i> Medium</span>
+                                    <span class="tkv-cat-badge" id="tkv-category-disp"><i class="bi bi-cpu"></i>
+                                        Hardware</span>
+                                    <span class="tkv-cat-badge" id="tkv-dept-disp"><i class="bi bi-building"></i>
+                                        IT</span>
+                                </div>
 
-        </div><!-- /container -->
+                                <!-- Inline edit controls (hidden in view mode) -->
+                                <div class="tkv-inline-controls" id="tkv-edit-controls" style="display:none;">
+                                    <div class="tkv-control-wrap">
+                                        <span class="tkv-control-label">Status</span>
+                                        <select class="tkv-inline-select" id="tkv-status" onchange="liveUpdateBadge()">
+                                            <option value="open">Open</option>
+                                            <option value="in-progress">In Progress</option>
+                                            <option value="resolved">Resolved</option>
+                                            <option value="closed">Closed</option>
+                                        </select>
+                                    </div>
+                                    <div class="tkv-control-wrap">
+                                        <span class="tkv-control-label">Priority</span>
+                                        <select class="tkv-inline-select" id="tkv-priority"
+                                            onchange="liveUpdateBadge()">
+                                            <option value="critical">🔴 Critical</option>
+                                            <option value="high">🟠 High</option>
+                                            <option value="medium" selected>🔵 Medium</option>
+                                            <option value="low">🟢 Low</option>
+                                        </select>
+                                    </div>
+                                    <div class="tkv-control-wrap">
+                                        <span class="tkv-control-label">Assign To</span>
+                                        <div style="position:relative;">
+                                            <select class="tkv-inline-select" id="tkv-assignee"
+                                                style="padding-left:34px;min-width:180px;"
+                                                onchange="liveUpdateAssignee()">
+                                                <option value="John Smith">John Smith</option>
+                                                <option value="Sarah Lee">Sarah Lee</option>
+                                                <option value="Mike Johnson">Mike Johnson</option>
+                                                <option value="Unassigned">Unassigned</option>
+                                            </select>
+                                            <div id="tkv-assignee-av"
+                                                style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:5px;background:var(--tk-pri);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:#fff;pointer-events:none;">
+                                                JS</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <p class="tkv-description" id="tkv-description">
+                                    The laptop screen on unit #1042 has been flickering intermittently since yesterday.
+                                    It worsens when the device heats up. Needs immediate hardware inspection.
+                                </p>
+
+                                <!-- Details grid -->
+                                <div class="tkv-details-grid">
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Client</div>
+                                        <div class="tkv-detail-value" id="tkv-client">Acme Corp</div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Created By</div>
+                                        <div class="tkv-detail-value" id="tkv-createdby">Jhon Smith</div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Assigned To</div>
+                                        <div id="tkv-assigned-detail" style="display:flex;align-items:center;gap:8px;">
+                                            <div
+                                                style="width:26px;height:26px;border-radius:7px;background:#004958;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;">
+                                                JS</div>
+                                            <span class="tkv-detail-value" style="margin:0;">John Smith (admin)</span>
+                                        </div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Created</div>
+                                        <div class="tkv-detail-value muted" id="tkv-created">21 Feb 2026, 10:30 am</div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Last Updated</div>
+                                        <div class="tkv-detail-value muted" id="tkv-updated">21 Feb 2026, 10:37 am</div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Notifications Email</div>
+                                        <div class="tkv-detail-value muted" id="tkv-notif-email">
+                                            info@crescenttechnoserve.com</div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Preferred Contact</div>
+                                        <div class="tkv-detail-value" id="tkv-contact">Email</div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Contact Email</div>
+                                        <div class="tkv-detail-value muted" id="tkv-contact-email">
+                                            info@crescenttechnoserve.com</div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Teams ID</div>
+                                        <div class="tkv-detail-value muted" id="tkv-teams">—</div>
+                                    </div>
+                                    <div class="tkv-detail-field">
+                                        <div class="tkv-detail-label">Department</div>
+                                        <div class="tkv-detail-value" id="tkv-dept-detail">IT</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Comments & Updates -->
+                        <div class="tkv-card">
+                            <div class="tkv-comments-header">
+                                <h6 class="tkv-card-title"><i class="bi bi-chat-left-text-fill"></i> Comments &amp;
+                                    Updates</h6>
+                                <span
+                                    style="font-size:12px;font-weight:700;background:var(--tk-pri-light);color:var(--tk-pri);padding:3px 10px;border-radius:10px;"
+                                    id="comment-count">2 Comments</span>
+                            </div>
+
+                            <!-- Comment list -->
+                            <div id="comment-list">
+                                <div class="tkv-comment-item">
+                                    <div class="tkv-comment-header">
+                                        <div class="tkv-comment-avatar">JS</div>
+                                        <span class="tkv-comment-author">Jhon Smith</span>
+                                        <span class="tkv-internal-badge"><i class="bi bi-lock-fill"></i> Internal
+                                            Note</span>
+                                        <span class="tkv-comment-time">21 Feb 2026, 05:07 am</span>
+                                    </div>
+                                    <div class="tkv-comment-body">Test Ticket</div>
+                                </div>
+                                <div class="tkv-comment-item">
+                                    <div class="tkv-comment-header">
+                                        <div class="tkv-comment-avatar" style="background:#16a34a;">SH</div>
+                                        <span class="tkv-comment-author">Jhon Smith</span>
+                                        <span class="tkv-comment-time">21 Feb 2026, 10:40 am</span>
+                                    </div>
+                                    <div class="tkv-comment-body public">Checking the hardware unit now. Will update
+                                        shortly with findings.</div>
+                                </div>
+                            </div>
+
+                            <!-- Reply box -->
+                            <div class="tkv-reply-wrap">
+                                <textarea class="tkv-reply-textarea" id="replyText"
+                                    placeholder="Add a reply to the customer... (Use @ to mention)"
+                                    oninput="toggleSendBtn()"></textarea>
+                                <div class="tkv-reply-actions">
+                                    <div class="tkv-reply-left">
+                                        <div class="tkv-toggle-wrap">
+                                            <button class="tkv-toggle" id="replyTypeToggle"
+                                                onclick="toggleReplyType(this)"></button>
+                                            <span class="tkv-toggle-label" id="replyTypeLabel">Public Reply</span>
+                                        </div>
+                                        <button class="tkv-canned-btn" onclick="showCanned()">
+                                            <i class="bi bi-card-text"></i> Canned Responses <i
+                                                class="bi bi-chevron-down" style="font-size:10px;"></i>
+                                        </button>
+                                    </div>
+                                    <button class="tkv-send-btn" id="sendBtn" disabled onclick="sendReply()">
+                                        <i class="bi bi-send-fill"></i> Send Reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ---- RIGHT SIDEBAR ---- -->
+                    <div class="tkv-sidebar">
+
+                        <!-- Asset Details -->
+                        <div class="tkv-card">
+                            <div class="tkv-card-header">
+                                <h6 class="tkv-card-title"><i class="bi bi-laptop-fill"></i> Asset Details</h6>
+                                <a href="#"
+                                    style="font-size:12px;font-weight:700;color:var(--tk-pri);text-decoration:none;"><i
+                                        class="bi bi-arrow-up-right-square"></i></a>
+                            </div>
+                            <div class="tkv-card-body" style="padding-top:10px;">
+                                <div class="tkv-asset-field">
+                                    <div class="tkv-asset-label">Name</div>
+                                    <div class="tkv-asset-value" id="tkv-asset-name">CRESCENT-IT</div>
+                                </div>
+                                <div class="tkv-asset-field">
+                                    <div class="tkv-asset-label">Model</div>
+                                    <div class="tkv-asset-value" id="tkv-asset-model">Latitude E5450</div>
+                                </div>
+                                <div class="tkv-asset-field">
+                                    <div class="tkv-asset-label">Asset Tag</div>
+                                    <span class="tkv-asset-tag" id="tkv-asset-tag">CT-02</span>
+                                </div>
+                                <div class="tkv-asset-field">
+                                    <div class="tkv-asset-label">Serial Number</div>
+                                    <div class="tkv-asset-value" id="tkv-asset-serial">C2WN882</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Linked Repairs -->
+                        <div class="tkv-card">
+                            <div class="tkv-card-header">
+                                <h6 class="tkv-card-title"><i class="bi bi-tools"></i> Linked Repairs</h6>
+                                <button class="tkv-create-repair-btn"><i class="bi bi-plus-lg"></i> Create
+                                    Repair</button>
+                            </div>
+                            <div class="tkv-card-body" style="padding-top:10px;">
+                                <div class="tkv-repair-item">
+                                    <div
+                                        style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                                        <span class="tkv-repair-id">#REP-20260221-001</span>
+                                        <span class="tkv-repair-status-badge wip">Work In Progress</span>
+                                    </div>
+                                    <div class="tkv-repair-sub">Dell Inc. Latitude E5450</div>
+                                    <div class="tkv-repair-sub">Last update: 21 Feb 2026, 10:36 am</div>
+                                    <select class="tkv-repair-select">
+                                        <option>• Work in Progress</option>
+                                        <option>• Waiting for Parts</option>
+                                        <option>• Completed</option>
+                                        <option>• Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ticket History -->
+                        <div class="tkv-card">
+                            <div class="tkv-card-header">
+                                <h6 class="tkv-card-title"><i class="bi bi-clock-history"></i> Ticket History</h6>
+                            </div>
+                            <div class="tkv-card-body" style="padding-top:8px;" id="tkv-history">
+                                <div class="tkv-history-item">
+                                    <div class="tkv-history-dot create"><i class="bi bi-plus-circle-fill"></i></div>
+                                    <div style="flex:1;min-width:0;">
+                                        <div class="tkv-history-event">created</div>
+                                        <div class="tkv-history-sub">Ticket created<br>by Jhon Smith</div>
+                                    </div>
+                                    <div class="tkv-history-time">21 Feb 2026, 10:30 am</div>
+                                </div>
+                                <div class="tkv-history-item">
+                                    <div class="tkv-history-dot comment"><i class="bi bi-chat-fill"></i></div>
+                                    <div style="flex:1;min-width:0;">
+                                        <div class="tkv-history-event">Comment Added</div>
+                                        <div class="tkv-history-sub">Comment added: "Test Ticket..."<br>by Jhon Smith
+                                        </div>
+                                    </div>
+                                    <div class="tkv-history-time">21 Feb 2026, 05:07 am</div>
+                                </div>
+                                <div class="tkv-history-item">
+                                    <div class="tkv-history-dot edit"><i class="bi bi-person-check-fill"></i></div>
+                                    <div style="flex:1;min-width:0;">
+                                        <div class="tkv-history-event">Assigned</div>
+                                        <div class="tkv-history-sub">Assigned to John Smith<br>by Jhon Smith
+                                        </div>
+                                    </div>
+                                    <div class="tkv-history-time">21 Feb 2026, 10:37 am</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- /tkv-layout -->
+
+            </div><!-- /container -->
+        </div><!-- /tkv-page -->
     </main>
-    <!-- =========================
-     DELETE CONFIRM MODAL
-========================= -->
-    <div class="modal fade tk-delete-modal" id="deleteConfirmModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
 
-                <div class="modal-body text-center">
-
-                    <div class="tk-delete-icon">
-                        <i class="bi bi-exclamation-triangle-fill"></i>
-                    </div>
-
-                    <h5 class="tk-delete-title">
-                        Delete Ticket?
-                    </h5>
-
-                    <p class="tk-delete-text">
-                        This action cannot be undone.
-                        Are you sure you want to delete this ticket?
-                    </p>
-
-                    <div class="tk-delete-actions">
-                        <button class="tk-btn-cancel" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-
-                        <button class="tk-btn-danger">
-                            Yes, Delete
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ========================
-     CREATE TICKET MODAL
-========================= -->
-    <div class="modal fade ct-modal" id="createTicketModal" tabindex="-1" aria-labelledby="createTicketModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-
-                <div class="modal-header d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title" id="createTicketModalLabel">Create New Ticket</h5>
-                    <button class="ct-btn-cancel" data-bs-dismiss="modal" onclick="resetModal()">
-                        <i class="bi bi-x-circle"></i> Cancel
-                    </button>
-                </div>
-
-                <div class="modal-body">
-
-                    <!-- Stepper -->
-                    <div class="ct-stepper">
-                        <div class="ct-step active" id="ctStep1">
-                            <div class="ct-step-circle" id="ctCircle1">1</div>
-                            <span class="ct-step-label">Basic Information</span>
-                        </div>
-                        <div class="ct-step-line" id="ctLine1"></div>
-                        <div class="ct-step" id="ctStep2">
-                            <div class="ct-step-circle" id="ctCircle2">2</div>
-                            <span class="ct-step-label">Details &amp; Priority</span>
-                        </div>
-                        <div class="ct-step-line" id="ctLine2"></div>
-                        <div class="ct-step" id="ctStep3">
-                            <div class="ct-step-circle" id="ctCircle3">3</div>
-                            <span class="ct-step-label">Review &amp; Submit</span>
-                        </div>
-                    </div>
-
-                    <!-- Step 1 -->
-                    <div class="ct-form-card ct-step-panel active" id="ctPanel1">
-                        <div class="mb-3">
-                            <label class="ct-label">Ticket Title <span class="text-danger">*</span></label>
-                            <div class="ct-input-icon-wrap">
-                                <i class="bi bi-file-text ct-input-icon"></i>
-                                <input type="text" class="ct-form-control" id="ctTitle"
-                                    placeholder="Brief description of the issue" />
-                            </div>
-                            <div class="ct-error" id="ctTitleError">Ticket title is required.</div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="ct-label">Description <span class="text-danger">*</span></label>
-                            <textarea class="ct-form-control ct-textarea" id="ctDescription"
-                                placeholder="Detailed description of the problem"></textarea>
-                            <div class="ct-error" id="ctDescError">Description is required.</div>
-                        </div>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="ct-label">Client <span class="text-danger">*</span></label>
-                                <div class="ct-select-wrap">
-                                    <select class="ct-select" id="ctClient" onchange="handleClientChange()">
-                                        <option value="">Select Client</option>
-                                        <option value="client1">Acme Corp</option>
-                                        <option value="client2">Beta Solutions</option>
-                                        <option value="client3">Gamma Industries</option>
-                                    </select>
-                                </div>
-                                <div class="ct-error" id="ctClientError">Please select a client.</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="ct-label">Asset <span
-                                        style="color:#aab0c4;font-weight:400;">(Optional)</span></label>
-                                <div class="ct-select-wrap">
-                                    <select class="ct-select" id="ctAsset" disabled>
-                                        <option value="">Asset (Optional)</option>
-                                        <option value="asset1">Laptop #1042</option>
-                                        <option value="asset2">Server #205</option>
-                                        <option value="asset3">Printer #88</option>
-                                    </select>
-                                </div>
-                                <div class="ct-hint" id="ctAssetHint">Select a client first</div>
-                            </div>
-                        </div>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="ct-label">Category</label>
-                                <div class="ct-select-wrap">
-                                    <select class="ct-select" id="ctCategory">
-                                        <option value="">Select Category</option>
-                                        <option value="Hardware">Hardware</option>
-                                        <option value="Software">Software</option>
-                                        <option value="Network">Network</option>
-                                        <option value="Security">Security</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="ct-label">Department</label>
-                                <div class="ct-select-wrap">
-                                    <select class="ct-select" id="ctDepartment">
-                                        <option value="">Select Department</option>
-                                        <option value="IT">IT</option>
-                                        <option value="HR">HR</option>
-                                        <option value="Finance">Finance</option>
-                                        <option value="Operations">Operations</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="ct-label">Link to Repair <span
-                                    style="color:#aab0c4;font-weight:400;">(Optional)</span></label>
-                            <div class="ct-select-wrap">
-                                <select class="ct-select" id="ctRepair">
-                                    <option value="">Link to Repair (Optional)</option>
-                                    <option value="rep001">REP-001 — Screen Replacement</option>
-                                    <option value="rep002">REP-002 — Battery Swap</option>
-                                    <option value="rep003">REP-003 — Keyboard Fix</option>
-                                </select>
-                            </div>
-                            <div class="ct-hint">Select a repair to link to this ticket</div>
-                        </div>
-                        <div class="ct-footer-nav">
-                            <button class="ct-btn-back" disabled>Back</button>
-                            <button class="ct-btn-next" onclick="goToStep(2)">Next <i
-                                    class="bi bi-arrow-right ms-1"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="ct-form-card ct-step-panel" id="ctPanel2">
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="ct-label">Priority</label>
-                                <div class="ct-select-wrap">
-                                    <select class="ct-select" id="ctPriority">
-                                        <option value="">Select Priority</option>
-                                        <option value="Critical">🔴 Critical</option>
-                                        <option value="High">🟠 High</option>
-                                        <option value="Medium">🔵 Medium</option>
-                                        <option value="Low">🟢 Low</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="ct-label">Assign To</label>
-                                <div class="ct-select-wrap">
-                                    <select class="ct-select" id="ctAssignTo">
-                                        <option value="">Select Engineer</option>
-                                        <option value="John Smith">John Smith</option>
-                                        <option value="Sarah Lee">Sarah Lee</option>
-                                        <option value="Mike Johnson">Mike Johnson</option>
-                                        <option value="Unassigned">Unassigned</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3" style="max-width:360px;">
-                            <label class="ct-label">Preferred Contact Method</label>
-                            <div class="ct-select-wrap">
-                                <select class="ct-select" id="ctContact">
-                                    <option value="">Select Contact Method</option>
-                                    <option value="Email">📧 Email</option>
-                                    <option value="Phone">📞 Phone</option>
-                                    <option value="SMS">💬 SMS</option>
-                                    <option value="In-Person">🤝 In-Person</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="ct-label">Additional Notes</label>
-                            <textarea class="ct-form-control ct-textarea" id="ctNotes"
-                                placeholder="Any additional information or context..."></textarea>
-                        </div>
-                        <div class="ct-footer-nav">
-                            <button class="ct-btn-back" onclick="goToStep(1)"><i class="bi bi-arrow-left me-1"></i>
-                                Back</button>
-                            <button class="ct-btn-next" onclick="goToStep(3)">Review <i
-                                    class="bi bi-arrow-right ms-1"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="ct-form-card ct-step-panel" id="ctPanel3">
-                        <h6
-                            style="font-weight:800;color:var(--head-color);margin-bottom:18px;font-size:16px;letter-spacing:-0.3px;">
-                            Review Your Ticket</h6>
-                        <div class="ct-review-card">
-                            <div class="ct-review-row">
-                                <div class="ct-review-field">
-                                    <label>Title</label>
-                                    <p id="rv-title">—</p>
-                                </div>
-                                <div class="ct-review-field">
-                                    <label>Category</label>
-                                    <div id="rv-category">—</div>
-                                </div>
-                                <div class="ct-review-field">
-                                    <label>Priority</label>
-                                    <div id="rv-priority">—</div>
-                                </div>
-                                <div class="ct-review-field">
-                                    <label>Department</label>
-                                    <p id="rv-department">—</p>
-                                </div>
-                                <div class="ct-review-field">
-                                    <label>Client</label>
-                                    <p id="rv-client">—</p>
-                                </div>
-                                <div class="ct-review-field">
-                                    <label>Assigned To</label>
-                                    <p id="rv-assign">—</p>
-                                </div>
-                                <div class="ct-review-field full">
-                                    <label>Description</label>
-                                    <p id="rv-description">—</p>
-                                </div>
-                                <div class="ct-review-field full" id="rv-notes-wrap" style="display:none;">
-                                    <label>Additional Notes</label>
-                                    <p id="rv-notes">—</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ct-notice">
-                            <i class="bi bi-info-circle-fill"></i>
-                            <span id="rv-notice-text">Your ticket will be assigned to an IT engineer based on the
-                                category and priority. We will contact you via your preferred method.</span>
-                        </div>
-                        <div class="ct-footer-nav">
-                            <button class="ct-btn-back" onclick="goToStep(2)"><i class="bi bi-arrow-left me-1"></i>
-                                Back</button>
-                            <button class="ct-btn-submit" onclick="submitTicket()">
-                                <i class="bi bi-send-fill"></i> Submit Ticket
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
-        <div id="ctToast" class="toast align-items-center border-0" role="alert"
-            style="background:var(--pri);color:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(0,73,88,.4);">
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999;">
+        <div id="replyToast" class="toast align-items-center border-0" role="alert"
+            style="background:#004958;color:#fff;border-radius:12px;box-shadow:0 6px 20px rgba(0,73,88,.35);">
             <div class="d-flex">
-                <div class="toast-body fw-semibold" style="font-family:var(--body-font);font-size:14px;">
-                    <i class="bi bi-check-circle-fill me-2"></i> Ticket submitted successfully!
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                <div class="toast-body fw-semibold" style="font-size:13.5px;font-family:var(--tg-body-font-family);"><i
+                        class="bi bi-check-circle-fill me-2"></i> Reply sent successfully!</div><button type="button"
+                    class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         </div>
     </div>
@@ -1565,32 +1210,245 @@
         }
 
         document.getElementById('createTicketModal').addEventListener('hidden.bs.modal', resetModal);
-
-
-
-
-        /* ---- VIEW ---- */
-        function openViewModal(btn) {
-            _activeRow = btn.closest('tr');
-            const d = _activeRow.dataset;
-            const params = new URLSearchParams({
-                id: d.id || '',
-                title: d.title || '',
-                status: d.status || '',
-                priority: d.priority || '',
-                category: d.category || '',
-                dept: d.department || '',
-                client: d.client || '',
-                assigned: d.assigned || '',
-                avatar: d.assignedavatar || '',
-                avcolor: d.assignedcolor || '',
-                created: d.created || '',
-                desc: d.description || '',
-                notes: d.notes || ''
-            });
-            window.location.href = 'view_tikit.html?' + params.toString();
+    </script>
+    <script>
+        /* ---- Tooltips ---- */
+        if (window.innerWidth > 576) {
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
         }
 
+        /* ================================================
+           LOAD TICKET DATA FROM URL PARAMS
+           tikits.html passes: tikit-view.html?id=#1042&title=...
+        ================================================ */
+        const AVATAR_MAP = {
+            'John Smith': { init: 'JS', color: '#004958' },
+            'Sarah Lee': { init: 'SL', color: '#d97706' },
+            'Mike Johnson': { init: 'MJ', color: '#16a34a' },
+            'Unassigned': { init: '?', color: '#aab0c4' }
+        };
+
+        const STATUS_LABELS = {
+            'open': 'Open', 'in-progress': 'In Progress', 'resolved': 'Resolved', 'closed': 'Closed'
+        };
+        const PRIORITY_LABELS = {
+            'critical': 'Critical', 'high': 'High', 'medium': 'Medium', 'low': 'Low'
+        };
+        const CAT_ICONS = {
+            'Hardware': 'bi-cpu', 'Software': 'bi-laptop', 'Network': 'bi-wifi', 'Security': 'bi-shield-lock', 'Other': 'bi-three-dots'
+        };
+
+        function get(id) { return document.getElementById(id); }
+
+        function loadTicketFromParams() {
+            const p = new URLSearchParams(window.location.search);
+            const id = p.get('id') || '#1042';
+            const tl = p.get('title') || 'Laptop screen flickering';
+            const st = p.get('status') || 'open';
+            const pr = p.get('priority') || 'medium';
+            const ct = p.get('category') || 'Hardware';
+            const dp = p.get('dept') || 'IT';
+            const cl = p.get('client') || 'Acme Corp';
+            const as = p.get('assigned') || 'John Smith';
+            const av = p.get('avatar') || 'JS';
+            const ac = p.get('avcolor') || '#004958';
+            const cr = p.get('created') || '21 Feb 2026';
+            const ds = p.get('desc') || 'No description provided.';
+            const nt = p.get('notes') || '';
+
+            // Populate page
+            get('page-ticket-number').textContent = 'Ticket ' + id;
+            get('tkv-title').textContent = tl;
+            get('tkv-client').textContent = cl;
+            get('tkv-created').textContent = cr + ', 10:30 am';
+            get('tkv-updated').textContent = cr + ', 10:37 am';
+            get('tkv-description').textContent = ds;
+            get('tkv-dept-detail').textContent = dp;
+
+            // Status badge
+            const stEl = get('tkv-status-disp');
+            stEl.className = 'tkv-status-badge ' + st;
+            stEl.textContent = STATUS_LABELS[st] || st;
+
+            // Priority badge
+            const prEl = get('tkv-priority-disp');
+            prEl.className = 'tkv-priority-badge ' + pr;
+            prEl.innerHTML = `<i class="bi bi-circle-fill"></i> ${PRIORITY_LABELS[pr] || pr}`;
+
+            // Category badge
+            get('tkv-category-disp').innerHTML = `<i class="bi ${CAT_ICONS[ct] || 'bi-tag'}"></i> ${ct}`;
+            get('tkv-dept-disp').innerHTML = `<i class="bi bi-building"></i> ${dp}`;
+
+            // Assigned
+            const av2 = AVATAR_MAP[as] || { init: as.split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase(), color: '#5a6278' };
+            get('tkv-assigned-detail').innerHTML =
+                `<div style="width:26px;height:26px;border-radius:7px;background:${av2.color};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;">${av2.init}</div>
+         <span class="tkv-detail-value" style="margin:0;">${as} (admin)</span>`;
+
+            // Inline selects
+            setSelectVal('tkv-status', st);
+            setSelectVal('tkv-priority', pr);
+            setSelectVal('tkv-assignee', as);
+            get('tkv-assignee-av').textContent = av2.init;
+            get('tkv-assignee-av').style.background = av2.color;
+
+            // History: update created date
+            const histItems = get('tkv-history').querySelectorAll('.tkv-history-time');
+            if (histItems[0]) histItems[0].textContent = cr + ', 10:30 am';
+        }
+
+        function setSelectVal(id, val) {
+            const el = get(id); if (!el || !val) return;
+            for (let i = 0; i < el.options.length; i++) {
+                if (el.options[i].value.toLowerCase() === val.toLowerCase()) { el.selectedIndex = i; return; }
+            }
+        }
+
+        /* ================================================
+           EDIT / VIEW MODE TOGGLE
+        ================================================ */
+        let isEditMode = false;
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const controls = get('tkv-edit-controls');
+            const badgeRow = get('tkv-badge-row');
+            const btnText = get('editBtnText');
+            const btnIcon = get('editBtnIcon');
+
+            if (isEditMode) {
+                controls.style.display = 'flex';
+                badgeRow.style.display = 'none';
+                btnText.textContent = 'Save Changes';
+                btnIcon.className = 'bi bi-check-lg';
+                document.querySelector('.tkv-edit-btn').style.background = '#16a34a';
+                document.querySelector('.tkv-edit-btn').style.boxShadow = '0 4px 12px rgba(22,163,74,.28)';
+            } else {
+                controls.style.display = 'none';
+                badgeRow.style.display = 'flex';
+                btnText.textContent = 'Edit Ticket';
+                btnIcon.className = 'bi bi-pencil-fill';
+                document.querySelector('.tkv-edit-btn').style.background = 'var(--tk-pri)';
+                document.querySelector('.tkv-edit-btn').style.boxShadow = '0 4px 12px rgba(0,73,88,.25)';
+                liveUpdateBadge();
+                liveUpdateAssignee();
+                // Flash saved indicator
+                const si = get('saveIndicator');
+                si.classList.add('show');
+                setTimeout(() => si.classList.remove('show'), 2500);
+                addHistoryEntry('edit', 'Status updated', `Changed to ${STATUS_LABELS[get('tkv-status').value]}`);
+            }
+        }
+
+        /* Live update badges from selects */
+        function liveUpdateBadge() {
+            const st = get('tkv-status').value;
+            const pr = get('tkv-priority').value;
+            const stEl = get('tkv-status-disp');
+            stEl.className = 'tkv-status-badge ' + st;
+            stEl.textContent = STATUS_LABELS[st] || st;
+            const prEl = get('tkv-priority-disp');
+            prEl.className = 'tkv-priority-badge ' + pr;
+            prEl.innerHTML = `<i class="bi bi-circle-fill"></i> ${PRIORITY_LABELS[pr] || pr}`;
+        }
+
+        function liveUpdateAssignee() {
+            const as = get('tkv-assignee').value;
+            const av2 = AVATAR_MAP[as] || { init: as.split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase(), color: '#5a6278' };
+            get('tkv-assignee-av').textContent = av2.init;
+            get('tkv-assignee-av').style.background = av2.color;
+            get('tkv-assigned-detail').innerHTML =
+                `<div style="width:26px;height:26px;border-radius:7px;background:${av2.color};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;">${av2.init}</div>
+         <span class="tkv-detail-value" style="margin:0;">${as} (admin)</span>`;
+        }
+
+        /* ================================================
+           REPLY BOX
+        ================================================ */
+        let isPublicReply = false;
+
+        function toggleReplyType(btn) {
+            isPublicReply = !isPublicReply;
+            btn.classList.toggle('active', isPublicReply);
+            get('replyTypeLabel').textContent = isPublicReply ? 'Public Reply' : 'Internal Note';
+        }
+
+        function toggleSendBtn() {
+            const v = get('replyText').value.trim();
+            get('sendBtn').disabled = v.length === 0;
+        }
+
+        function showCanned() {
+            // Could populate canned responses dropdown - for now inserts a sample
+            const ta = get('replyText');
+            if (!ta.value) {
+                ta.value = 'Thank you for reaching out. We have received your request and are looking into it. We will update you shortly.';
+                toggleSendBtn();
+            }
+        }
+
+        function sendReply() {
+            const text = get('replyText').value.trim();
+            if (!text) return;
+
+            const now = new Date();
+            const timeStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            const isInternal = !isPublicReply;
+            const commentHTML = `
+    <div class="tkv-comment-item" style="animation:slideIn .3s ease;">
+        <div class="tkv-comment-header">
+            <div class="tkv-comment-avatar" style="background:#004958;">ME</div>
+            <span class="tkv-comment-author">YOU</span>
+            ${isInternal ? '<span class="tkv-internal-badge"><i class="bi bi-lock-fill"></i> Internal Note</span>' : ''}
+            <span class="tkv-comment-time">${timeStr}</span>
+        </div>
+        <div class="tkv-comment-body${isInternal ? '' : ' public'}">${text.replace(/</g, '&lt;')}</div>
+    </div>`;
+
+            get('comment-list').insertAdjacentHTML('beforeend', commentHTML);
+            get('replyText').value = '';
+            get('sendBtn').disabled = true;
+
+            // Update comment count
+            const count = get('comment-list').querySelectorAll('.tkv-comment-item').length;
+            get('comment-count').textContent = count + ' Comment' + (count !== 1 ? 's' : '');
+
+            // Add to history
+            addHistoryEntry('comment', 'Comment Added', `Comment added: "${text.substring(0, 30)}..."`);
+
+            // Toast
+            new bootstrap.Toast(get('replyToast'), { delay: 2000 }).show();
+        }
+
+        /* ================================================
+           HISTORY
+        ================================================ */
+        function addHistoryEntry(type, event, sub) {
+            const dotMap = { create: 'create', comment: 'comment', edit: 'edit', resolve: 'resolve' };
+            const iconMap = { create: 'bi-plus-circle-fill', comment: 'bi-chat-fill', edit: 'bi-pencil-fill', resolve: 'bi-check-circle-fill' };
+            const now = new Date();
+            const timeStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            const html = `
+    <div class="tkv-history-item" style="animation:slideIn .3s ease;">
+        <div class="tkv-history-dot ${dotMap[type] || 'edit'}"><i class="bi ${iconMap[type] || 'bi-circle'}"></i></div>
+        <div style="flex:1;min-width:0;">
+            <div class="tkv-history-event">${event}</div>
+            <div class="tkv-history-sub">${sub}<br>by YOU</div>
+        </div>
+        <div class="tkv-history-time">${timeStr}</div>
+    </div>`;
+            get('tkv-history').insertAdjacentHTML('beforeend', html);
+        }
+
+        /* ---- Slide-in animation ---- */
+        const style = document.createElement('style');
+        style.textContent = `@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }`;
+        document.head.appendChild(style);
+
+        // Load ticket data on page load
+        document.addEventListener('DOMContentLoaded', loadTicketFromParams);
     </script>
 </body>
 
